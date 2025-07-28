@@ -5,6 +5,7 @@ import { WidgetSidebar } from '../../features/widget-sidebar/widget-sidebar';
 
 @Component({
   selector: 'admin-page',
+  standalone: true,
   imports: [AppHeader, Dashboard, WidgetSidebar],
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.css',
