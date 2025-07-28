@@ -1,9 +1,12 @@
 /* Основной контейнер сетки */
-gridster {
+.gridster {
   display: block;
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: 100%;
+  transform: scale(var(--zoom-level, 1));
   background-color: #0f172a;
+  transform-origin: 0 0;
+  transition: transform 0.2s ease;
 }
 
 /* Элементы сетки */

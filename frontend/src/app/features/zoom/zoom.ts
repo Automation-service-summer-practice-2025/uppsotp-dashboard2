@@ -1,4 +1,10 @@
-import { Component, HostListener, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { GridsterConfig } from 'angular-gridster2';
 import { LucideAngularModule, CirclePlus, CircleMinus } from 'lucide-angular';
 
@@ -11,6 +17,7 @@ import { LucideAngularModule, CirclePlus, CircleMinus } from 'lucide-angular';
 })
 export class Zoom {
   @Input() options!: GridsterConfig;
+  @Output() zoomChange = new EventEmitter<number>();
   zoomLevel: number = 100;
   minZoom: number = 50;
   maxZoom: number = 200;
@@ -37,8 +44,11 @@ export class Zoom {
   public updateZoom(): void {
     document.documentElement.style.setProperty(
       '--zoom-level',
-      this.zoomLevel.toString()
+      (this.zoomLevel / 100).toString()
     );
+
+    // Отправляем текущий уровень зума родительскому компоненту
+    this.zoomChange.emit(this.zoomLevel);
 
     if (this.options) {
       this.options.fixedColWidth = 40;

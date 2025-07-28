@@ -18,13 +18,14 @@ import {
 export class Dashboard implements OnInit {
   options!: GridsterConfig;
   dashboardWidgets?: Array<GridsterItem>;
+  baseCellSize = 50;
 
   ngOnInit(): void {
     this.options = {
       gridType: GridType.Fixed,
 
-      fixedColWidth: 50,
-      fixedRowHeight: 50,
+      fixedColWidth: this.baseCellSize,
+      fixedRowHeight: this.baseCellSize,
       // maxCols: 12,
       draggable: {
         enabled: true,
@@ -49,5 +50,19 @@ export class Dashboard implements OnInit {
       { cols: 1, rows: 1, y: 1, x: 1 },
       { cols: 1, rows: 1, y: 2, x: 2 },
     ];
+  }
+
+  // Метод для обновления размера ячеек при зуме
+  updateGridSize(zoomLevel: number): void {
+    if (this.options) {
+      const scaledSize = this.baseCellSize * (zoomLevel / 100);
+      this.options.fixedColWidth = scaledSize;
+      this.options.fixedRowHeight = scaledSize;
+
+      setTimeout(() => {
+        this.options.api?.resize?.();
+        this.options.api?.optionsChanged?.();
+      }, 0);
+    }
   }
 }
