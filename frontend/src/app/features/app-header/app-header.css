@@ -1,0 +1,68 @@
+/* Стили заголовка */
+.header {
+  background: #1e293b;
+  padding: 14px;
+  display: flex;
+  justify-content: flex-end;
+  height: 45px;
+  margin-top: -60px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  transition: margin-top 0.3s ease;
+  overflow: hidden;
+}
+
+.header.visible {
+  margin-top: 0;
+}
+
+.header:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Кнопка входа */
+.login-button,
+.logout-button {
+  padding: 10px 12px;
+  color: #e2e8f0;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-top: 5px;
+}
+
+.login-button {
+  background-color: #3b82f6;
+}
+
+.login-button:hover {
+  background-color: #2563eb;
+}
+
+.login-button:active {
+  background-color: #1d4ed8;
+}
+
+/* Кнопка выхода */
+.logout-button {
+  background-color: #ef4444;
+}
+
+.logout-button:hover {
+  background-color: #dc2626;
+}
+
+.logout-button:active {
+  background-color: #b91c1c;
+}
+
+.login-button:active,
+.logout-button:active {
+  transform: scale(0.97);
+}

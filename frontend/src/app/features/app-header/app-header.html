@@ -1,0 +1,22 @@
+<div
+  class="header"
+  [class.visible]="isVisible"
+  (mouseenter)="toggleVisibility(true)"
+  (mouseleave)="toggleVisibility(false)"
+>
+  <button
+    class="login-button"
+    (click)="redirectToPage('/login')"
+    *ngIf="isOnPage('/')"
+  >
+    Войти
+  </button>
+
+  <button
+    class="logout-button"
+    (click)="redirectToPage('')"
+    *ngIf="isOnPage('/admin')"
+  >
+    Выйти
+  </button>
+</div>

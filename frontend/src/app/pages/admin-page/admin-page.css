@@ -1,0 +1,7 @@
+.user-page-content {
+  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}

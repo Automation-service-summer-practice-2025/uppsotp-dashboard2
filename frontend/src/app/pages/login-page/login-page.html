@@ -1,0 +1,58 @@
+<div class="login-container">
+  <h1 class="login-title">Вход в систему</h1>
+  <form
+    #loginForm="ngForm"
+    (ngSubmit)="login(loginForm)"
+    class="login-form"
+    novalidate
+  >
+    <div class="input-group">
+      <input
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        placeholder="Логин"
+        class="login-input"
+        [class.error-input]="loginForm.submitted && usernameRef.invalid"
+        required
+        #usernameRef="ngModel"
+      />
+      <div
+        class="error-message"
+        *ngIf="loginForm.submitted && usernameRef.invalid"
+      >
+        Логин обязателен
+      </div>
+    </div>
+
+    <div class="input-group">
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        placeholder="Пароль"
+        class="login-input"
+        [class.error-input]="loginForm.submitted && passwordRef.invalid"
+        required
+        #passwordRef="ngModel"
+      />
+      <div
+        class="error-message"
+        *ngIf="loginForm.submitted && passwordRef.invalid"
+      >
+        Пароль обязателен
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="login-button"
+      [class.disabled]="loginForm.submitted && loginForm.invalid"
+      [disabled]="loginForm.submitted && loginForm.invalid"
+    >
+      Войти
+    </button>
+  </form>
+
+  <button class="back-button" (click)="redirectToUserPage()">Назад</button>
+</div>
