@@ -1,5 +1,12 @@
-<ng-container [ngSwitch]="widget.type">
-  <text-widget *ngSwitchCase="'text'" [data]="widget.data"> </text-widget>
-
-  <image-widget *ngSwitchCase="'image'" [data]="widget.data"> </image-widget>
+<ng-container *ngIf="!isEmptyWidgetData(); else fallback">
+  <ng-container [ngSwitch]="widget.type">
+    <text-widget *ngSwitchCase="'text'" [data]="widget.data"> </text-widget>
+    <image-widget *ngSwitchCase="'image'" [data]="widget.data"> </image-widget>
+  </ng-container>
 </ng-container>
+
+<ng-template #fallback>
+  <div class="widget-empty">
+    <lucide-icon [img]="widget.icon" size="60"></lucide-icon>
+  </div>
+</ng-template>

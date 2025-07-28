@@ -15,6 +15,7 @@ export class WidgetsService {
     const newWidget = {
       id: uuidv4(),
       type: widgetType,
+      icon: widgetConfig.icon,
       x: 0,
       y: 0,
       cols: widgetConfig.cols,
