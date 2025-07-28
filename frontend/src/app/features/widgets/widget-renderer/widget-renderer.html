@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="widget.type">
+  <text-widget *ngSwitchCase="'text'" [data]="widget.data"> </text-widget>
+
+  <image-widget *ngSwitchCase="'image'" [data]="widget.data"> </image-widget>
+</ng-container>
