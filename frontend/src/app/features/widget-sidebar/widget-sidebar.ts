@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { widgetSidebarButtons, WidgetSideBarButton } from './widget-sidebar.config';
+import {
+  widgetSidebarButtons,
+  WidgetSideBarButton,
+} from './widget-sidebar.config';
+import { WidgetsService } from '../widgets/widgets.service';
 
 @Component({
   selector: 'widget-sidebar',
@@ -13,8 +17,9 @@ import { widgetSidebarButtons, WidgetSideBarButton } from './widget-sidebar.conf
 export class WidgetSidebar {
   buttons: WidgetSideBarButton[] = widgetSidebarButtons;
 
-  addWidget(type: string) {
-    console.log(`Добавление виджета типа: ${type}`);
-    // Здесь будет логика добавления виджета на дашборд
+  constructor(private widgetsService: WidgetsService) {}
+
+  addWidget(type: string): void {
+    this.widgetsService.addWidget(type);
   }
 }
