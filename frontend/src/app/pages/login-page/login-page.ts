@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-page',
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',

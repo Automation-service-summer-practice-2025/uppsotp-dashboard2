@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'dashboard',
+  standalone: true,
   imports: [CommonModule, GridsterModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',

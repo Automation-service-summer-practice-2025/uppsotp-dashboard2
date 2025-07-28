@@ -5,6 +5,7 @@ import { widgetSidebarButtons, WidgetSideBarButton } from './widget-sidebar.conf
 
 @Component({
   selector: 'widget-sidebar',
+  standalone: true,
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './widget-sidebar.html',
   styleUrl: './widget-sidebar.css',
