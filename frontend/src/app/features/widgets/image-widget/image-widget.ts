@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-image-widget',
+  selector: 'image-widget',
+  standalone: true,
   imports: [],
   templateUrl: './image-widget.html',
-  styleUrl: './image-widget.css'
+  styleUrl: './image-widget.css',
 })
-export class ImageWidget {
-
-}
+export class ImageWidget {}
