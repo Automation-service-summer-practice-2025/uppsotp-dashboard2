@@ -64,8 +64,8 @@
 /* Добавляем отступ сверху для зум-контролов */
 .zoom-controls-wrapper {
   padding: 5px 0;
-  border-top: 1px solid #334155; /* Разделительная линия */
-  margin-top: auto; /* Если нужно прижать к низу */
+  border-top: 1px solid #334155;
+  margin-top: auto;
   align-self: center;
   justify-content: center;
 }
@@ -76,5 +76,5 @@
   align-items: center;
   gap: 5px;
   padding: 5px;
-  width: auto; /* Автоматическая ширина по содержимому */
+  width: auto;
 }
