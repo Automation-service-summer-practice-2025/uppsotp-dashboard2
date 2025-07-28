@@ -42,17 +42,17 @@ export class Zoom {
   }
 
   public updateZoom(): void {
+    const zoomValue = this.zoomLevel / 100;
     document.documentElement.style.setProperty(
       '--zoom-level',
-      (this.zoomLevel / 100).toString()
+      zoomValue.toString()
     );
-
-    // Отправляем текущий уровень зума родительскому компоненту
     this.zoomChange.emit(this.zoomLevel);
 
     if (this.options) {
-      this.options.fixedColWidth = 40;
-      this.options.fixedRowHeight = 40;
+      const scaledSize = 50 * zoomValue;
+      this.options.fixedColWidth = scaledSize;
+      this.options.fixedRowHeight = scaledSize;
 
       setTimeout(() => {
         this.options.api?.resize?.();

@@ -5,3 +5,9 @@
   height: 100vh;
   overflow: hidden;
 }
+
+dashboard {
+  flex-grow: 1;
+  display: block;
+  position: relative;
+}
