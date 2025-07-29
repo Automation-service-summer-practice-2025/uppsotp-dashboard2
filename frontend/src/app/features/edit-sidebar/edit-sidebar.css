@@ -1,8 +1,9 @@
 .edit-sidebar-conteiner {
   position: fixed;
-  right: -300px;
+  box-sizing: border-box;
+  right: -200px;
   top: 0;
-  width: 300px;
+  width: 200px;
   height: 100vh;
   transition: right 0.3s ease;
 }
