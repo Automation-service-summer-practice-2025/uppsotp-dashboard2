@@ -1,9 +1,17 @@
-/* Основной контейнер сетки */
+/* Основной контейнер дашборда */
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
+}
+
 gridster {
   display: block;
-  height: 100vh;
-  width: 100%;
   background-color: #0f172a;
+  overflow: visible;
+  height: 100%;
 }
 
 /* Панель кнопок */
@@ -15,12 +23,6 @@ gridster-item:hover .action-btn {
   opacity: 1;
 }
 
-/* Элементы сетки */
-gridster-item {
-  background-color: #1e293b;
-  border: 1px solid #334155;
-}
-
 gridster-item:hover {
   border-color: #3b82f6;
 }
@@ -29,4 +31,37 @@ gridster-item.gridster-item-moving {
   opacity: 0.8;
   transform: scale(1.02);
   z-index: 1000;
+}
+
+/* Элементы сетки */
+gridster-item {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Стилизация скроллбара для gridster */
+gridster::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+gridster::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+gridster::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+  border: 2px solid #1e293b;
+}
+
+gridster::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+gridster::-webkit-scrollbar-corner {
+  background: #1e293b;
 }

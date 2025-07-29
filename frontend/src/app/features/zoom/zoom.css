@@ -1,0 +1,46 @@
+.zoom-controls-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-block-end: 5px;
+  width: auto;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #94a3b8;
+  background-color: transparent;
+  border: 1px solid transparent;
+  width: 30px;
+  height: 30px;
+}
+
+.button:hover {
+  background-color: #334155;
+  color: #3b82f6;
+  border-color: #3b82f6;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.zoom-label {
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.zoom-controls-wrapper {
+  border-top: 1px solid #334155;
+  align-self: center;
+}

@@ -1,0 +1,11 @@
+<div class="zoom-controls-wrapper">
+  <div class="zoom-controls-container">
+    <button class="button" (click)="zoomOut()" title="Уменьшить">
+      <lucide-icon [name]="zoomDecreaseIcon" size="16"></lucide-icon>
+    </button>
+    <span class="zoom-label">{{ zoomLevel$ | async }}%</span>
+    <button class="button" (click)="zoomIn()" title="Увеличить">
+      <lucide-icon [name]="zoomIncreaseIcon" size="16"></lucide-icon>
+    </button>
+  </div>
+</div>
