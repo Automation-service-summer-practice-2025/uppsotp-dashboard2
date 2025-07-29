@@ -8,6 +8,4 @@
 
 dashboard {
   flex-grow: 1;
-  display: block;
-  position: relative;
 }
