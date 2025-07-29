@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import {
   widgetSidebarButtons,
   WidgetSideBarButton,
 } from './widget-sidebar.config';
 import { Zoom } from '../zoom/zoom';
-import { Dashboard } from '../dashboard/dashboard';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'widget-sidebar',
@@ -17,16 +17,14 @@ import { Dashboard } from '../dashboard/dashboard';
 })
 export class WidgetSidebar {
   buttons: WidgetSideBarButton[] = widgetSidebarButtons;
-  @ViewChild(Dashboard) dashboard!: Dashboard;
+  @Output() zoomChange = new EventEmitter<number>();
 
   addWidget(type: string) {
     console.log(`Добавление виджета типа: ${type}`);
     // Здесь будет логика добавления виджета на дашборд
   }
 
-  onZoomChange(zoomLevel: number) {
-    if (this.dashboard) {
-      this.dashboard.updateGridSize(zoomLevel);
-    }
+  onZoomChange(level: number) {
+    this.zoomChange.emit(level);
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {
   CompactType,
   GridsterConfig,
@@ -19,6 +19,12 @@ export class Dashboard implements OnInit {
   options!: GridsterConfig;
   dashboardWidgets?: Array<GridsterItem>;
   baseCellSize = 50;
+
+  @Input() set zoomLevel(level: number) {
+    if (level) {
+      this.updateGridSize(level);
+    }
+  }
 
   ngOnInit(): void {
     this.options = {

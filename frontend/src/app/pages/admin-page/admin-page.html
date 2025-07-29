@@ -1,6 +1,4 @@
-<widget-sidebar></widget-sidebar>
-
+<widget-sidebar (zoomChange)="onZoomChange($event)"></widget-sidebar>
 <div class="admin-page-content">
-  <app-header></app-header>
-  <dashboard></dashboard>
+    <app-header></app-header>   <dashboard [zoomLevel]="zoomLevel"></dashboard>
 </div>
