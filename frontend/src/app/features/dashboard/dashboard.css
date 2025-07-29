@@ -32,3 +32,28 @@ gridster-item {
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+/* Стилизация скроллбара для gridster */
+gridster::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+gridster::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+gridster::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+  border: 2px solid #1e293b;
+}
+
+gridster::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+gridster::-webkit-scrollbar-corner {
+  background: #1e293b;
+}
