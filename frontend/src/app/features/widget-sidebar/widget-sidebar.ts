@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import {
-  widgetSidebarButtons,
-  WidgetSideBarButton,
-} from './widget-sidebar.config';
+import { WidgetSideBarBtn } from '../../interfaces/widget-sb-btn.interface';
+import { widgetSbBtnsConfig } from '../../configs/widget-sb-btn.config';
 import { Zoom } from '../zoom/zoom';
 
 @Component({
@@ -15,7 +13,7 @@ import { Zoom } from '../zoom/zoom';
   styleUrl: './widget-sidebar.css',
 })
 export class WidgetSidebar {
-  buttons: WidgetSideBarButton[] = widgetSidebarButtons;
+  buttons: WidgetSideBarBtn[] = widgetSbBtnsConfig;
 
   addWidget(type: string) {
     console.log(`Добавление виджета типа: ${type}`);

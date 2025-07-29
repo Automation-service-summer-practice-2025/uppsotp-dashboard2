@@ -1,19 +1,7 @@
-import {
-  Type,
-  Image,
-  ChartScatter,
-  ChartColumn,
-  LucideIconData,
-} from 'lucide-angular';
+import { Type, Image, ChartScatter, ChartColumn } from 'lucide-angular';
+import { WidgetSideBarBtn } from '../interfaces/widget-sb-btn.interface';
 
-export interface WidgetSideBarButton {
-  name: string;
-  label: string;
-  icon: LucideIconData;
-  tooltip: string;
-}
-
-export const widgetSidebarButtons: WidgetSideBarButton[] = [
+export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
   {
     name: 'text',
     label: 'Текст',
