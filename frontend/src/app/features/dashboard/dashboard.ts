@@ -21,8 +21,7 @@ export class Dashboard implements OnInit, OnDestroy {
   options!: GridsterConfig;
   dashboardWidgets?: Array<GridsterItem>;
   baseCellSize = 50;
-
-  private zoomSub?: Subscription;
+  zoomSub?: Subscription;
 
   constructor(private zoomService: ZoomService) {}
 
