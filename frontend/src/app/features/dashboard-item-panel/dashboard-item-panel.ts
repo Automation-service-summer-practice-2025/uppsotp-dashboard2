@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LucideAngularModule, Pencil, Move, X } from 'lucide-angular';
 
 @Component({
-  selector: 'app-dashboard-item-panel',
+  selector: 'dashboard-item-panel',
   standalone: true,
   imports: [LucideAngularModule],
   templateUrl: './dashboard-item-panel.html',
