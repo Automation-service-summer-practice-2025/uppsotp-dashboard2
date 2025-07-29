@@ -10,10 +10,4 @@ import { WidgetSidebar } from '../../features/widget-sidebar/widget-sidebar';
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.css',
 })
-export class AdminPage {
-  zoomLevel = 100;
-
-  onZoomChange(level: number) {
-    this.zoomLevel = level;
-  }
-}
+export class AdminPage {}

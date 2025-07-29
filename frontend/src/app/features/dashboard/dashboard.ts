@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import {
   CompactType,
   GridsterConfig,
@@ -7,6 +7,8 @@ import {
   GridsterModule,
   GridType,
 } from 'angular-gridster2';
+import { ZoomService } from '../../services/ZoomService';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
@@ -15,16 +17,14 @@ import {
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
-export class Dashboard implements OnInit {
+export class Dashboard implements OnInit, OnDestroy {
   options!: GridsterConfig;
   dashboardWidgets?: Array<GridsterItem>;
   baseCellSize = 50;
 
-  @Input() set zoomLevel(level: number) {
-    if (level) {
-      this.updateGridSize(level);
-    }
-  }
+  private zoomSub?: Subscription;
+
+  constructor(private zoomService: ZoomService) {}
 
   ngOnInit(): void {
     this.options = {
@@ -56,6 +56,14 @@ export class Dashboard implements OnInit {
       { cols: 1, rows: 1, y: 1, x: 1 },
       { cols: 1, rows: 1, y: 2, x: 2 },
     ];
+
+    this.zoomSub = this.zoomService.zoomLevel$.subscribe((level) => {
+      this.updateGridSize(level);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.zoomSub?.unsubscribe();
   }
 
   // Метод для обновления размера ячеек при зуме

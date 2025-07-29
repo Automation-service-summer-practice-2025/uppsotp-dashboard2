@@ -5,8 +5,9 @@ import {
   widgetSidebarButtons,
   WidgetSideBarButton,
 } from './widget-sidebar.config';
+import { ZoomService } from '../../services/ZoomService';
+import { Observable } from 'rxjs';
 import { Zoom } from '../zoom/zoom';
-import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'widget-sidebar',
@@ -17,14 +18,22 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class WidgetSidebar {
   buttons: WidgetSideBarButton[] = widgetSidebarButtons;
-  @Output() zoomChange = new EventEmitter<number>();
+  zoomLevel$: Observable<number>;
+
+  constructor(private zoomService: ZoomService) {
+    this.zoomLevel$ = this.zoomService.zoomLevel$;
+  }
 
   addWidget(type: string) {
     console.log(`Добавление виджета типа: ${type}`);
     // Здесь будет логика добавления виджета на дашборд
   }
 
-  onZoomChange(level: number) {
-    this.zoomChange.emit(level);
+  zoomIn() {
+    this.zoomService.zoomIn();
+  }
+
+  zoomOut() {
+    this.zoomService.zoomOut();
   }
 }
