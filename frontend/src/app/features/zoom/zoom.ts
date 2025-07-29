@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LucideAngularModule, ZoomOut, ZoomIn } from 'lucide-angular';
-import { ZoomService } from '../../services/ZoomService';
+import { ZoomService } from '../../services/zoom.service';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 

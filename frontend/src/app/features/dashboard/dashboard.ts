@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
-import { ZoomService } from '../../services/ZoomService';
+import { ZoomService } from '../../services/zoom.service';
 import { Subscription } from 'rxjs';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetService } from '../../services/widget.service';
