@@ -67,15 +67,11 @@ export class Dashboard implements OnInit, OnDestroy {
 
   // Метод для обновления размера ячеек при зуме
   updateGridSize(zoomLevel: number): void {
-    if (this.options) {
-      const scaledSize = this.baseCellSize * (zoomLevel / 100);
-      this.options.fixedColWidth = scaledSize;
-      this.options.fixedRowHeight = scaledSize;
+    const scaledSize = this.baseCellSize * (zoomLevel / 100);
+    this.options.fixedColWidth = scaledSize;
+    this.options.fixedRowHeight = scaledSize;
 
-      setTimeout(() => {
-        this.options.api?.resize?.();
-        this.options.api?.optionsChanged?.();
-      }, 0);
-    }
+    this.options.api?.resize?.();
+    this.options.api?.optionsChanged?.();
   }
 }
