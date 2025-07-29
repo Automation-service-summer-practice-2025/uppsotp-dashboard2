@@ -1,6 +1,8 @@
 <widget-sidebar></widget-sidebar>
 
-<div class="user-page-content">
+<div class="user-page-content" [class.edit-sidebar-open]="isEditSidebarOpen">
   <app-header></app-header>
   <dashboard></dashboard>
 </div>
+
+<edit-sidebar></edit-sidebar>
