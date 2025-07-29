@@ -7,11 +7,12 @@ import {
   GridsterModule,
   GridType,
 } from 'angular-gridster2';
+import { DashboardItemPanel } from '../dashboard-item-panel/dashboard-item-panel';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule],
+  imports: [CommonModule, GridsterModule, DashboardItemPanel],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -46,8 +47,8 @@ export class Dashboard implements OnInit {
 
     this.dashboardWidgets = [
       { cols: 1, rows: 1, y: 0, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 1 },
-      { cols: 1, rows: 1, y: 2, x: 2 },
+      { cols: 2, rows: 2, y: 1, x: 1 },
+      { cols: 3, rows: 3, y: 2, x: 2 },
     ];
   }
 }
