@@ -6,7 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { GridsterConfig } from 'angular-gridster2';
-import { LucideAngularModule, CirclePlus, CircleMinus } from 'lucide-angular';
+import { LucideAngularModule, ZoomOut, ZoomIn } from 'lucide-angular';
 
 @Component({
   selector: 'zoom',
@@ -23,8 +23,8 @@ export class Zoom {
   maxZoom: number = 200;
   zoomStep: number = 10;
 
-  zoomIncreaseIcon = CirclePlus;
-  zoomDecreaseIcon = CircleMinus;
+  zoomIncreaseIcon = ZoomIn;
+  zoomDecreaseIcon = ZoomOut;
 
   zoomIn(): void {
     this.zoomLevel = Math.min(this.zoomLevel + this.zoomStep, this.maxZoom);
