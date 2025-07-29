@@ -19,10 +19,6 @@ export class DashboardItemPanel {
     console.log('Редактируется виджет:', idWidget);
   }
 
-  moveWidget(): void {
-    console.log('Двигается виджет:');
-  }
-
   deleteWidget(idWidget: number): void {
     console.log('Удален виджет:', idWidget);
   }

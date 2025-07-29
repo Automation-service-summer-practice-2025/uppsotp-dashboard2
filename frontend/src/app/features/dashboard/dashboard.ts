@@ -29,6 +29,8 @@ export class Dashboard implements OnInit {
       // maxCols: 12,
       draggable: {
         enabled: true,
+        ignoreContent: true,
+        dragHandleClass: 'drag-handle',
       },
       resizable: {
         enabled: true,
