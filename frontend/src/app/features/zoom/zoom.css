@@ -3,6 +3,7 @@
   flex-direction: row;
   align-items: center;
   padding-block-end: 5px;
+  width: auto;
 }
 
 .button {
@@ -37,4 +38,9 @@
   min-width: 40px;
   text-align: center;
   color: #94a3b8;
+}
+
+.zoom-controls-wrapper {
+  border-top: 1px solid #334155;
+  align-self: center;
 }

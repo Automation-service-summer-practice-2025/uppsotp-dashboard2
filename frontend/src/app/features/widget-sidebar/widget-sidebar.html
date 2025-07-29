@@ -1,18 +1,18 @@
 <div class="widget-sidebar">
-  <header class="header">Виджеты</header>
+  <div>
+    <header class="header">Виджеты</header>
 
-  <div class="widget-buttons-container">
-    <div
-      class="widget-button"
-      *ngFor="let button of buttons"
-      (click)="addWidget(button.name)"
-      [title]="button.tooltip"
-    >
-      <lucide-icon [img]="button.icon"></lucide-icon>
-      <span class="widget-button-label">{{ button.label }}</span>
+    <div class="widget-buttons-container">
+      <div
+        class="widget-button"
+        *ngFor="let button of buttons"
+        (click)="addWidget(button.name)"
+        [title]="button.tooltip"
+      >
+        <lucide-icon [img]="button.icon"></lucide-icon>
+        <span class="widget-button-label">{{ button.label }}</span>
+      </div>
     </div>
   </div>
-  <div class="zoom-controls-wrapper">
-    <zoom></zoom>
-  </div>
+  <zoom></zoom>
 </div>
