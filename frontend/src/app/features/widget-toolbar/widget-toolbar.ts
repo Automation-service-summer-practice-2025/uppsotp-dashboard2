@@ -21,7 +21,6 @@ export class WidgetToolbar {
   editWidget(widgetId: string): void {
     this.editsidebarServise.closeEditSidebar();
     this.editsidebarServise.openEditSidebar(widgetId);
-    console.log('Редактируется виджет:', widgetId);
   }
 
   deleteWidget(widgetId: string): void {
