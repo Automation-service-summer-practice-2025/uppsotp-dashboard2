@@ -1,19 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import {
-  CompactType,
   GridsterConfig,
   GridsterItem,
   GridsterModule,
   GridType,
 } from 'angular-gridster2';
+import { WidgetToolbar } from '../widget-toolbar/widget-toolbar';
 import { ZoomService } from '../../services/ZoomService';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule],
+  imports: [CommonModule, GridsterModule, WidgetToolbar],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -34,6 +34,8 @@ export class Dashboard implements OnInit, OnDestroy {
       // maxCols: 12,
       draggable: {
         enabled: true,
+        ignoreContent: true,
+        dragHandleClass: 'drag-handle',
       },
       resizable: {
         enabled: true,
@@ -52,8 +54,8 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.dashboardWidgets = [
       { cols: 1, rows: 1, y: 0, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 1 },
-      { cols: 1, rows: 1, y: 2, x: 2 },
+      { cols: 2, rows: 2, y: 1, x: 1 },
+      { cols: 3, rows: 3, y: 2, x: 2 },
     ];
 
     this.zoomSub = this.zoomService.zoomLevel$.subscribe((level) => {
