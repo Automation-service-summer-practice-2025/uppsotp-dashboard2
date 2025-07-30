@@ -18,13 +18,13 @@ export class DashboardItemPanel {
 
   constructor(private editsidebarServise: EditSidebarService) {}
 
-  editWidget(idWidget: number): void {
+  editWidget(widgetId: number): void {
     this.editsidebarServise.closeEditSidebar();
-    this.editsidebarServise.openEditSidebar(idWidget);
-    console.log('Редактируется виджет:', idWidget);
+    this.editsidebarServise.openEditSidebar(widgetId);
+    console.log('Редактируется виджет:', widgetId);
   }
 
-  deleteWidget(idWidget: number): void {
-    console.log('Удален виджет:', idWidget);
+  deleteWidget(widgetId: number): void {
+    console.log('Удален виджет:', widgetId);
   }
 }
