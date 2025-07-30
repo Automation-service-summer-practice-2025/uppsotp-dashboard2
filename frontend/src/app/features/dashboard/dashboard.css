@@ -14,11 +14,11 @@ gridster {
   height: 100%;
 }
 
-.action-btn {
+.widget-toolbar-visibility {
   opacity: 0;
 }
 
-gridster-item:hover .action-btn {
+gridster-item:hover .widget-toolbar-visibility {
   opacity: 1;
 }
 
