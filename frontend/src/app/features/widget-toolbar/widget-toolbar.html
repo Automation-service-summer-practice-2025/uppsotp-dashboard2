@@ -1,9 +1,9 @@
 <div class="widget-toolbar-container">
-  <button class="widget-toolbar-btn" (click)="editWidget(1)">
-    <lucide-icon [img]="buttons.edit" [strokeWidth]="2" [size]="15" />
-  </button>
   <button class="widget-toolbar-btn drag-handle">
     <lucide-icon [img]="buttons.move" [strokeWidth]="2" [size]="15" />
+  </button>
+  <button class="widget-toolbar-btn" (click)="editWidget(1)">
+    <lucide-icon [img]="buttons.edit" [strokeWidth]="2" [size]="15" />
   </button>
   <button class="widget-toolbar-btn delete" (click)="deleteWidget(1)">
     <lucide-icon [img]="buttons.delete" [strokeWidth]="2" [size]="15" />
