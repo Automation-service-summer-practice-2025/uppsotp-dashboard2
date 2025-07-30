@@ -31,7 +31,7 @@
   margin: 0px;
 }
 
-.action-btn {
+.closedEditSidebar-btn {
   height: 30px;
   width: 30px;
   padding: 0px;
@@ -43,11 +43,11 @@
   cursor: pointer;
 }
 
-.action-btn:hover {
+.closedEditSidebar-btn:hover {
   border: 1px solid #3b82f6;
   color: #3b82f6;
 }
 
-.action-btn:active {
+.closedEditSidebar-btn:active {
   transform: scale(0.9);
 }
