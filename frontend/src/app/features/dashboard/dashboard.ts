@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import {
-  CompactType,
   GridsterConfig,
   GridsterItem,
   GridsterModule,
   GridType,
 } from 'angular-gridster2';
-import { DashboardItemPanel } from '../dashboard-item-panel/dashboard-item-panel';
+import { WidgetToolbar } from '../widget-toolbar/widget-toolbar';
 import { ZoomService } from '../../services/ZoomService';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule, DashboardItemPanel],
+  imports: [CommonModule, GridsterModule, WidgetToolbar],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

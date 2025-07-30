@@ -3,13 +3,13 @@ import { LucideAngularModule, Pencil, Move, X } from 'lucide-angular';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 
 @Component({
-  selector: 'dashboard-item-panel',
+  selector: 'widget-toolbar',
   standalone: true,
   imports: [LucideAngularModule],
-  templateUrl: './dashboard-item-panel.html',
-  styleUrl: './dashboard-item-panel.css',
+  templateUrl: './widget-toolbar.html',
+  styleUrl: './widget-toolbar.css',
 })
-export class DashboardItemPanel {
+export class WidgetToolbar {
   readonly buttons = {
     edit: Pencil,
     move: Move,
