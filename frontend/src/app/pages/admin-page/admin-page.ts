@@ -15,20 +15,20 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AdminPage {
   isEditSidebarOpen: boolean = false;
-  private destroy$ = new Subject<void>();
+  private destroyEditSidebar$ = new Subject<void>();
 
   constructor(private editsidebarServise: EditSidebarService) {}
 
   ngOnInit() {
     this.editsidebarServise.isOpen$
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntil(this.destroyEditSidebar$))
       .subscribe((isOpen) => {
         this.isEditSidebarOpen = isOpen;
       });
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.destroyEditSidebar$.next();
+    this.destroyEditSidebar$.complete();
   }
 }
