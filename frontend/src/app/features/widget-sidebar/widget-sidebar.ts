@@ -14,7 +14,7 @@ import { WidgetService } from '../../services/widget.service';
   styleUrl: './widget-sidebar.css',
 })
 export class WidgetSidebar {
-  buttons: WidgetSideBarBtn[] = widgetSbBtnsConfig;
+  readonly buttonsConfig: WidgetSideBarBtn[] = widgetSbBtnsConfig;
 
   constructor(private widgetService: WidgetService) {}
 
