@@ -13,7 +13,7 @@ export class WidgetService {
   addWidget(type: string): void {
     const newWidget: Widget = {
       id: uuidv4(),
-      type,
+      type: type,
       cols: 3,
       rows: 3,
       x: 0,
