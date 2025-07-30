@@ -18,13 +18,13 @@ export class WidgetToolbar {
 
   constructor(private editsidebarServise: EditSidebarService) {}
 
-  editWidget(widgetId: number): void {
+  editWidget(widgetId: string): void {
     this.editsidebarServise.closeEditSidebar();
     this.editsidebarServise.openEditSidebar(widgetId);
     console.log('Редактируется виджет:', widgetId);
   }
 
-  deleteWidget(widgetId: number): void {
+  deleteWidget(widgetId: string): void {
     console.log('Удален виджет:', widgetId);
   }
 }
