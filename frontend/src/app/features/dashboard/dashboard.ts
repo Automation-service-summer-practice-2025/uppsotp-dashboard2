@@ -31,7 +31,10 @@ export class Dashboard implements OnInit, OnDestroy {
 
       fixedColWidth: this.baseCellSize,
       fixedRowHeight: this.baseCellSize,
-      // maxCols: 12,
+      maxCols: 46,
+      maxRows: 24,
+
+      displayGrid: 'onDrag&Resize',
       draggable: {
         enabled: true,
       },

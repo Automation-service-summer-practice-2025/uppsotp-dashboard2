@@ -57,3 +57,14 @@ gridster::-webkit-scrollbar-thumb:hover {
 gridster::-webkit-scrollbar-corner {
   background: #1e293b;
 }
+
+/* Стили для сетки Gridster */
+:host ::ng-deep gridster .gridster-row {
+  border-top: 1px solid #627d9c !important;
+  border-bottom: 1px solid #627d9c !important;
+}
+
+:host ::ng-deep gridster .gridster-column {
+  border-left: 1px solid #627d9c !important;
+  border-right: 1px solid #627d9c !important;
+}
