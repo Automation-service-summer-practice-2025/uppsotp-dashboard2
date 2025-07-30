@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LucideAngularModule, Pencil, Move, X } from 'lucide-angular';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 
@@ -15,7 +15,7 @@ export class WidgetToolbar {
     move: Move,
     delete: X,
   };
-
+  @Input() widgetId!: string;
   constructor(private editsidebarServise: EditSidebarService) {}
 
   editWidget(widgetId: string): void {
