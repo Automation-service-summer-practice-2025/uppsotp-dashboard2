@@ -1,29 +1,30 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import {
-  CompactType,
-  GridsterConfig,
-  GridsterItem,
-  GridsterModule,
-  GridType,
-} from 'angular-gridster2';
-import { ZoomService } from '../../services/ZoomService';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
 import { Subscription } from 'rxjs';
+import { Widget } from '../../interfaces/widget.interface';
+import { WidgetService } from '../../services/widget.service';
+import { WidgetToolbar } from '../widget-toolbar/widget-toolbar';
+import { ZoomService } from '../../services/zoom.service';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule],
+  imports: [CommonModule, GridsterModule, WidgetToolbar],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit, OnDestroy {
   options!: GridsterConfig;
-  dashboardWidgets?: Array<GridsterItem>;
+  dashboardWidgets: Widget[] = [];
   baseCellSize = 50;
   zoomSub?: Subscription;
+  widgetsSub?: Subscription;
 
-  constructor(private zoomService: ZoomService) {}
+  constructor(
+    private zoomService: ZoomService,
+    private widgetService: WidgetService
+  ) {}
 
   ngOnInit(): void {
     this.options = {
@@ -37,6 +38,8 @@ export class Dashboard implements OnInit, OnDestroy {
       displayGrid: 'onDrag&Resize',
       draggable: {
         enabled: true,
+        ignoreContent: true,
+        dragHandleClass: 'drag-handle',
       },
       resizable: {
         enabled: true,
@@ -53,11 +56,9 @@ export class Dashboard implements OnInit, OnDestroy {
       },
     };
 
-    this.dashboardWidgets = [
-      { cols: 1, rows: 1, y: 0, x: 0 },
-      { cols: 1, rows: 1, y: 1, x: 1 },
-      { cols: 1, rows: 1, y: 2, x: 2 },
-    ];
+    this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
+      this.dashboardWidgets = widgets;
+    });
 
     this.zoomSub = this.zoomService.zoomLevel$.subscribe((level) => {
       this.updateGridSize(level);
@@ -66,9 +67,9 @@ export class Dashboard implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.zoomSub?.unsubscribe();
+    this.widgetsSub?.unsubscribe();
   }
 
-  // Метод для обновления размера ячеек при зуме
   updateGridSize(zoomLevel: number): void {
     const scaledSize = this.baseCellSize * (zoomLevel / 100);
     this.options.fixedColWidth = scaledSize;

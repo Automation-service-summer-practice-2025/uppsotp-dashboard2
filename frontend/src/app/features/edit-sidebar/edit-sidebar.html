@@ -1,0 +1,9 @@
+<div class="edit-sidebar-container" [class.open]="isOpen">
+  <header class="header">
+    <p>Редактор виджета</p>
+    <button class="close-edit-sidebar-btn" (click)="closedEditSidebar()">
+      <lucide-icon [img]="btn_close" [strokeWidth]="1" [size]="25" />
+    </button>
+  </header>
+  <p>{{ widgetId }}</p>
+</div>

@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
-import {
-  widgetSidebarButtons,
-  WidgetSideBarButton,
-} from './widget-sidebar.config';
+import { WidgetSideBarBtn } from '../../interfaces/widget-sb-btn.interface';
+import { widgetSbBtnsConfig } from '../../configs/widget-sb-btn.config';
 import { Zoom } from '../zoom/zoom';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'widget-sidebar',
@@ -15,10 +14,11 @@ import { Zoom } from '../zoom/zoom';
   styleUrl: './widget-sidebar.css',
 })
 export class WidgetSidebar {
-  buttons: WidgetSideBarButton[] = widgetSidebarButtons;
+  readonly buttonsConfig: WidgetSideBarBtn[] = widgetSbBtnsConfig;
+
+  constructor(private widgetService: WidgetService) {}
 
   addWidget(type: string) {
-    console.log(`Добавление виджета типа: ${type}`);
-    // Здесь будет логика добавления виджета на дашборд
+    this.widgetService.addWidget(type);
   }
 }
