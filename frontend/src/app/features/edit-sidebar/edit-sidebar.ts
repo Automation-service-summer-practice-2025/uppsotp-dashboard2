@@ -12,7 +12,7 @@ import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
 })
 export class EditSidebar implements OnInit {
   isOpen: boolean = false;
-  widgetId: number | null = null;
+  widgetId: string | null = null;
   private destroyEditSidebar$ = new Subject<void>();
   btn_close: LucideIconData = X;
 
