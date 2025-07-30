@@ -20,7 +20,12 @@ export class WidgetService {
       y: 0,
     };
 
-    const currentWidgets = this.widgetsSubject.value;
-    this.widgetsSubject.next([...currentWidgets, newWidget]);
+    this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
+  }
+
+  delWidget(widgetId: string): void {
+    this.widgetsSubject.next([
+      ...this.widgetsSubject.value.filter((w) => w.id !== widgetId),
+    ]);
   }
 }
