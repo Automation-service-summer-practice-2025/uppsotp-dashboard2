@@ -33,16 +33,8 @@ export class Dashboard implements OnInit, OnDestroy {
       fixedColWidth: this.baseCellSize,
       fixedRowHeight: this.baseCellSize,
       maxCols: 54,
-      maxRows: 40,
-
-      outerMargin: true,
-      outerMarginTop: 0,
-      outerMarginLeft: 0,
-      outerMarginBottom: 10,
-      outerMarginRight: 10,
+      maxRows: 100,
       margin: 5,
-
-      displayGrid: 'always',
       draggable: {
         enabled: true,
         ignoreContent: true,
