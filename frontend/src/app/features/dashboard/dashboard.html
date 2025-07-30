@@ -1,4 +1,5 @@
 <gridster [options]="options" class="gridster">
   <gridster-item [item]="widget" *ngFor="let widget of dashboardWidgets">
+    <widget-toolbar class="widget-toolbar-visibility"></widget-toolbar>
   </gridster-item>
 </gridster>

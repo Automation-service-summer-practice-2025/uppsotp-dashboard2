@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
-import { ZoomService } from '../../services/zoom.service';
 import { Subscription } from 'rxjs';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetService } from '../../services/widget.service';
+import { WidgetToolbar } from '../widget-toolbar/widget-toolbar';
+import { ZoomService } from '../../services/zoom.service';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule],
+  imports: [CommonModule, GridsterModule, WidgetToolbar],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -34,6 +35,8 @@ export class Dashboard implements OnInit, OnDestroy {
       // maxCols: 12,
       draggable: {
         enabled: true,
+        ignoreContent: true,
+        dragHandleClass: 'drag-handle',
       },
       resizable: {
         enabled: true,

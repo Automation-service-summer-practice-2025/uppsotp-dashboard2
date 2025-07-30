@@ -4,4 +4,9 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  transition: margin-right 0.3s ease;
+}
+
+.user-page-content.edit-sidebar-open {
+  margin-right: 200px;
 }
