@@ -25,7 +25,7 @@ export class WidgetService {
 
   delWidget(widgetId: string): void {
     this.widgetsSubject.next([
-      ...this.widgetsSubject.value.filter((w) => w.id !== widgetId),
+      ...this.widgetsSubject.value.filter((widget) => widget.id !== widgetId),
     ]);
   }
 }
