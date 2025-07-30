@@ -11,8 +11,6 @@ gridster {
   display: block;
   background-color: #0f172a;
   overflow: visible;
-  height: 100%;
-  min-height: calc(100% - 50px);
 }
 
 .widget-toolbar-visibility {
