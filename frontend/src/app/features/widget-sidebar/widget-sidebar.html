@@ -5,7 +5,7 @@
     <div class="widget-buttons-container">
       <div
         class="widget-button"
-        *ngFor="let button of buttons"
+        *ngFor="let button of buttonsConfig"
         (click)="addWidget(button.name)"
         [title]="button.tooltip"
       >
