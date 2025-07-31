@@ -5,12 +5,13 @@ import { Subscription } from 'rxjs';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetService } from '../../services/widget.service';
 import { WidgetToolbar } from '../widget-toolbar/widget-toolbar';
+import { WidgetRender } from '../widget-render/widget-render';
 import { ZoomService } from '../../services/zoom.service';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule, WidgetToolbar],
+  imports: [CommonModule, GridsterModule, WidgetToolbar, WidgetRender],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
