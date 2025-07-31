@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
-import { v4 as uuidv4 } from 'uuid';
+import { widgetFactories } from '../configs/widget-factory';
 
 @Injectable({
   providedIn: 'root',
@@ -10,16 +10,8 @@ export class WidgetService {
   private widgetsSubject = new BehaviorSubject<Widget[]>([]);
   widgets$ = this.widgetsSubject.asObservable();
 
-  addWidget(type: string): void {
-    const newWidget: Widget = {
-      id: uuidv4(),
-      type: type,
-      cols: 3,
-      rows: 3,
-      x: 0,
-      y: 0,
-    };
-
+  addWidget(widgetType: string): void {
+    const newWidget = widgetFactories[widgetType]();
     this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
   }
 
