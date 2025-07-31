@@ -2,21 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
-import { TextWidgetEditor } from '../../editors/text-widget-editor/text-widget-editor';
-import { WidgetService } from '../../services/widget.service';
 import { Widget } from '../../interfaces/widget.interface';
-import { widgetEditorsConfig } from '../../configs/widget-editors.config';
+import { WidgetEditorRender } from '../editors/widget-editor-render/widget-editor-render';
 
 @Component({
   selector: 'edit-sidebar',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, WidgetEditorRender],
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
 export class EditSidebar implements OnInit, OnDestroy {
   isOpenEditSidebar: boolean = false;
-  widget: Widget | null = null;
+  widget: Widget | undefined = undefined;
   private destroyService$ = new Subject<void>();
   btn_close: LucideIconData = X;
 
