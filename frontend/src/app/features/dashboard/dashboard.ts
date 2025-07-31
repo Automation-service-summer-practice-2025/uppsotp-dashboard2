@@ -17,7 +17,7 @@ import { ZoomService } from '../../services/zoom.service';
 export class Dashboard implements OnInit, OnDestroy {
   options!: GridsterConfig;
   dashboardWidgets: Widget[] = [];
-  baseCellSize = 50;
+  baseCellSize = 40;
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
 
@@ -34,6 +34,8 @@ export class Dashboard implements OnInit, OnDestroy {
       fixedRowHeight: this.baseCellSize,
       minItemCols: 2,
       minItemRows: 2,
+      maxCols: 54,
+      maxRows: 100,
       draggable: {
         enabled: true,
         ignoreContent: true,
@@ -72,7 +74,6 @@ export class Dashboard implements OnInit, OnDestroy {
     const scaledSize = this.baseCellSize * (zoomLevel / 100);
     this.options.fixedColWidth = scaledSize;
     this.options.fixedRowHeight = scaledSize;
-
     this.options.api?.resize?.();
     this.options.api?.optionsChanged?.();
   }
