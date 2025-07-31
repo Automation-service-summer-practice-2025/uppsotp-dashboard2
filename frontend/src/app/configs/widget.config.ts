@@ -2,12 +2,12 @@ import { Type } from '@angular/core';
 import { TextWidget } from '../features/widgets/text-widget/text-widget';
 import { ImageWidget } from '../features/widgets/image-widget/image-widget';
 
-export interface ComponentConfig {
+export interface WidgetConfig {
   name: string;
   component: Type<any>;
 }
 
-export const componentConfigs: ComponentConfig[] = [
+export const componentConfigs: WidgetConfig[] = [
   {
     name: 'text',
     component: TextWidget,
