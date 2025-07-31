@@ -1,14 +1,14 @@
-import { TextWidget } from '../features/widgets/text-widget/text-widget';
-import { ImageWidget } from '../features/widgets/image-widget/image-widget';
+import { TextWidgetContent } from '../features/widgets/text-widget/text-widget';
+import { ImageWidgetContent } from '../features/widgets/image-widget/image-widget';
 import { WidgetConfig } from '../interfaces/widget.interface';
 
 export const widgetConfigs: WidgetConfig[] = [
   {
     name: 'text',
-    component: TextWidget,
+    component: TextWidgetContent,
   },
   {
     name: 'image',
-    component: ImageWidget,
+    component: ImageWidgetContent,
   },
 ];
