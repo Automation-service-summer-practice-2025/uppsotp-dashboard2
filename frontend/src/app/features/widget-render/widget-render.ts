@@ -35,6 +35,10 @@ export class WidgetRender implements AfterViewInit {
     }
 
     this.dynamicComponentContainer.clear();
-    this.dynamicComponentContainer.createComponent(config.component);
+    const componentRef = this.dynamicComponentContainer.createComponent(
+      config.component
+    );
+
+    componentRef.setInput('widget', this.widget);
   }
 }
