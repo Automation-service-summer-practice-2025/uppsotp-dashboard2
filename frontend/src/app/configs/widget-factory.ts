@@ -15,7 +15,7 @@ export const widgetFactories: Record<string, WidgetFactory> = {
     rows: 3,
     x: 0,
     y: 0,
-    textParamA: 'default',
+    textParamA: 'textParamA',
     textParamB: 0,
   }),
   image: (): ImageWidget => ({
@@ -25,7 +25,7 @@ export const widgetFactories: Record<string, WidgetFactory> = {
     rows: 3,
     x: 0,
     y: 0,
-    imageParamA: 'default',
-    imageParamB: 0,
+    imageParamA: 'imageParamA',
+    imageParamB: -20,
   }),
 };
