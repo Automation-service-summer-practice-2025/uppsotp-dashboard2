@@ -2,12 +2,14 @@ import {
   AfterViewInit,
   Component,
   Input,
-  OnInit,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { componentConfigs, ComponentConfig } from '../../configs/widget.config';
-import { Widget } from '../../interfaces/widget.interface';
+import {
+  componentConfigs,
+  ComponentConfig,
+} from '../../../configs/widget.config';
+import { Widget } from '../../../interfaces/widget.interface';
 
 @Component({
   selector: 'widget-render',
