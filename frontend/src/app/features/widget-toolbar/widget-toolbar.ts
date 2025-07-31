@@ -19,7 +19,7 @@ export class WidgetToolbar implements OnInit, OnDestroy {
     delete: X,
   };
   @Input() newWidget!: Widget;
-  oldWidgetId!: string;
+  oldWidgetId: string = '';
   isOpenEditSidebar: boolean = false;
   private destroyService$ = new Subject<void>();
 
@@ -42,12 +42,17 @@ export class WidgetToolbar implements OnInit, OnDestroy {
   }
 
   editWidget(newWidget: Widget): void {
-    if (this.isOpenEditSidebar && this.oldWidgetId === newWidget.id) {
+    console.log(newWidget.id, '||', this.oldWidgetId);
+    if (this.editsidebarServise.isOpen$ && this.oldWidgetId === newWidget.id) {
       this.editsidebarServise.closeEditSidebar();
+      this.oldWidgetId = ''; // костыль
+      console.log('Close', this.oldWidgetId);
     } else {
       this.editsidebarServise.openEditSidebar(newWidget);
+      // this.oldWidgetId = '';
+      this.oldWidgetId = newWidget.id;
+      console.log('Open', this.oldWidgetId);
     }
-    this.oldWidgetId = newWidget.id;
   }
 
   deleteWidget(widgetId: string): void {
