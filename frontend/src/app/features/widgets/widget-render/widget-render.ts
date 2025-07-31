@@ -5,10 +5,8 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import {
-  componentConfigs,
-  ComponentConfig,
-} from '../../../configs/widget.config';
+import { widgetConfigs } from '../../../configs/widget.config';
+import { WidgetConfig } from '../../../interfaces/widget.interface';
 import { Widget } from '../../../interfaces/widget.interface';
 
 @Component({
@@ -21,7 +19,7 @@ export class WidgetRender implements AfterViewInit {
   @ViewChild('dynamicComponentContainer', { read: ViewContainerRef })
   dynamicComponentContainer!: ViewContainerRef;
 
-  componentConfigs: ComponentConfig[] = componentConfigs;
+  widgetConfigs: WidgetConfig[] = widgetConfigs;
   @Input() widget!: Widget;
 
   ngAfterViewInit(): void {
@@ -29,7 +27,7 @@ export class WidgetRender implements AfterViewInit {
   }
 
   loadDynamicComponent(componentName: string) {
-    const config = this.componentConfigs.find((c) => c.name === componentName);
+    const config = this.widgetConfigs.find((c) => c.name === componentName);
 
     if (!config) {
       console.error(`Component with name '${componentName}' not found`);
