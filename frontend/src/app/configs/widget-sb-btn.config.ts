@@ -14,16 +14,16 @@ export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
     icon: Image,
     tooltip: 'Изображение',
   },
-  {
-    name: 'scatter',
-    label: 'Точечный график',
-    icon: ChartScatter,
-    tooltip: 'Точечный график',
-  },
-  {
-    name: 'histogram',
-    label: 'Гистограмма',
-    icon: ChartColumn,
-    tooltip: 'Гистограмма',
-  },
+  // {
+  //   name: 'scatter',
+  //   label: 'Точечный график',
+  //   icon: ChartScatter,
+  //   tooltip: 'Точечный график',
+  // },
+  // {
+  //   name: 'histogram',
+  //   label: 'Гистограмма',
+  //   icon: ChartColumn,
+  //   tooltip: 'Гистограмма',
+  // },
 ];

@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { componentConfigs, ComponentConfig } from '../../configs/widget.config';
+import { Widget } from '../../interfaces/widget.interface';
 
 @Component({
   selector: 'widget-render',
@@ -6,4 +15,26 @@ import { Component } from '@angular/core';
   templateUrl: './widget-render.html',
   styleUrl: './widget-render.css',
 })
-export class WidgetRender {}
+export class WidgetRender implements AfterViewInit {
+  @ViewChild('dynamicComponentContainer', { read: ViewContainerRef })
+  dynamicComponentContainer!: ViewContainerRef;
+
+  componentConfigs: ComponentConfig[] = componentConfigs;
+  @Input() widget!: Widget;
+
+  ngAfterViewInit(): void {
+    this.loadDynamicComponent(this.widget.type);
+  }
+
+  loadDynamicComponent(componentName: string) {
+    const config = this.componentConfigs.find((c) => c.name === componentName);
+
+    if (!config) {
+      console.error(`Component with name '${componentName}' not found`);
+      return;
+    }
+
+    this.dynamicComponentContainer.clear();
+    this.dynamicComponentContainer.createComponent(config.component);
+  }
+}
