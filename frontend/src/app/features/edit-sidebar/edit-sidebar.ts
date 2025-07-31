@@ -2,6 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
+import { TextWidgetEditor } from '../../editors/text-widget-editor/text-widget-editor';
+import { WidgetService } from '../../services/widget.service';
+import { Widget } from '../../interfaces/widget.interface';
+import { widgetEditorsConfig } from '../../configs/widget-editors.config';
 
 @Component({
   selector: 'edit-sidebar',
@@ -12,29 +16,29 @@ import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
 })
 export class EditSidebar implements OnInit, OnDestroy {
   isOpenEditSidebar: boolean = false;
-  widgetId?: string;
-  private destroyEditSidebar$ = new Subject<void>();
+  widget: Widget | null = null;
+  private destroyService$ = new Subject<void>();
   btn_close: LucideIconData = X;
 
   constructor(private editsidebarServise: EditSidebarService) {}
 
   ngOnInit() {
     this.editsidebarServise.isOpen$
-      .pipe(takeUntil(this.destroyEditSidebar$))
+      .pipe(takeUntil(this.destroyService$))
       .subscribe((isOpenEditSidebar) => {
         this.isOpenEditSidebar = isOpenEditSidebar;
       });
 
-    this.editsidebarServise.widgetEditableId$
-      .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe((widgetId) => {
-        this.widgetId = widgetId;
+    this.editsidebarServise.widgetEditable$
+      .pipe(takeUntil(this.destroyService$))
+      .subscribe((widget) => {
+        this.widget = widget;
       });
   }
 
   ngOnDestroy() {
-    this.destroyEditSidebar$.next();
-    this.destroyEditSidebar$.complete();
+    this.destroyService$.next();
+    this.destroyService$.complete();
   }
 
   closedEditSidebar(): void {

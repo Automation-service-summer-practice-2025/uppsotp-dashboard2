@@ -5,5 +5,8 @@
       <lucide-icon [img]="btn_close" [strokeWidth]="1" [size]="25" />
     </button>
   </header>
-  <p>{{ widgetId }}</p>
+
+  <p>{{ widget?.id }}</p>
+
+  <!-- <ng-container *ngComponentOutlet="getTemplate(.type)"></ng-container> -->
 </div>

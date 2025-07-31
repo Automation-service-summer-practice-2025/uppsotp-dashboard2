@@ -3,6 +3,7 @@ import { LucideAngularModule, Pencil, Move, X } from 'lucide-angular';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { WidgetService } from '../../services/widget.service';
 import { Subject, takeUntil } from 'rxjs';
+import { Widget } from '../../interfaces/widget.interface';
 
 @Component({
   selector: 'widget-toolbar',
@@ -17,10 +18,10 @@ export class WidgetToolbar implements OnInit, OnDestroy {
     move: Move,
     delete: X,
   };
-  @Input() newWidgetId!: string;
+  @Input() newWidget!: Widget;
+  oldWidgetId!: string;
   isOpenEditSidebar: boolean = false;
-  widgetId!: string;
-  private destroyEditSidebar$ = new Subject<void>();
+  private destroyService$ = new Subject<void>();
 
   constructor(
     private editsidebarServise: EditSidebarService,
@@ -29,28 +30,24 @@ export class WidgetToolbar implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.editsidebarServise.isOpen$
-      .pipe(takeUntil(this.destroyEditSidebar$))
+      .pipe(takeUntil(this.destroyService$))
       .subscribe((isOpenEditSidebar) => {
         this.isOpenEditSidebar = isOpenEditSidebar;
       });
-
-    this.editsidebarServise.widgetEditableId$
-      .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe((widgetId) => {
-        this.widgetId = widgetId;
-      });
   }
+
   ngOnDestroy() {
-    this.destroyEditSidebar$.next();
-    this.destroyEditSidebar$.complete();
+    this.destroyService$.next();
+    this.destroyService$.complete();
   }
 
-  editWidget(newWidgetId: string): void {
-    if (this.isOpenEditSidebar && this.widgetId === newWidgetId) {
+  editWidget(newWidget: Widget): void {
+    if (this.isOpenEditSidebar && this.oldWidgetId === newWidget.id) {
       this.editsidebarServise.closeEditSidebar();
     } else {
-      this.editsidebarServise.openEditSidebar(newWidgetId);
+      this.editsidebarServise.openEditSidebar(newWidget);
     }
+    this.oldWidgetId = newWidget.id;
   }
 
   deleteWidget(widgetId: string): void {
