@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
@@ -10,9 +10,9 @@ import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
-export class EditSidebar implements OnInit {
-  isOpen: boolean = false;
-  widgetId: number | null = null;
+export class EditSidebar implements OnInit, OnDestroy {
+  isOpenEditSidebar: boolean = false;
+  widgetId?: string;
   private destroyEditSidebar$ = new Subject<void>();
   btn_close: LucideIconData = X;
 
@@ -21,8 +21,8 @@ export class EditSidebar implements OnInit {
   ngOnInit() {
     this.editsidebarServise.isOpen$
       .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe((isOpen) => {
-        this.isOpen = isOpen;
+      .subscribe((isOpenEditSidebar) => {
+        this.isOpenEditSidebar = isOpenEditSidebar;
       });
 
     this.editsidebarServise.widgetEditableId$
