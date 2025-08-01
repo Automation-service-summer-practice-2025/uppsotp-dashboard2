@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { LucideAngularModule, Pencil, Move, X } from 'lucide-angular';
-import { EditSidebarService } from '../../services/edit-sidebar.service';
-import { WidgetService } from '../../services/widget.service';
+import { EditSidebarService } from '../../../services/edit-sidebar.service';
+import { WidgetService } from '../../../services/widget.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
