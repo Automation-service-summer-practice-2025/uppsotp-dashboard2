@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { EditSidebarService } from '../../services/edit-sidebar.service';
+import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
 

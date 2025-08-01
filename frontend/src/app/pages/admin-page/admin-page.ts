@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Header } from '../../features/header/header';
 import { Dashboard } from '../../features/dashboard/dashboard';
-import { WidgetSidebar } from '../../features/widget-sidebar/widget-sidebar';
-import { EditSidebar } from '../../features/edit-sidebar/edit-sidebar';
+import { WidgetSidebar } from '../../features/sidebars/widget-sidebar/widget-sidebar';
+import { EditSidebar } from '../../features/sidebars/edit-sidebar/edit-sidebar';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 
