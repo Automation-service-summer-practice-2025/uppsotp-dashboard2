@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Header } from '../../features/header/header';
 import { Dashboard } from '../../features/dashboard/dashboard';
 import { WidgetSidebar } from '../../features/sidebars/widget-sidebar/widget-sidebar';
@@ -13,7 +13,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.css',
 })
-export class AdminPage {
+export class AdminPage implements OnInit, OnDestroy {
   isEditSidebarOpen: boolean = false;
   private destroyEditSidebar$ = new Subject<void>();
 
