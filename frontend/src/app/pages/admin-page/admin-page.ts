@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppHeader } from '../../features/app-header/app-header';
+import { Header } from '../../features/header/header';
 import { Dashboard } from '../../features/dashboard/dashboard';
 import { WidgetSidebar } from '../../features/widget-sidebar/widget-sidebar';
 import { EditSidebar } from '../../features/edit-sidebar/edit-sidebar';
@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'admin-page',
   standalone: true,
-  imports: [AppHeader, Dashboard, WidgetSidebar, EditSidebar],
+  imports: [Header, Dashboard, WidgetSidebar, EditSidebar],
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.css',
 })
