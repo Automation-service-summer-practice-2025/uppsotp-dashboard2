@@ -13,7 +13,7 @@ import { Widget } from '../../../interfaces/widget.interface';
 })
 export class EditSidebar implements OnInit, OnDestroy {
   isOpenEditSidebar: boolean = false;
-  widget?: Widget;
+  widget?: Widget | null = null;
   private destroyEditSidebar$ = new Subject<void>();
   btn_close: LucideIconData = X;
 
@@ -29,9 +29,7 @@ export class EditSidebar implements OnInit, OnDestroy {
     this.editsidebarServise.currentWidget$
       .pipe(takeUntil(this.destroyEditSidebar$))
       .subscribe((currentWidget) => {
-        if (currentWidget) {
-          this.widget = currentWidget;
-        }
+        this.widget = currentWidget;
       });
   }
 

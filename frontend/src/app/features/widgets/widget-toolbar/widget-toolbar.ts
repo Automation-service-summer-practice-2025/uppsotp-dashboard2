@@ -18,9 +18,8 @@ export class WidgetToolbar implements OnInit, OnDestroy {
     move: Move,
     delete: X,
   };
-  @Input() newWidget!: Widget;
+  @Input() widget!: Widget;
   isOpenEditSidebar: boolean = false;
-  widget!: Widget;
   private destroyEditSidebar$ = new Subject<void>();
 
   constructor(
@@ -34,30 +33,18 @@ export class WidgetToolbar implements OnInit, OnDestroy {
       .subscribe((isOpenEditSidebar) => {
         this.isOpenEditSidebar = isOpenEditSidebar;
       });
-
-    this.editsidebarServise.currentWidget$
-      .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe((currentWidget) => {
-        if (currentWidget) {
-          this.widget = currentWidget;
-        }
-      });
   }
   ngOnDestroy() {
     this.destroyEditSidebar$.next();
     this.destroyEditSidebar$.complete();
   }
 
-  editWidget(newWidget: Widget): void {
-    if (this.isOpenEditSidebar && this.widget.id === newWidget.id) {
-      this.editsidebarServise.closeEditSidebar();
-    } else {
-      this.editsidebarServise.openEditSidebar(newWidget);
-    }
+  editWidget(): void {
+    this.editsidebarServise.toggleSidebarFor(this.widget);
   }
 
-  delWidget(widget: Widget): void {
+  delWidget(): void {
     this.editsidebarServise.closeEditSidebar();
-    this.widgetService.delWidget(widget);
+    this.widgetService.delWidget(this.widget);
   }
 }

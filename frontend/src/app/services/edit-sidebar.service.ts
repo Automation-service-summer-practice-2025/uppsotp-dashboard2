@@ -21,4 +21,12 @@ export class EditSidebarService {
     this.isOpenEditSidebar.next(false);
     this.currentWidget.next(null);
   }
+
+  toggleSidebarFor(widget: Widget): void {
+    const currentWidget = this.currentWidget.getValue();
+    const isOpenSidebar = this.isOpenEditSidebar.getValue();
+    isOpenSidebar && currentWidget?.id === widget.id
+      ? this.closeEditSidebar()
+      : this.openEditSidebar(widget);
+  }
 }
