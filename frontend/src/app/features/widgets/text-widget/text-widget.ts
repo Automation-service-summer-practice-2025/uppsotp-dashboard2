@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TextWidget } from '../../../interfaces/widget-classes';
 
 @Component({
   selector: 'text-widget',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './text-widget.html',
   styleUrl: './text-widget.css',
 })
-export class TextWidget {}
+export class TextWidgetComponent {
+  @Input() widget!: TextWidget;
+}
