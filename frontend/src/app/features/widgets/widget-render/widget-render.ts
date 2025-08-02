@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Widget } from '../../../interfaces/widget.interface';
 
 @Component({
   selector: 'widget-render',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './widget-render.html',
   styleUrl: './widget-render.css',
 })
-export class WidgetRender {}
+export class WidgetRender {
+  @Input() widget!: Widget;
+}
