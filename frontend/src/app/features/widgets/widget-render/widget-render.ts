@@ -1,5 +1,13 @@
-import { Component, Input } from '@angular/core';
-import { Widget } from '../../../interfaces/widget.interface';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
+import { Widget, WidgetConfig } from '../../../interfaces/widget.interface';
+import { widgetConfigs } from '../../../configs/widget.config';
 
 @Component({
   selector: 'widget-render',
@@ -7,6 +15,24 @@ import { Widget } from '../../../interfaces/widget.interface';
   templateUrl: './widget-render.html',
   styleUrl: './widget-render.css',
 })
-export class WidgetRender {
+export class WidgetRender implements AfterViewInit {
+  @ViewChild('widgetContainer', { read: ViewContainerRef })
+  widgetContainer!: ViewContainerRef;
+
   @Input() widget!: Widget;
+  widgetConfigs: Record<string, WidgetConfig> = widgetConfigs;
+
+  ngAfterViewInit(): void {
+    this.loadWidgetComponent();
+  }
+
+  loadWidgetComponent(): void {
+    console.log(this.widget.type);
+    const widgetComponent = this.widgetConfigs[this.widget.type].Component;
+
+    this.widgetContainer.clear();
+    const componentRef = this.widgetContainer.createComponent(widgetComponent);
+
+    componentRef.setInput('widget', this.widget);
+  }
 }
