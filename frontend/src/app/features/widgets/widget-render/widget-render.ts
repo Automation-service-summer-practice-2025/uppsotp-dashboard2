@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   Component,
   Input,
-  OnInit,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
