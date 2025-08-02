@@ -23,9 +23,11 @@ export class WidgetService {
     this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
   }
 
-  delWidget(widgetId: string): void {
+  delWidget(currentWidget: Widget): void {
     this.widgetsSubject.next([
-      ...this.widgetsSubject.value.filter((widget) => widget.id !== widgetId),
+      ...this.widgetsSubject.value.filter(
+        (widget) => widget.id !== currentWidget.id
+      ),
     ]);
   }
 }

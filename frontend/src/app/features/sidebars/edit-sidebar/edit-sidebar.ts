@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
+import { Widget } from '../../../interfaces/widget.interface';
 
 @Component({
   selector: 'edit-sidebar',
@@ -12,7 +13,7 @@ import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
 })
 export class EditSidebar implements OnInit, OnDestroy {
   isOpenEditSidebar: boolean = false;
-  widgetId?: string;
+  widget?: Widget;
   private destroyEditSidebar$ = new Subject<void>();
   btn_close: LucideIconData = X;
 
@@ -25,10 +26,12 @@ export class EditSidebar implements OnInit, OnDestroy {
         this.isOpenEditSidebar = isOpenEditSidebar;
       });
 
-    this.editsidebarServise.widgetEditableId$
+    this.editsidebarServise.currentWidget$
       .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe((widgetId) => {
-        this.widgetId = widgetId;
+      .subscribe((currentWidget) => {
+        if (currentWidget) {
+          this.widget = currentWidget;
+        }
       });
   }
 
