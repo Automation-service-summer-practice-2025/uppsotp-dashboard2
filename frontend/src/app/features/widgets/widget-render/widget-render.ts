@@ -26,7 +26,6 @@ export class WidgetRender implements AfterViewInit {
   }
 
   loadWidgetComponent(): void {
-    console.log(this.widget.type);
     const widgetComponent = this.widgetConfigs[this.widget.type].Component;
 
     this.widgetContainer.clear();
