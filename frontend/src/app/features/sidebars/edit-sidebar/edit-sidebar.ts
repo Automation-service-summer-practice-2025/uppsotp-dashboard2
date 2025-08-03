@@ -3,17 +3,18 @@ import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
 import { Widget } from '../../../interfaces/widget.interface';
+import { EditorRender } from '../../editors/editor-render/editor-render';
 
 @Component({
   selector: 'edit-sidebar',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, EditorRender],
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
 export class EditSidebar implements OnInit, OnDestroy {
   isOpenEditSidebar: boolean = false;
-  widget?: Widget | null = null;
+  widget?: Widget | undefined = undefined;
   private destroyEditSidebar$ = new Subject<void>();
   btn_close: LucideIconData = X;
 

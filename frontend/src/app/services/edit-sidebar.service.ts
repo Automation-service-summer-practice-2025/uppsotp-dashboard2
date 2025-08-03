@@ -7,7 +7,7 @@ import { Widget } from '../interfaces/widget.interface';
 })
 export class EditSidebarService {
   private isOpenEditSidebar = new BehaviorSubject<boolean>(false);
-  private currentWidget = new BehaviorSubject<Widget | null>(null);
+  private currentWidget = new BehaviorSubject<Widget | undefined>(undefined);
 
   isOpen$ = this.isOpenEditSidebar.asObservable();
   currentWidget$ = this.currentWidget.asObservable();
@@ -19,7 +19,7 @@ export class EditSidebarService {
 
   closeEditSidebar(): void {
     this.isOpenEditSidebar.next(false);
-    this.currentWidget.next(null);
+    this.currentWidget.next(undefined);
   }
 
   toggleSidebarFor(widget: Widget): void {
