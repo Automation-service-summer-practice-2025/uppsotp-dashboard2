@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ImageWidget } from '../../../interfaces/widget-classes';
 
 @Component({
   selector: 'image-widget-editor',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './image-widget-editor.html',
   styleUrl: './image-widget-editor.css',
 })
-export class ImageWidgetEditor {}
+export class ImageWidgetEditor {
+  @Input() widget!: ImageWidget;
+}
