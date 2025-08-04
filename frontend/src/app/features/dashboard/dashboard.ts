@@ -3,14 +3,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
 import { Subscription } from 'rxjs';
 import { Widget } from '../../interfaces/widget.interface';
+import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
-import { WidgetToolbar } from '../widget-toolbar/widget-toolbar';
+import { WidgetToolbar } from '../widgets/widget-toolbar/widget-toolbar';
 import { ZoomService } from '../../services/zoom.service';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule, WidgetToolbar],
+  imports: [CommonModule, GridsterModule, WidgetToolbar, WidgetRender],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

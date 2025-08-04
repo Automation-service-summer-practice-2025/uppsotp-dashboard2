@@ -2,10 +2,10 @@
   <button class="widget-toolbar-btn drag-handle">
     <lucide-icon [img]="buttons.move" [strokeWidth]="2" [size]="15" />
   </button>
-  <button class="widget-toolbar-btn" (click)="editWidget(newWidgetId)">
+  <button class="widget-toolbar-btn" (click)="editWidget()">
     <lucide-icon [img]="buttons.edit" [strokeWidth]="2" [size]="15" />
   </button>
-  <button class="widget-toolbar-btn delete" (click)="deleteWidget(newWidgetId)">
+  <button class="widget-toolbar-btn delete" (click)="delWidget()">
     <lucide-icon [img]="buttons.delete" [strokeWidth]="2" [size]="15" />
   </button>
 </div>

@@ -3,13 +3,13 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
+  selector: 'header',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './app-header.html',
-  styleUrl: './app-header.css',
+  templateUrl: './header.html',
+  styleUrl: './header.css',
 })
-export class AppHeader {
+export class Header {
   constructor(private router: Router) {}
 
   isOnPage(endpoint: string): boolean {

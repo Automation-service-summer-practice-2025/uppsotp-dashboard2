@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { AppHeader } from '../../features/app-header/app-header';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Header } from '../../features/header/header';
 import { Dashboard } from '../../features/dashboard/dashboard';
-import { WidgetSidebar } from '../../features/widget-sidebar/widget-sidebar';
-import { EditSidebar } from '../../features/edit-sidebar/edit-sidebar';
+import { WidgetSidebar } from '../../features/sidebars/widget-sidebar/widget-sidebar';
+import { EditSidebar } from '../../features/sidebars/edit-sidebar/edit-sidebar';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-page',
   standalone: true,
-  imports: [AppHeader, Dashboard, WidgetSidebar, EditSidebar],
+  imports: [Header, Dashboard, WidgetSidebar, EditSidebar],
   templateUrl: './admin-page.html',
   styleUrl: './admin-page.css',
 })
-export class AdminPage {
+export class AdminPage implements OnInit, OnDestroy {
   isEditSidebarOpen: boolean = false;
   private destroyEditSidebar$ = new Subject<void>();
 

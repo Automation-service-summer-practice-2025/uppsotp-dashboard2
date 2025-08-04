@@ -11,11 +11,11 @@ gridster {
   overflow: visible;
 }
 
-.widget-toolbar-visibility {
+widget-toolbar {
   opacity: 0;
 }
 
-gridster-item:hover .widget-toolbar-visibility {
+gridster-item:hover widget-toolbar {
   opacity: 1;
 }
 
