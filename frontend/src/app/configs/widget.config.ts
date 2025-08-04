@@ -4,8 +4,14 @@ import { ImageWidgetEditor } from '../features/editors/image-widget-editor/image
 import { TextWidgetComponent } from '../features/widgets/text-widget/text-widget';
 import { TextWidgetEditor } from '../features/editors/text-widget-editor/text-widget-editor';
 
-import { ImageWidget, TextWidget } from '../interfaces/widget-classes';
+import {
+  ChartWidget,
+  ImageWidget,
+  TextWidget,
+} from '../interfaces/widget-classes';
 import { WidgetConfig } from '../interfaces/widget.interface';
+import { ChartWidgetComponent } from '../features/widgets/chart-widget/chart-widget';
+import { ChartWidgetEditor } from '../features/editors/chart-widget-editor/chart-widget-editor';
 
 export const widgetConfigs: Record<string, WidgetConfig> = {
   text: {
@@ -17,5 +23,10 @@ export const widgetConfigs: Record<string, WidgetConfig> = {
     Component: ImageWidgetComponent,
     Editor: ImageWidgetEditor,
     Widget: ImageWidget,
+  },
+  chart: {
+    Component: ChartWidgetComponent,
+    Editor: ChartWidgetEditor,
+    Widget: ChartWidget,
   },
 };

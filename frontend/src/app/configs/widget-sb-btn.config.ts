@@ -1,4 +1,4 @@
-import { Type, Image } from 'lucide-angular';
+import { Type, Image, ChartLine } from 'lucide-angular';
 import { WidgetSideBarBtn } from '../interfaces/widget-sb-btn.interface';
 
 export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
@@ -13,5 +13,11 @@ export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
     label: 'Картинка',
     icon: Image,
     tooltip: 'Изображение',
+  },
+  {
+    name: 'chart',
+    label: 'График',
+    icon: ChartLine,
+    tooltip: 'График',
   },
 ];
