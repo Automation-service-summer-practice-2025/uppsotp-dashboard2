@@ -1,0 +1,13 @@
+.chart-widget-editor label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+}
+
+.chart-widget-editor select,
+.chart-widget-editor input[type="color"],
+.chart-widget-editor input[type="number"],
+.chart-widget-editor input[type="file"] {
+  margin-top: 4px;
+  width: 100%;
+}
