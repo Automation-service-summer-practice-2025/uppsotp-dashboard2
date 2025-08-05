@@ -17,17 +17,31 @@ export class TextWidgetEditor {
   @Input() widget!: TextWidget;
 
   toolbar: Toolbar = [
-    ['undo', 'redo'],
-    ['bold', 'italic'],
-    ['underline', 'strike'],
-    ['indent', 'outdent'],
-    ['code', 'blockquote'],
-    ['ordered_list', 'bullet_list'],
-    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-    ['text_color', 'background_color'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
-    ['horizontal_rule', 'format_clear'],
-    ['superscript', 'subscript'],
+    [
+      'undo',
+      'redo',
+      'bold',
+      'italic',
+      'underline',
+      'strike',
+      'indent',
+      'outdent',
+      'code',
+      'blockquote',
+      'ordered_list',
+      'bullet_list',
+      { heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] },
+      'text_color',
+      'background_color',
+      'align_left',
+      'align_center',
+      'align_right',
+      'align_justify',
+      'horizontal_rule',
+      'format_clear',
+      'superscript',
+      'subscript',
+    ],
   ];
 
   editor!: Editor;
@@ -39,8 +53,6 @@ export class TextWidgetEditor {
     this.editorSubscription = this.editSidebarService.editor$.subscribe(
       (editor) => {
         this.editor = editor;
-        // Здесь можно выполнить дополнительные действия при изменении редактора
-        console.log('Editor get');
       }
     );
   }

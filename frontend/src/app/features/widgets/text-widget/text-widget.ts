@@ -21,11 +21,9 @@ export class TextWidgetComponent {
   ngOnInit(): void {
     this.editor = new Editor();
     this.editSidebarService.setEditor(this.editor);
-    console.log('Editor создан');
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
-    // this.editSidebarService.setEditor(); // Очищаем при уничтожении
   }
 }
