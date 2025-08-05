@@ -16,6 +16,5 @@ export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
     name: 'chart',
     label: 'График',
     icon: ChartLine,
-    tooltip: 'График',
   },
 ];

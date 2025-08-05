@@ -1,72 +1,78 @@
-<div>{{ widget.id }}</div>
 <div class="chart-widget-editor">
-  <label>Тип графика:</label>
-  <select [value]="widget.chartType" (change)="setChartType($event)">
-    <option value="bar">Гистограмма (Bar Chart)</option>
-    <option value="scatter">Точечный график (Scatter Chart)</option>
-  </select>
+  <div class="chart-type">
+    <label>Тип графика:</label>
+    <select [value]="widget.chartType" (change)="setChartType($event)">
+      <option value="bar">Гистограмма (Bar Chart)</option>
+      <option value="scatter">Точечный график (Scatter Chart)</option>
+    </select>
+  </div>
 
-  <br /><br />
-
-  <label>Загрузить CSV файл:</label>
-  <input type="file" (change)="handleFileInput($event)" accept=".csv" />
-
-  <br /><br />
+  <div class="chart-load-file">
+    <label>Загрузить CSV файл:</label>
+    <input type="file" (change)="handleFileInput($event)" accept=".csv" />
+  </div>
 
   <ng-container *ngIf="csvHeaders.length > 0">
     <ng-container
       *ngFor="let selector of chartFeatureSelectors[widget.chartType]"
     >
-      <label>{{ selector.label }}:</label>
-      <select (change)="onFeatureSelect(selector.key, $event)">
-        <option value="" disabled [selected]="!selectedFeatures[selector.key]">
-          -- Выберите --
-        </option>
-        <option *ngFor="let header of csvHeaders" [value]="header">
-          {{ header }}
-        </option>
-      </select>
-      <br /><br />
+      <div class="chart-select-feature">
+        <label>{{ selector.label }}:</label>
+        <select (change)="onFeatureSelect(selector.key, $event)">
+          <option
+            value=""
+            disabled
+            [selected]="!selectedFeatures[selector.key]"
+          >
+            -- Выберите --
+          </option>
+          <option *ngFor="let header of csvHeaders" [value]="header">
+            {{ header }}
+          </option>
+        </select>
+      </div>
     </ng-container>
   </ng-container>
 
-  <label>Цвет линии:</label>
-  <input
-    type="color"
-    [value]="widget.lineColor || '#4bc0c0'"
-    (change)="onParamChange('lineColor', $event)"
-  />
-
-  <br /><br />
-
-  <label>Толщина линии:</label>
-  <input
-    type="number"
-    min="1"
-    max="10"
-    [value]="widget.lineWidth || 1"
-    (change)="onParamChange('lineWidth', $event)"
-  />
-
-  <br /><br />
-
-  <label>
+  <div class="chart-line-color">
+    <label>Цвет линии:</label>
     <input
-      type="checkbox"
-      [checked]="widget.showLegend ?? true"
-      (change)="onParamChange('showLegend', $event)"
+      type="color"
+      [value]="widget.lineColor || '#4bc0c0'"
+      (change)="onParamChange('lineColor', $event)"
     />
-    Показать легенду
-  </label>
+  </div>
 
-  <br />
-
-  <label>
+  <div class="chart-line-width">
+    <label>Толщина линии:</label>
     <input
-      type="checkbox"
-      [checked]="widget.showGrid ?? true"
-      (change)="onParamChange('showGrid', $event)"
+      type="number"
+      min="1"
+      max="10"
+      [value]="widget.lineWidth || 1"
+      (change)="onParamChange('lineWidth', $event)"
     />
-    Показать сетку
-  </label>
+  </div>
+
+  <div class="chart-display-legend">
+    <label>
+      <input
+        type="checkbox"
+        [checked]="widget.showLegend ?? true"
+        (change)="onParamChange('showLegend', $event)"
+      />
+      Показать легенду
+    </label>
+  </div>
+
+  <div class="chart-display-grid">
+    <label>
+      <input
+        type="checkbox"
+        [checked]="widget.showGrid ?? true"
+        (change)="onParamChange('showGrid', $event)"
+      />
+      Показать сетку
+    </label>
+  </div>
 </div>

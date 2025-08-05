@@ -8,6 +8,6 @@
 .chart-widget-editor input[type="color"],
 .chart-widget-editor input[type="number"],
 .chart-widget-editor input[type="file"] {
-  margin-top: 4px;
+  margin-top: 10px;
   width: 100%;
 }
