@@ -6,13 +6,11 @@ export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
     name: 'text',
     label: 'Текст',
     icon: Type,
-    tooltip: 'Текстовый виджет',
   },
   {
     name: 'image',
-    label: 'Картинка',
+    label: 'Картинка/GIF',
     icon: Image,
-    tooltip: 'Изображение',
   },
   {
     name: 'chart',

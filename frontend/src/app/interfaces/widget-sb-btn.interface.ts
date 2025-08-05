@@ -4,5 +4,4 @@ export interface WidgetSideBarBtn {
   name: string;
   label: string;
   icon: LucideIconData;
-  tooltip: string;
 }

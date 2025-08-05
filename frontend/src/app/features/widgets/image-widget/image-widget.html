@@ -1,1 +1,3 @@
-<div>{{ widget.mockParam1 }}</div>
+<div class="image-widget">
+  <img *ngIf="widget.previewUrl" [src]="widget.previewUrl" alt="image" />
+</div>
