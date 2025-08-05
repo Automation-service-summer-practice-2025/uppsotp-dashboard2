@@ -36,4 +36,12 @@ export class ChartWidget extends Widget {
   lineWidth?: number;
   showLegend?: boolean;
   showGrid?: boolean;
+
+  csvRawData?: string;
+  csvHeaders?: string[];
+  selectedFeature?: string;
+  selectedFeatureX?: string;
+  selectedFeatureY?: string;
+
+  [key: string]: any;
 }

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ChartWidget } from '../../../interfaces/widget-classes';
 import { CommonModule } from '@angular/common';
+import { chartDataGenerators } from '../../../configs/chart.config';
 
 @Component({
   selector: 'chart-widget-editor',
@@ -9,29 +10,51 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chart-widget-editor.html',
   styleUrl: './chart-widget-editor.css',
 })
-export class ChartWidgetEditor {
+export class ChartWidgetEditor implements OnInit {
   @Input() widget!: ChartWidget;
 
   csvData: any[] = [];
   csvHeaders: string[] = [];
-  selectedFeature: string = '';
+
+  selectedFeatures: Record<string, string> = {};
+
+  ngOnInit() {
+    if (this.widget.csvRawData) {
+      this.parseCSV(this.widget.csvRawData);
+    }
+    if (this.widget.csvHeaders) {
+      this.csvHeaders = this.widget.csvHeaders;
+    }
+
+    this.selectedFeatures = {
+      single: this.widget.selectedFeature || '',
+      x: this.widget.selectedFeatureX || '',
+      y: this.widget.selectedFeatureY || '',
+    };
+  }
 
   setChartType(event: Event) {
     const select = event.target as HTMLSelectElement | null;
     if (!select) return;
+
     this.widget.chartType = select.value as any;
+
+    this.selectedFeatures = { single: '', x: '', y: '' };
+    this.widget.selectedFeature = '';
+    this.widget.selectedFeatureX = '';
+    this.widget.selectedFeatureY = '';
+
     this.updateChartData();
   }
 
   handleFileInput(event: any) {
     const file = event.target.files[0];
-    if (!file) {
-      return;
-    }
+    if (!file) return;
 
     const reader = new FileReader();
-    reader.onload = (e) => {
+    reader.onload = () => {
       const text = reader.result as string;
+      this.widget.csvRawData = text;
       this.parseCSV(text);
     };
     reader.readAsText(file);
@@ -42,7 +65,6 @@ export class ChartWidgetEditor {
     if (lines.length === 0) return;
 
     this.csvHeaders = lines[0].split(',');
-
     this.csvData = lines.slice(1).map((line) => {
       const values = line.split(',');
       const obj: any = {};
@@ -51,68 +73,48 @@ export class ChartWidgetEditor {
       });
       return obj;
     });
-
-    this.selectedFeature = '';
+    this.widget.csvHeaders = this.csvHeaders;
   }
 
-  onFeatureSelect(event: Event) {
+  onFeatureSelect(key: string, event: Event) {
     const select = event.target as HTMLSelectElement | null;
     if (!select) return;
-    this.selectedFeature = select.value;
+
+    this.selectedFeatures[key] = select.value;
+    if (key === 'single') this.widget.selectedFeature = select.value;
+    if (key === 'x') this.widget.selectedFeatureX = select.value;
+    if (key === 'y') this.widget.selectedFeatureY = select.value;
     this.updateChartData();
+  }
+
+  onParamChange(key: keyof ChartWidget, event: Event) {
+    const input = event.target as HTMLInputElement | null;
+    if (!input) return;
+
+    const booleanKeys = ['showLegend', 'showGrid'];
+    const numberKeys = ['lineWidth'];
+
+    const keyStr = key as string;
+
+    if (booleanKeys.includes(keyStr)) {
+      this.widget[key] = input.checked as any;
+      this.updateChartOptions();
+    } else if (numberKeys.includes(keyStr)) {
+      this.widget[key] = +input.value as any;
+      this.updateChartData();
+    } else {
+      this.widget[key] = input.value as any;
+      this.updateChartData();
+    }
   }
 
   updateChartData() {
-    if (this.selectedFeature != '' || this.csvData.length === 0) {
+    const generator = chartDataGenerators[this.widget.chartType];
+    if (generator) {
+      generator(this.csvData, this.selectedFeatures, this.widget);
+    } else {
       this.widget.chartData = { labels: [], datasets: [] };
-      return;
     }
-
-    if (this.widget.chartType === 'bar') {
-      const counts = this.csvData.reduce((acc: any, row: any) => {
-        const val = row[this.selectedFeature];
-        acc[val] = (acc[val] || 0) + 1;
-        return acc;
-      }, {});
-
-      this.widget.chartData = {
-        labels: Object.keys(counts),
-        datasets: [
-          {
-            label: `Распределение по ${this.selectedFeature}`,
-            data: Object.values(counts),
-            backgroundColor: this.widget.lineColor || 'rgba(75,192,192,0.4)',
-            borderColor: this.widget.lineColor || 'rgba(75,192,192,1)',
-            borderWidth: this.widget.lineWidth || 1,
-          },
-        ],
-      };
-    } else if (this.widget.chartType === 'scatter') {
-      this.widget.chartData = {
-        datasets: [],
-        labels: [],
-      };
-    }
-  }
-
-  onLineColorChange(event: any) {
-    this.widget.lineColor = event.target.value;
-    this.updateChartData();
-  }
-
-  onLineWidthChange(event: any) {
-    this.widget.lineWidth = +event.target.value;
-    this.updateChartData();
-  }
-
-  onShowLegendChange(event: any) {
-    this.widget.showLegend = event.target.checked;
-    this.updateChartOptions();
-  }
-
-  onShowGridChange(event: any) {
-    this.widget.showGrid = event.target.checked;
-    this.updateChartOptions();
   }
 
   updateChartOptions() {

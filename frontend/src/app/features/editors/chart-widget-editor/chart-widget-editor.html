@@ -1,4 +1,3 @@
-<div>{{ widget.id }}</div>
 <div class="chart-widget-editor">
   <label>Тип графика:</label>
   <select [value]="widget.chartType" (change)="setChartType($event)">
@@ -13,9 +12,44 @@
 
   <br /><br />
 
-  <label *ngIf="csvHeaders.length > 0">Выберите признак:</label>
-  <select *ngIf="csvHeaders.length > 0" (change)="onFeatureSelect($event)">
-    <option value="" disabled [selected]="!selectedFeature">
+  <label *ngIf="widget.chartType === 'bar' && csvHeaders.length > 0"
+    >Выберите признак:</label
+  >
+  <select
+    *ngIf="widget.chartType === 'bar' && csvHeaders.length > 0"
+    (change)="onFeatureSelect('single', $event)"
+  >
+    <option value="" disabled [selected]="!selectedFeatures['single']">
+      -- Выберите --
+    </option>
+    <option *ngFor="let header of csvHeaders" [value]="header">
+      {{ header }}
+    </option>
+  </select>
+
+  <label *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
+    >Выберите X-признак:</label
+  >
+  <select
+    *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
+    (change)="onFeatureSelect('x', $event)"
+  >
+    <option value="" disabled [selected]="!selectedFeatures['x']">
+      -- Выберите --
+    </option>
+    <option *ngFor="let header of csvHeaders" [value]="header">
+      {{ header }}
+    </option>
+  </select>
+
+  <label *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
+    >Выберите Y-признак:</label
+  >
+  <select
+    *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
+    (change)="onFeatureSelect('y', $event)"
+  >
+    <option value="" disabled [selected]="!selectedFeatures['y']">
       -- Выберите --
     </option>
     <option *ngFor="let header of csvHeaders" [value]="header">
@@ -29,7 +63,7 @@
   <input
     type="color"
     [value]="widget.lineColor || '#4bc0c0'"
-    (change)="onLineColorChange($event)"
+    (change)="onParamChange('lineColor', $event)"
   />
 
   <br /><br />
@@ -40,7 +74,7 @@
     min="1"
     max="10"
     [value]="widget.lineWidth || 1"
-    (change)="onLineWidthChange($event)"
+    (change)="onParamChange('lineWidth', $event)"
   />
 
   <br /><br />
@@ -49,7 +83,7 @@
     <input
       type="checkbox"
       [checked]="widget.showLegend ?? true"
-      (change)="onShowLegendChange($event)"
+      (change)="onParamChange('showLegend', $event)"
     />
     Показать легенду
   </label>
@@ -60,7 +94,7 @@
     <input
       type="checkbox"
       [checked]="widget.showGrid ?? true"
-      (change)="onShowGridChange($event)"
+      (change)="onParamChange('showGrid', $event)"
     />
     Показать сетку
   </label>
