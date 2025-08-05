@@ -16,20 +16,12 @@ export class ChartWidget extends Widget {
 
   chartType: ChartType = 'bar';
 
-  chartData: ChartData = {
-    labels: [],
-    datasets: [],
-  };
+  chartData: ChartData = { labels: [], datasets: [] };
 
   chartOptions: ChartOptions = {
     responsive: true,
-    plugins: {
-      legend: { display: true },
-    },
-    scales: {
-      x: {},
-      y: { beginAtZero: true },
-    },
+    plugins: { legend: { display: true } },
+    scales: { x: {}, y: { beginAtZero: true } },
   };
 
   lineColor?: string;
@@ -39,9 +31,6 @@ export class ChartWidget extends Widget {
 
   csvRawData?: string;
   csvHeaders?: string[];
-  selectedFeature?: string;
-  selectedFeatureX?: string;
-  selectedFeatureY?: string;
 
   [key: string]: any;
 }

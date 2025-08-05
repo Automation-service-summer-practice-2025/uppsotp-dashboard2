@@ -16,7 +16,11 @@ export class ChartWidgetEditor implements OnInit {
   csvData: any[] = [];
   csvHeaders: string[] = [];
 
-  selectedFeatures: Record<string, string> = {};
+  selectedFeatures: Record<string, string> = {
+    single: '',
+    x: '',
+    y: '',
+  };
 
   ngOnInit() {
     if (this.widget.csvRawData) {
@@ -26,11 +30,7 @@ export class ChartWidgetEditor implements OnInit {
       this.csvHeaders = this.widget.csvHeaders;
     }
 
-    this.selectedFeatures = {
-      single: this.widget.selectedFeature || '',
-      x: this.widget.selectedFeatureX || '',
-      y: this.widget.selectedFeatureY || '',
-    };
+    this.selectedFeatures = { single: '', x: '', y: '' };
   }
 
   setChartType(event: Event) {
@@ -38,12 +38,6 @@ export class ChartWidgetEditor implements OnInit {
     if (!select) return;
 
     this.widget.chartType = select.value as any;
-
-    this.selectedFeatures = { single: '', x: '', y: '' };
-    this.widget.selectedFeature = '';
-    this.widget.selectedFeatureX = '';
-    this.widget.selectedFeatureY = '';
-
     this.updateChartData();
   }
 
@@ -62,7 +56,6 @@ export class ChartWidgetEditor implements OnInit {
 
   parseCSV(csvText: string) {
     const lines = csvText.split(/\r\n|\n/);
-    if (lines.length === 0) return;
 
     this.csvHeaders = lines[0].split(',');
     this.csvData = lines.slice(1).map((line) => {
@@ -81,9 +74,6 @@ export class ChartWidgetEditor implements OnInit {
     if (!select) return;
 
     this.selectedFeatures[key] = select.value;
-    if (key === 'single') this.widget.selectedFeature = select.value;
-    if (key === 'x') this.widget.selectedFeatureX = select.value;
-    if (key === 'y') this.widget.selectedFeatureY = select.value;
     this.updateChartData();
   }
 
