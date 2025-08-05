@@ -2,7 +2,7 @@ import { Widget } from './widget.interface';
 
 export class TextWidget extends Widget {
   override type: string = 'text';
-  mockParam1: string = 'this is text.mockParam1';
+  htmlContent: string = '';
 }
 
 export class ImageWidget extends Widget {
