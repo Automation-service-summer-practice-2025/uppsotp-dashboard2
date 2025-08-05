@@ -8,6 +8,6 @@ export class TextWidget extends Widget {
 export class ImageWidget extends Widget {
   override type: string = 'image';
 
-  file: File | null = null;
-  previewUrl: string | null = null;
+  file?: File | null = null;
+  previewUrl?: string | null = null;
 }
