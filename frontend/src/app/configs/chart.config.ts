@@ -60,3 +60,14 @@ export const chartDataGenerators: Record<
     };
   },
 };
+
+export const chartFeatureSelectors: Record<
+  string,
+  { key: string; label: string }[]
+> = {
+  bar: [{ key: 'single', label: 'Выберите признак' }],
+  scatter: [
+    { key: 'x', label: 'Выберите X-признак' },
+    { key: 'y', label: 'Выберите Y-признак' },
+  ],
+};

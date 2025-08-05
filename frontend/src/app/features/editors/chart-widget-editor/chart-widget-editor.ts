@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartWidget } from '../../../interfaces/widget-classes';
 import { CommonModule } from '@angular/common';
-import { chartDataGenerators } from '../../../configs/chart.config';
+import {
+  chartDataGenerators,
+  chartFeatureSelectors,
+} from '../../../configs/chart.config';
 
 @Component({
   selector: 'chart-widget-editor',
@@ -15,6 +18,8 @@ export class ChartWidgetEditor implements OnInit {
 
   csvData: any[] = [];
   csvHeaders: string[] = [];
+
+  chartFeatureSelectors = chartFeatureSelectors;
 
   selectedFeatures: Record<string, string> = {
     single: '',

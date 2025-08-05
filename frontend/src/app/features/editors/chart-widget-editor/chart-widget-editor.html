@@ -13,52 +13,22 @@
 
   <br /><br />
 
-  <label *ngIf="widget.chartType === 'bar' && csvHeaders.length > 0"
-    >Выберите признак:</label
-  >
-  <select
-    *ngIf="widget.chartType === 'bar' && csvHeaders.length > 0"
-    (change)="onFeatureSelect('single', $event)"
-  >
-    <option value="" disabled [selected]="!selectedFeatures['single']">
-      -- Выберите --
-    </option>
-    <option *ngFor="let header of csvHeaders" [value]="header">
-      {{ header }}
-    </option>
-  </select>
-
-  <label *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
-    >Выберите X-признак:</label
-  >
-  <select
-    *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
-    (change)="onFeatureSelect('x', $event)"
-  >
-    <option value="" disabled [selected]="!selectedFeatures['x']">
-      -- Выберите --
-    </option>
-    <option *ngFor="let header of csvHeaders" [value]="header">
-      {{ header }}
-    </option>
-  </select>
-
-  <label *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
-    >Выберите Y-признак:</label
-  >
-  <select
-    *ngIf="widget.chartType === 'scatter' && csvHeaders.length > 0"
-    (change)="onFeatureSelect('y', $event)"
-  >
-    <option value="" disabled [selected]="!selectedFeatures['y']">
-      -- Выберите --
-    </option>
-    <option *ngFor="let header of csvHeaders" [value]="header">
-      {{ header }}
-    </option>
-  </select>
-
-  <br /><br />
+  <ng-container *ngIf="csvHeaders.length > 0">
+    <ng-container
+      *ngFor="let selector of chartFeatureSelectors[widget.chartType]"
+    >
+      <label>{{ selector.label }}:</label>
+      <select (change)="onFeatureSelect(selector.key, $event)">
+        <option value="" disabled [selected]="!selectedFeatures[selector.key]">
+          -- Выберите --
+        </option>
+        <option *ngFor="let header of csvHeaders" [value]="header">
+          {{ header }}
+        </option>
+      </select>
+      <br /><br />
+    </ng-container>
+  </ng-container>
 
   <label>Цвет линии:</label>
   <input
