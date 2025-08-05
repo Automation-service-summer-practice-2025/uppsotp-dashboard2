@@ -7,7 +7,7 @@
         class="widget-button"
         *ngFor="let button of buttonsConfig"
         (click)="addWidget(button.name)"
-        [title]="button.tooltip"
+        [title]="button.label"
       >
         <lucide-icon [img]="button.icon"></lucide-icon>
         <span class="widget-button-label">{{ button.label }}</span>
