@@ -1,1 +1,6 @@
 <div>{{ widget.mockParam1 }}</div>
+<ngx-editor
+  [editor]="editor"
+  [(ngModel)]="widget.mockParam1"
+  [placeholder]="'Введите текст... '"
+></ngx-editor>
