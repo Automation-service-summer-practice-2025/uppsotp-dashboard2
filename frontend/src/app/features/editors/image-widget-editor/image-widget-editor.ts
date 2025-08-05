@@ -12,8 +12,6 @@ import { ImageWidget } from '../../../interfaces/widget-classes';
 export class ImageWidgetEditor {
   @Input() widget!: ImageWidget;
 
-  imageUploadLabel = 'Загрузить изображение';
-
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
@@ -41,6 +39,9 @@ export class ImageWidgetEditor {
   onFileInsert(file: File) {
     this.widget.file = file;
     this.widget.previewUrl = URL.createObjectURL(file);
-    this.imageUploadLabel = 'Заменить изображение';
+  }
+
+  get imageUploadLabel(): string {
+    return this.widget.file ? 'Заменить изображение' : 'Загрузить изображение';
   }
 }
