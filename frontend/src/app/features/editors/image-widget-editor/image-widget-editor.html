@@ -1,15 +1,21 @@
 <div class="image-widget-editor">
   <div class="image-upload-section">
-    <label for="imageUpload">Загрузить изображение</label>
+    <label for="imageUpload" class="custom-file-label">{{
+      imageUploadLabel
+    }}</label>
     <input
       id="imageUpload"
       type="file"
       (change)="onFileSelected($event)"
       accept="image/*"
+      hidden
     />
+    <p class="paste-hint">или нажмите Ctrl + V, чтобы вставить изображение</p>
   </div>
-
-  <div *ngIf="widget.previewUrl" class="img-preview-container">
-    <img [src]="widget.previewUrl" alt="preview" />
-  </div>
+  <ng-container *ngIf="widget.previewUrl">
+    <p class="preview-title">Предпросмотр</p>
+    <div class="img-preview-container">
+      <img [src]="widget.previewUrl" alt="preview" />
+    </div>
+  </ng-container>
 </div>

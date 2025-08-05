@@ -12,12 +12,13 @@ import { ImageWidget } from '../../../interfaces/widget-classes';
 export class ImageWidgetEditor {
   @Input() widget!: ImageWidget;
 
+  imageUploadLabel = 'Загрузить изображение';
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
     if (file && file.type.startsWith('image/')) {
-      this.widget.file = file;
-      this.widget.previewUrl = URL.createObjectURL(file);
+      this.onFileInsert(file);
     }
   }
 
@@ -30,11 +31,16 @@ export class ImageWidgetEditor {
       if (item.type.startsWith('image/')) {
         const file = item.getAsFile();
         if (file) {
-          this.widget.file = file;
-          this.widget.previewUrl = URL.createObjectURL(file);
+          this.onFileInsert(file);
           break;
         }
       }
     }
+  }
+
+  onFileInsert(file: File) {
+    this.widget.file = file;
+    this.widget.previewUrl = URL.createObjectURL(file);
+    this.imageUploadLabel = 'Заменить изображение';
   }
 }
