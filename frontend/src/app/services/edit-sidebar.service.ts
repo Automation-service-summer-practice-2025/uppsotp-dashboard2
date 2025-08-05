@@ -33,12 +33,10 @@ export class EditSidebarService {
       : this.openEditSidebar(widget);
   }
 
-  // Устанавливаем редактор и уведомляем подписчиков
   setEditor(editor: Editor): void {
     this.editorSubject.next(editor);
   }
 
-  // Получаем текущее значение редактора (без подписки)
   getEditorValue(): Editor {
     return this.editorSubject.getValue();
   }
