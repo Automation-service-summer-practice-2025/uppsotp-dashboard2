@@ -7,5 +7,7 @@ export class TextWidget extends Widget {
 
 export class ImageWidget extends Widget {
   override type: string = 'image';
-  mockParam1: string = 'this is image.mockParam1';
+
+  file?: File | null = null;
+  previewUrl?: string | null = null;
 }

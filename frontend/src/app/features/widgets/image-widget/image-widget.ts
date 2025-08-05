@@ -1,9 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ImageWidget } from '../../../interfaces/widget-classes';
 
 @Component({
   selector: 'image-widget',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './image-widget.html',
   styleUrl: './image-widget.css',
 })
