@@ -1,29 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { TextWidget } from '../../../interfaces/widget-classes';
-import { Editor, NgxEditorComponent } from 'ngx-editor';
+import { NgxEditorComponent } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
-import { EditSidebarService } from '../../../services/edit-sidebar.service';
-import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'text-widget',
-  imports: [NgxEditorComponent, FormsModule],
+  imports: [NgxEditorComponent, FormsModule, CommonModule],
   templateUrl: './text-widget.html',
   styleUrl: './text-widget.css',
 })
 export class TextWidgetComponent {
   @Input() widget!: TextWidget;
-
-  editor!: Editor;
-
-  constructor(private editSidebarService: EditSidebarService) {}
-
-  ngOnInit(): void {
-    this.editor = new Editor();
-    this.editSidebarService.setEditor(this.editor);
-  }
-
-  ngOnDestroy(): void {
-    this.editor.destroy();
-  }
 }

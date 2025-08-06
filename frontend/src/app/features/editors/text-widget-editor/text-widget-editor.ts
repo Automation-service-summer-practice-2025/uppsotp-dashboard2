@@ -2,9 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TextWidget } from '../../../interfaces/widget-classes';
-import { Editor, NgxEditorMenuComponent, Toolbar } from 'ngx-editor';
-import { EditSidebarService } from '../../../services/edit-sidebar.service';
-import { Subscription } from 'rxjs';
+import { NgxEditorMenuComponent, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'text-widget-editor',
@@ -43,21 +41,4 @@ export class TextWidgetEditor {
       'subscript',
     ],
   ];
-
-  editor!: Editor;
-  private editorSubscription!: Subscription;
-
-  constructor(private editSidebarService: EditSidebarService) {}
-
-  ngOnInit(): void {
-    this.editorSubscription = this.editSidebarService.editor$.subscribe(
-      (editor) => {
-        this.editor = editor;
-      }
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.editorSubscription.unsubscribe();
-  }
 }
