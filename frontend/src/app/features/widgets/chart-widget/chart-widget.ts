@@ -1,45 +1,103 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 import { ChartWidget } from '../../../interfaces/widget-classes';
-import { ChartData, ChartOptions, ChartType } from 'chart.js';
-import { BaseChartDirective } from 'ng2-charts';
+import { Chart } from 'chart.js';
+
+import {
+  BarController,
+  BarElement,
+  LineController,
+  PointElement,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Tooltip,
+  Title,
+} from 'chart.js';
+
+// Регистрируем компоненты Chart.js один раз
+Chart.register(
+  BarController,
+  BarElement,
+  LineController,
+  PointElement,
+  ScatterController,
+  CategoryScale,
+  LinearScale,
+  Legend,
+  Tooltip,
+  Title
+);
 
 @Component({
   selector: 'chart-widget',
-  imports: [BaseChartDirective],
   templateUrl: './chart-widget.html',
-  styleUrl: './chart-widget.css',
+  styleUrls: ['./chart-widget.css'],
 })
-export class ChartWidgetComponent implements OnChanges {
+export class ChartWidgetComponent
+  implements OnChanges, AfterViewInit, OnDestroy
+{
   @Input() widget!: ChartWidget;
 
-  chartType: ChartType = 'bar';
-  chartData: ChartData = {
-    labels: ['A', 'B', 'C'],
-    datasets: [{ data: [10, 20, 15], label: 'Серия' }],
-  };
-  chartOptions: ChartOptions = {
-    responsive: true,
-    plugins: {
-      legend: { display: true },
-    },
-    scales: {
-      x: {},
-      y: { beginAtZero: true },
-    },
-  };
+  @ViewChild('canvas', { static: false })
+  canvasRef!: ElementRef<HTMLCanvasElement>;
+
+  private chart: Chart | null = null;
+
+  ngAfterViewInit(): void {
+    this.renderChart();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['widget'] && this.widget) {
-      this.updateChart();
+    if (changes['widget'] && this.widget && this.canvasRef) {
+      this.updateChartInstance();
     }
   }
 
-  updateChart() {
-    this.chartType = (this.widget as any).chartType || 'bar';
-    this.chartData = (this.widget as any).chartData || {
-      labels: [],
-      datasets: [],
-    };
-    this.chartOptions = (this.widget as any).chartOptions || this.chartOptions;
+  private renderChart() {
+    if (!this.widget) return;
+    if (!this.canvasRef) {
+      console.warn('Canvas элемент ещё не готов');
+      return;
+    }
+    const ctx = this.canvasRef.nativeElement.getContext('2d');
+    if (!ctx) {
+      console.error('2D context not found for chart rendering');
+      return;
+    }
+    if (this.chart) {
+      this.chart.destroy();
+    }
+    console.log('Создание нового чарта с данными:', this.widget.chartData);
+    this.chart = new Chart(ctx, {
+      type: this.widget.chartType,
+      data: this.widget.chartData,
+      options: this.widget.chartOptions,
+    });
+  }
+
+  private updateChartInstance() {
+    if (!this.chart) {
+      console.warn('Чарт ещё не создан');
+      return;
+    }
+    console.log('Обновление чарта с новыми данными', this.widget.chartData);
+    this.chart.destroy();
+    this.renderChart();
+  }
+
+  ngOnDestroy(): void {
+    if (this.chart) {
+      this.chart.destroy();
+    }
   }
 }

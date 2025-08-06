@@ -36,6 +36,9 @@ export class ChartWidgetEditor implements OnInit {
     }
 
     this.selectedFeatures = { single: '', x: '', y: '' };
+
+    this.updateChartOptions();
+    this.updateChartData();
   }
 
   setChartType(event: Event) {
@@ -43,6 +46,8 @@ export class ChartWidgetEditor implements OnInit {
     if (!select) return;
 
     this.widget.chartType = select.value as any;
+
+    this.updateChartOptions();
     this.updateChartData();
   }
 
@@ -55,6 +60,11 @@ export class ChartWidgetEditor implements OnInit {
       const text = reader.result as string;
       this.widget.csvRawData = text;
       this.parseCSV(text);
+
+      console.log('CSV загружен и распарсен:', this.csvData, this.csvHeaders);
+
+      this.updateChartData();
+      this.updateChartOptions();
     };
     reader.readAsText(file);
   }
@@ -79,6 +89,11 @@ export class ChartWidgetEditor implements OnInit {
     if (!select) return;
 
     this.selectedFeatures[key] = select.value;
+    console.log(
+      `Выбран признак: key=${key}, value=${select.value}`,
+      'selectedFeatures:',
+      this.selectedFeatures
+    );
     this.updateChartData();
   }
 
@@ -107,32 +122,61 @@ export class ChartWidgetEditor implements OnInit {
     const generator = chartDataGenerators[this.widget.chartType];
     if (generator) {
       generator(this.csvData, this.selectedFeatures, this.widget);
+      console.log('Сгенерированы данные графика:', this.widget.chartData);
     } else {
-      this.widget.chartData = { labels: [], datasets: [] };
+      console.warn(
+        'Генератор данных для типа',
+        this.widget.chartType,
+        'не найден'
+      );
     }
+    this.widget.chartData = { ...this.widget.chartData };
+    this.widget.chartOptions = { ...this.widget.chartOptions };
   }
 
   updateChartOptions() {
-    this.widget.chartOptions = {
-      responsive: true,
-      plugins: {
-        legend: {
-          display: this.widget.showLegend ?? true,
-        },
-      },
-      scales: {
-        x: {
-          grid: {
-            display: this.widget.showGrid ?? true,
+    if (this.widget.chartType === 'bar') {
+      this.widget.chartOptions = {
+        responsive: true,
+        plugins: { legend: { display: this.widget.showLegend ?? true } },
+        scales: {
+          x: {
+            type: 'category',
+            grid: { display: this.widget.showGrid ?? true },
+          },
+          y: {
+            beginAtZero: true,
+            grid: { display: this.widget.showGrid ?? true },
           },
         },
-        y: {
-          beginAtZero: true,
-          grid: {
-            display: this.widget.showGrid ?? true,
+      };
+    } else if (this.widget.chartType === 'scatter') {
+      this.widget.chartOptions = {
+        responsive: true,
+        plugins: { legend: { display: this.widget.showLegend ?? true } },
+        scales: {
+          x: {
+            type: 'linear',
+            position: 'bottom',
+            grid: { display: this.widget.showGrid ?? true },
+          },
+          y: {
+            type: 'linear',
+            grid: { display: this.widget.showGrid ?? true },
           },
         },
-      },
-    };
+      };
+    } else {
+      this.widget.chartOptions = {
+        responsive: true,
+        plugins: { legend: { display: this.widget.showLegend ?? true } },
+        scales: {
+          x: { grid: { display: this.widget.showGrid ?? true } },
+          y: { grid: { display: this.widget.showGrid ?? true } },
+        },
+      };
+    }
+    console.log('Обновлены опции графика:', this.widget.chartOptions);
+    this.widget.chartOptions = { ...this.widget.chartOptions };
   }
 }
