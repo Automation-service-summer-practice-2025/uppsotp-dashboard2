@@ -1,3 +1,4 @@
 <div class="image-widget">
   <img *ngIf="widget.previewUrl" [src]="widget.previewUrl" alt="image" />
+  <lucide-icon *ngIf="!widget.previewUrl" [img]="iconImage" [size]="90" />
 </div>
