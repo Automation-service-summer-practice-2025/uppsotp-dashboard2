@@ -1,6 +1,9 @@
 <gridster [options]="options" class="gridster">
-  <gridster-item [item]="widget" *ngFor="let widget of dashboardWidgets">
-    <widget-toolbar [widget]="widget"></widget-toolbar>
+  <gridster-item
+    [item]="widget"
+    *ngFor="let widget of dashboardWidgets"
+    (dblclick)="onDoubleClick(widget)"
+  >
     <widget-render [widget]="widget"></widget-render>
   </gridster-item>
 </gridster>
