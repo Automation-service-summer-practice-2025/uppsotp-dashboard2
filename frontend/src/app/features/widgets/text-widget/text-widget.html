@@ -1,6 +1,6 @@
-<div class="scroll-text">
+<div class="scroll-text" *ngIf="widget.editor">
   <ngx-editor
-    [editor]="editor"
+    [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
     [placeholder]="'Введите текст... '"
   ></ngx-editor>
