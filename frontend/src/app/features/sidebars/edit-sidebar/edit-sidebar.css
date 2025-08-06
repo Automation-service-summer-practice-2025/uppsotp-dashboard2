@@ -1,7 +1,7 @@
 .edit-sidebar-container {
   position: fixed;
   box-sizing: border-box;
-  right: -200px;
+  right: 0;
   top: 0;
   width: 200px;
   height: 100vh;
@@ -9,10 +9,6 @@
   background-color: #1e293b;
   padding: 0px 10px;
   overflow: auto;
-}
-
-.edit-sidebar-container.open {
-  right: 0;
 }
 
 .header {

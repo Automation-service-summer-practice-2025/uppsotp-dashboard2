@@ -1,4 +1,4 @@
-<div class="edit-sidebar-container" [class.open]="isOpenEditSidebar">
+<div class="edit-sidebar-container" *ngIf="isOpenEditSidebar">
   <header class="header">
     <p>Редактор виджета</p>
     <button class="close-edit-sidebar-btn" (click)="onClose()">
