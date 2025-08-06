@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -5,16 +6,16 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { combineLatest, Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
+import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget, WidgetConfig } from '../../../interfaces/widget.interface';
 import { widgetConfigs } from '../../../configs/widget.config';
 
 @Component({
   selector: 'edit-sidebar',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
@@ -67,4 +68,10 @@ export class EditSidebar implements OnInit, OnDestroy {
 
     componentRef.setInput('widget', this.widget);
   }
+
+  onCancel(): void {}
+
+  onSave(): void {}
+
+  onDelete(): void {}
 }

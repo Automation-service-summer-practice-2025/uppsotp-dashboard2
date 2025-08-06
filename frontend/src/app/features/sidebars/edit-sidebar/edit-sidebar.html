@@ -5,5 +5,19 @@
       <lucide-icon [img]="btn_close" [strokeWidth]="1" [size]="25" />
     </button>
   </header>
+
+  <div class="sidebar-header-buttons" *ngIf="widget">
+    <div class="button-row">
+      <button class="btn save" (click)="onSave()">Сохранить</button>
+      <button class="btn cancel" (click)="onCancel()">Отмена</button>
+    </div>
+    <div class="divider"></div>
+  </div>
+
   <template #editorContainer></template>
+
+  <div class="sidebar-footer-delete" *ngIf="widget">
+    <div class="divider"></div>
+    <button class="btn delete full-width" (click)="onDelete()">Удалить</button>
+  </div>
 </div>
