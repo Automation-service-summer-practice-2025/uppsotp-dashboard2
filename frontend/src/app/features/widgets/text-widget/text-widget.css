@@ -6,7 +6,7 @@
 
 .scroll-text {
   overflow-y: auto;
-  height: calc(100% - 50px);
+  height: 100%;
   margin-right: 10px;
   margin-bottom: 10px;
 }
