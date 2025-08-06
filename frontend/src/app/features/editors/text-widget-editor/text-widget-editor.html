@@ -1,6 +1,5 @@
-<div class="editor-container">
+<div class="editor-container" *ngIf="widget.editor">
   <ngx-editor-menu
-    *ngIf="widget.editor"
     [editor]="widget.editor"
     [toolbar]="toolbar"
   ></ngx-editor-menu>
