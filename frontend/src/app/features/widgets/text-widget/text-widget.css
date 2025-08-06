@@ -1,3 +1,36 @@
 ::ng-deep .NgxEditor {
-  background-color: none !important;
+  --ngx-editor-background-color: none;
+  --ngx-editor-text-color: #94a3b8;
+  --ngx-editor-border-color: none;
+}
+
+.scroll-text {
+  overflow-y: auto;
+  height: calc(100% - 50px);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.scroll-text::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.scroll-text::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.scroll-text::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+  border: 2px solid #1e293b;
+}
+
+.scroll-text::-webkit-scrollbar-thumb:hover {
+  background: #3b82f6;
+}
+
+.scroll-text::-webkit-scrollbar-corner {
+  background: #1e293b;
 }
