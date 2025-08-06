@@ -91,6 +91,26 @@
   transform: scale(0.97);
 }
 
+.sidebar-header-buttons .btn.save {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.sidebar-header-buttons .btn.save:hover {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.sidebar-footer-delete .btn.delete {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.sidebar-footer-delete .btn.delete:hover {
+  background-color: #ef4444;
+  border-color: #ef4444;
+}
+
 .btn.delete.full-width {
   width: 100%;
   margin-top: 10px;
