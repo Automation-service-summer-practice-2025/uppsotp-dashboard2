@@ -8,6 +8,7 @@
   transition: right 0.3s ease;
   background-color: #1e293b;
   padding: 0px 10px;
+  overflow: auto;
 }
 
 .edit-sidebar-container.open {
@@ -50,4 +51,72 @@
 
 .close-edit-sidebar-btn:active {
   transform: scale(0.9);
+}
+
+.sidebar-header-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.button-row {
+  display: flex;
+  gap: 6px;
+}
+
+/* Унифицированный стиль кнопок */
+.sidebar-header-buttons .btn,
+.sidebar-footer-delete .btn {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #e2e8f0;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.1s;
+  flex: 1;
+}
+
+.sidebar-header-buttons .btn:hover,
+.sidebar-footer-delete .btn:hover {
+  border-color: #3b82f6;
+  background-color: #475569;
+}
+
+.sidebar-header-buttons .btn:active,
+.sidebar-footer-delete .btn:active {
+  transform: scale(0.97);
+}
+
+.sidebar-header-buttons .btn.save {
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+.sidebar-header-buttons .btn.save:hover {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.sidebar-footer-delete .btn.delete {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.sidebar-footer-delete .btn.delete:hover {
+  background-color: #ef4444;
+  border-color: #ef4444;
+}
+
+.btn.delete.full-width {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.divider {
+  border-bottom: 1px solid #334155;
+  margin-top: 4px;
 }

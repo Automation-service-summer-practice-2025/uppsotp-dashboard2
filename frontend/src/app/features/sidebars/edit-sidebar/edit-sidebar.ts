@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -5,16 +6,17 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { combineLatest, Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
+import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget, WidgetConfig } from '../../../interfaces/widget.interface';
 import { widgetConfigs } from '../../../configs/widget.config';
+import { WidgetService } from '../../../services/widget.service';
 
 @Component({
   selector: 'edit-sidebar',
   standalone: true,
-  imports: [LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
@@ -28,7 +30,10 @@ export class EditSidebar implements OnInit, OnDestroy {
   btn_close: LucideIconData = X;
   widgetConfigs: Record<string, WidgetConfig> = widgetConfigs;
 
-  constructor(private editsidebarServise: EditSidebarService) {}
+  constructor(
+    private editsidebarServise: EditSidebarService,
+    private widgetService: WidgetService
+  ) {}
 
   ngOnInit() {
     combineLatest([
@@ -51,10 +56,6 @@ export class EditSidebar implements OnInit, OnDestroy {
     this.destroyEditSidebar$.complete();
   }
 
-  closedEditSidebar(): void {
-    this.editsidebarServise.closeEditSidebar();
-  }
-
   loadEditorComponent(): void {
     if (!this.widget) {
       console.log('Error: widget is underfined');
@@ -66,5 +67,20 @@ export class EditSidebar implements OnInit, OnDestroy {
     const componentRef = this.editorContainer.createComponent(editorComponent);
 
     componentRef.setInput('widget', this.widget);
+  }
+
+  onClose(): void {
+    this.editsidebarServise.closeEditSidebar();
+  }
+
+  onCancel(): void {}
+
+  onSave(): void {}
+
+  onDelete(): void {
+    if (this.widget) {
+      this.widgetService.delWidget(this.widget);
+      this.editsidebarServise.closeEditSidebar();
+    }
   }
 }

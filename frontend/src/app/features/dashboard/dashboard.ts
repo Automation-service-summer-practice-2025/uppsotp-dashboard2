@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
 import { Subscription } from 'rxjs';
+import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
-import { WidgetToolbar } from '../widgets/widget-toolbar/widget-toolbar';
 import { ZoomService } from '../../services/zoom.service';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule, WidgetToolbar, WidgetRender],
+  imports: [CommonModule, GridsterModule, WidgetRender],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -23,8 +23,9 @@ export class Dashboard implements OnInit, OnDestroy {
   widgetsSub?: Subscription;
 
   constructor(
-    private zoomService: ZoomService,
-    private widgetService: WidgetService
+    private editSidebarService: EditSidebarService,
+    private widgetService: WidgetService,
+    private zoomService: ZoomService
   ) {}
 
   ngOnInit(): void {
@@ -39,8 +40,6 @@ export class Dashboard implements OnInit, OnDestroy {
       maxRows: 100,
       draggable: {
         enabled: true,
-        ignoreContent: true,
-        dragHandleClass: 'drag-handle',
       },
       resizable: {
         enabled: true,
@@ -77,5 +76,9 @@ export class Dashboard implements OnInit, OnDestroy {
     this.options.fixedRowHeight = scaledSize;
     this.options.api?.resize?.();
     this.options.api?.optionsChanged?.();
+  }
+
+  onDoubleClick(widget: Widget) {
+    this.editSidebarService.toggleSidebarFor(widget);
   }
 }
