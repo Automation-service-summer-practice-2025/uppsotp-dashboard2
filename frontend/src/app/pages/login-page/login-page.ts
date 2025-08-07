@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'login-page',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
   templateUrl: './login-page.html',
   styleUrl: './login-page.css',
 })
