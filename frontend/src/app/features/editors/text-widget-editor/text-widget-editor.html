@@ -1,21 +1,8 @@
+@if (widget.editor) {
 <div class="editor-container">
-  <h2 class="editor-title">Редактирование TextWidget</h2>
-
-  <form class="editor-form">
-    <label class="form-label">ID:</label>
-    <input class="form-input" type="text" [value]="widget.id" disabled />
-
-    <label class="form-label">Тип:</label>
-    <input class="form-input" type="text" [value]="widget.type" disabled />
-
-    <label class="form-label">Mock Param 1:</label>
-    <input
-      class="form-input"
-      type="text"
-      [(ngModel)]="widget.mockParam1"
-      name="mockParam1"
-    />
-
-    <button type="button" class="widget-button save-button">Сохранить</button>
-  </form>
+  <ngx-editor-menu
+    [editor]="widget.editor"
+    [toolbar]="toolbar"
+  ></ngx-editor-menu>
 </div>
+}

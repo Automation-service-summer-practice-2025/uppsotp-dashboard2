@@ -39,6 +39,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxRows: 100,
       draggable: {
         enabled: true,
+        delayStart: 1000,
       },
       resizable: {
         enabled: true,
