@@ -1,103 +1,103 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  AfterViewInit,
-  ViewChild,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { ChartWidget } from '../../../interfaces/widget-classes';
-import { Chart } from 'chart.js';
-
-import {
-  BarController,
-  BarElement,
-  LineController,
-  PointElement,
-  ScatterController,
-  CategoryScale,
-  LinearScale,
-  Legend,
-  Tooltip,
-  Title,
-} from 'chart.js';
-
-// Регистрируем компоненты Chart.js один раз
-Chart.register(
-  BarController,
-  BarElement,
-  LineController,
-  PointElement,
-  ScatterController,
-  CategoryScale,
-  LinearScale,
-  Legend,
-  Tooltip,
-  Title
-);
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'chart-widget',
+  imports: [BaseChartDirective],
   templateUrl: './chart-widget.html',
   styleUrls: ['./chart-widget.css'],
 })
-export class ChartWidgetComponent
-  implements OnChanges, AfterViewInit, OnDestroy
-{
+export class ChartWidgetComponent {
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
   @Input() widget!: ChartWidget;
 
-  @ViewChild('canvas', { static: false })
-  canvasRef!: ElementRef<HTMLCanvasElement>;
+  chartType: any = 'bar';
+  chartData: ChartConfiguration<'bar'>['data'] = {
+    labels: ['Ангуляр', 'Самый', 'Лучший', 'Фреймворк', 'В', 'Мире'],
+    datasets: [
+      {
+        label: 'Название столбца - тип: string',
+        data: [100, 150, 30, 15, 20, 34],
+        backgroundColor: [
+          //Цвет столбцов
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+        ],
+        borderColor: [
+          // Цвет рамки
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 99, 132)',
+        ],
+        borderWidth: 10, // Толщина рамки
+        base: 0, // Смещение оси Ox
+        barPercentage: 0.2, // Толщина столбца относительно categoryPercentage
+        categoryPercentage: 0.7, // Толщина столбца
+        hoverBackgroundColor: 'rgba(255, 99, 133, 0)', // Цвет заднего фона столбца при наведении курсора
+        hoverBorderColor: 'rgba(255, 255, 255, 1)', // Цвет границы при наведении курсора
+        hoverBorderWidth: 7, // Толщина границы при наведении курсора
+        indexAxis: 'x', // Базовая ось набора данных. "x" для вертикальных столбцов и "y" для горизонтальных.
+        maxBarThickness: 100, //Установите это значение, чтобы убедиться, что размер брусков не превышает этого
+        minBarLength: 70, //Установите это значение, чтобы полосы имели минимальную длину в пикселях.
+        // order - Нужен, когда у нас несколько графиков, чтобы определить порядок отрисовки графиков
+        //pointStyle: "circle" // Стиль точек графика
+      },
+    ],
+  };
 
-  private chart: Chart | null = null;
-
-  ngAfterViewInit(): void {
-    this.renderChart();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['widget'] && this.widget && this.canvasRef) {
-      this.updateChartInstance();
-    }
-  }
-
-  private renderChart() {
-    if (!this.widget) return;
-    if (!this.canvasRef) {
-      console.warn('Canvas элемент ещё не готов');
-      return;
-    }
-    const ctx = this.canvasRef.nativeElement.getContext('2d');
-    if (!ctx) {
-      console.error('2D context not found for chart rendering');
-      return;
-    }
-    if (this.chart) {
-      this.chart.destroy();
-    }
-    console.log('Создание нового чарта с данными:', this.widget.chartData);
-    this.chart = new Chart(ctx, {
-      type: this.widget.chartType,
-      data: this.widget.chartData,
-      options: this.widget.chartOptions,
-    });
-  }
-
-  private updateChartInstance() {
-    if (!this.chart) {
-      console.warn('Чарт ещё не создан');
-      return;
-    }
-    console.log('Обновление чарта с новыми данными', this.widget.chartData);
-    this.chart.destroy();
-    this.renderChart();
-  }
-
-  ngOnDestroy(): void {
-    if (this.chart) {
-      this.chart.destroy();
-    }
-  }
+  chartOptions: ChartConfiguration<'bar'>['options'] = {
+    // Общие настройки options:
+    responsive: true, // Автоматически подстраивать размер под контейнер.
+    maintainAspectRatio: true, //Сохранять пропорции графика при изменении размера.
+    // plugins: {} Настройки плагинов (легенда, заголовок, подсказки). СМ НИЖЕ
+    // animation: {} Настройки анимации (появление, обновление).
+    // onClick: (e) => console.log(e). Обработчик клика на элементы графика. Пример <-
+    // scales: {} Настройка осей. СМ НИЖЕ
+    scales: {
+      x: {
+        // Настройки оси X (категории)
+        title: { display: true, text: 'Ось X' }, // Подпись оси
+        grid: { display: false }, // Сетка (линии фона)
+        ticks: { color: 'red' }, // Настройки подписей (цвет, шрифт)
+        min: 0, // Минимальное значение
+        max: 200, // Максимальное значение
+      },
+      y: {
+        // Настройки оси Y (значения)
+        beginAtZero: true, // Начинать с нуля
+        stacked: true, // Режим "stacked" (столбцы накапливаются)
+      },
+    },
+    plugins: {
+      legend: {
+        display: true, // Показывать легенду?
+        position: 'top', // 'top', 'bottom', 'left', 'right'
+        labels: { color: 'blue' }, // Стиль текста
+      },
+      title: {
+        display: true,
+        text: 'Моя диаграмма', // Текст заголовка
+        font: { size: 20 }, // Размер шрифта
+      },
+      tooltip: {
+        enabled: true, // Включить подсказки?
+        backgroundColor: 'rgba(0, 0, 0, 0.8)', // Цвет фона
+        titleColor: '#fff', // Цвет заголовка
+        bodyColor: '#fff', // Цвет текста
+      },
+    },
+    animation: {
+      duration: 1000, // Плавное появление за 1 секунду
+    },
+  };
 }
