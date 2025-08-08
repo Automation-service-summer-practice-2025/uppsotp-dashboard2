@@ -86,16 +86,17 @@ export class Dashboard implements OnInit, OnDestroy {
 
   onWidgetClick(widget: Widget): void {
     this.focusedWidget = widget;
-    this.editSidebarService.toggleSidebarFor(widget);
+    this.editSidebarService.openEditSidebar(widget);
   }
 
-  onClickOutsideWidget(event: MouseEvent): void {
+  onClickOutsideWidget(event: MouseEvent) {
     const target = event.target as HTMLElement;
 
-    if (
-      !this.elementRef.nativeElement.contains(target) ||
-      target.closest('gridster-item') == null
-    ) {
+    const clickedInsideDashboard =
+      this.elementRef.nativeElement.contains(target);
+    const clickedOnWidget = target.closest('gridster-item') !== null;
+
+    if (clickedInsideDashboard && !clickedOnWidget) {
       this.focusedWidget = null;
       this.editSidebarService.closeEditSidebar();
     }
