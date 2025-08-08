@@ -1,9 +1,7 @@
 <gridster [options]="options" class="gridster">
-  <gridster-item
-    [item]="widget"
-    *ngFor="let widget of dashboardWidgets"
-    (dblclick)="onDoubleClick(widget)"
-  >
+  @for (widget of dashboardWidgets; track $index) {
+  <gridster-item [item]="widget" (dblclick)="onDoubleClick(widget)">
     <widget-render [widget]="widget"></widget-render>
   </gridster-item>
+  }
 </gridster>

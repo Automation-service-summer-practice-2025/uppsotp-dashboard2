@@ -1,17 +1,7 @@
 <div class="header">
-  <button
-    class="login-button"
-    (click)="redirectToPage('/login')"
-    *ngIf="isOnPage('/')"
-  >
-    Войти
-  </button>
-
-  <button
-    class="logout-button"
-    (click)="redirectToPage('')"
-    *ngIf="isOnPage('/admin')"
-  >
-    Выйти
-  </button>
+  @if (isOnPage('/')) {
+  <button class="login-button" (click)="redirectToPage('/login')">Войти</button>
+  } @else if (isOnPage('/admin')) {
+  <button class="logout-button" (click)="redirectToPage('')">Выйти</button>
+  }
 </div>

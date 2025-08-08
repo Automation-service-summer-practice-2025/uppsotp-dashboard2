@@ -17,12 +17,9 @@
         required
         #usernameRef="ngModel"
       />
-      <div
-        class="error-message"
-        *ngIf="loginForm.submitted && usernameRef.invalid"
-      >
-        Логин обязателен
-      </div>
+      @if (loginForm.submitted && usernameRef.invalid) {
+      <div class="error-message">Логин обязателен</div>
+      }
     </div>
 
     <div class="input-group">
@@ -36,12 +33,9 @@
         required
         #passwordRef="ngModel"
       />
-      <div
-        class="error-message"
-        *ngIf="loginForm.submitted && passwordRef.invalid"
-      >
-        Пароль обязателен
-      </div>
+      @if (loginForm.submitted && passwordRef.invalid) {
+      <div class="error-message">Пароль обязателен</div>
+      }
     </div>
 
     <button
