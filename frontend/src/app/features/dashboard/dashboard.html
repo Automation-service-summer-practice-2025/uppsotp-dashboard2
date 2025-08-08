@@ -1,6 +1,11 @@
 <gridster [options]="options" class="gridster">
   @for (widget of widgets; track $index) {
-  <gridster-item [item]="widget" (dblclick)="onDoubleClick(widget)">
+  <gridster-item
+    [item]="widget"
+    [class.focused]="widget.id === focusedWidget?.id"
+    (click)="onWidgetClick(widget)"
+    (dblclick)="onDoubleClick(widget)"
+  >
     <widget-render [widget]="widget"></widget-render>
   </gridster-item>
   }

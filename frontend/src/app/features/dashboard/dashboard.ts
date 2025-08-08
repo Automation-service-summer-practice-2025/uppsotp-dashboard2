@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
 import { Subscription } from 'rxjs';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
@@ -23,8 +23,11 @@ export class Dashboard implements OnInit, OnDestroy {
   focusedWidget: Widget | null = null;
   baseCellSize = 40;
 
+  boundOnClickOutsideHandler = this.onClickOutsideHandler.bind(this);
+
   constructor(
     private editSidebarService: EditSidebarService,
+    private elementRef: ElementRef,
     private widgetService: WidgetService,
     private zoomService: ZoomService
   ) {
@@ -58,6 +61,8 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    document.addEventListener('click', this.boundOnClickOutsideHandler);
+
     this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
       this.widgets = widgets;
     });
@@ -68,6 +73,7 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    document.removeEventListener('click', this.boundOnClickOutsideHandler);
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
   }
@@ -86,5 +92,12 @@ export class Dashboard implements OnInit, OnDestroy {
 
   onWidgetClick(widget: Widget): void {
     this.focusedWidget = widget;
+  }
+
+  onClickOutsideHandler(event: MouseEvent) {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      console.log('onClickOutsideHandler works!');
+      this.focusedWidget = null;
+    }
   }
 }
