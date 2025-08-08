@@ -23,8 +23,6 @@ export class Dashboard implements OnInit, OnDestroy {
   focusedWidget: Widget | null = null;
   baseCellSize = 40;
 
-  boundOnClickOutsideHandler = this.onClickOutsideHandler.bind(this);
-
   constructor(
     private editSidebarService: EditSidebarService,
     private elementRef: ElementRef,
@@ -61,7 +59,7 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    document.addEventListener('click', this.boundOnClickOutsideHandler);
+    document.addEventListener('click', this.onClickOutsideWidget.bind(this));
 
     this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
       this.widgets = widgets;
@@ -73,7 +71,7 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    document.removeEventListener('click', this.boundOnClickOutsideHandler);
+    document.removeEventListener('click', this.onClickOutsideWidget.bind(this));
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
   }
@@ -86,17 +84,20 @@ export class Dashboard implements OnInit, OnDestroy {
     this.options.api?.optionsChanged?.();
   }
 
-  onDoubleClick(widget: Widget) {
+  onWidgetClick(widget: Widget): void {
+    this.focusedWidget = widget;
     this.editSidebarService.toggleSidebarFor(widget);
   }
 
-  onWidgetClick(widget: Widget): void {
-    this.focusedWidget = widget;
-  }
+  onClickOutsideWidget(event: MouseEvent) {
+    const target = event.target as HTMLElement;
 
-  onClickOutsideHandler(event: MouseEvent) {
     if (!this.elementRef.nativeElement.contains(event.target)) {
-      console.log('onClickOutsideHandler works!');
+      this.focusedWidget = null;
+      return;
+    }
+
+    if (target.closest('gridster-item') == null) {
       this.focusedWidget = null;
     }
   }
