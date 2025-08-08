@@ -1,11 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, HostListener, Input } from '@angular/core';
 import { ImageWidget } from '../../../interfaces/widget-classes';
 
 @Component({
   selector: 'image-widget-editor',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './image-widget-editor.html',
   styleUrl: './image-widget-editor.css',
 })

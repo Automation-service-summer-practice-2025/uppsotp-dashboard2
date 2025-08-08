@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TextWidget } from '../../../interfaces/widget-classes';
 import { NgxEditorMenuComponent, Toolbar } from 'ngx-editor';
@@ -7,7 +6,7 @@ import { NgxEditorMenuComponent, Toolbar } from 'ngx-editor';
 @Component({
   selector: 'text-widget-editor',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgxEditorMenuComponent],
+  imports: [FormsModule, NgxEditorMenuComponent],
   templateUrl: './text-widget-editor.html',
   styleUrl: './text-widget-editor.css',
 })
