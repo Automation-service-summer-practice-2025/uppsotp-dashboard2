@@ -4,33 +4,33 @@
   --ngx-editor-border-color: none;
 }
 
-.scroll-text {
+.text-widget {
   overflow-y: auto;
   height: 100%;
   margin-right: 10px;
   margin-bottom: 10px;
 }
 
-.scroll-text::-webkit-scrollbar {
+.text-widget::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
-.scroll-text::-webkit-scrollbar-track {
+.text-widget::-webkit-scrollbar-track {
   background: #1e293b;
   border-radius: 4px;
 }
 
-.scroll-text::-webkit-scrollbar-thumb {
+.text-widget::-webkit-scrollbar-thumb {
   background: #94a3b8;
   border-radius: 4px;
   border: 2px solid #1e293b;
 }
 
-.scroll-text::-webkit-scrollbar-thumb:hover {
+.text-widget::-webkit-scrollbar-thumb:hover {
   background: #3b82f6;
 }
 
-.scroll-text::-webkit-scrollbar-corner {
+.text-widget::-webkit-scrollbar-corner {
   background: #1e293b;
 }
