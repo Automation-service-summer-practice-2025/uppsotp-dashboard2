@@ -45,6 +45,8 @@
 ::ng-deep .NgxEditor__Popup {
   width: 130px !important;
   box-sizing: border-box;
+  left: -30px;
+  min-width: 130px !important;
 }
 
 ::ng-deep .NgxEditor__ColorContainer {
