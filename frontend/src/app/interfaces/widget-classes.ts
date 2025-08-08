@@ -22,12 +22,47 @@ export class ChartWidget extends Widget {
 
   chartOptions: ChartOptions = {
     responsive: true,
-    plugins: { legend: { display: true } },
-    scales: { x: {}, y: { beginAtZero: true } },
+    maintainAspectRatio: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: 'top',
+        labels: { color: '#94a3b8' },
+      },
+      title: {
+        display: true,
+        text: 'График',
+        font: { size: 20 },
+      },
+      tooltip: {
+        enabled: true,
+        backgroundColor: '#0f172a',
+        titleColor: '#a2b8d7ff',
+        bodyColor: '#94a3b8',
+      },
+    },
+    scales: {
+      x: {
+        title: { display: true, text: 'Ось X' },
+        grid: { display: false },
+        ticks: { color: '#94a3b8' },
+        min: 0,
+        max: 200,
+      },
+      y: { beginAtZero: true, stacked: true },
+    },
   };
 
-  lineColor?: string;
-  lineWidth?: number;
+  //Настройка данных. Пойдут в chartData
+  backgroundColor?: string;
+  borderColor?: string;
+  borderWidth?: number;
+  categoryPercentage?: number; //[0;1]
+  barPercentage?: number; //[0;1]
+  hoverBackgroundColor?: string;
+  hoverBorderColor?: string;
+  hoverBorderWidth?: number;
+  indexAxis?: 'x' | 'y';
   showLegend?: boolean;
   showGrid?: boolean;
 

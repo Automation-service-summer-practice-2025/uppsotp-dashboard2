@@ -26,9 +26,9 @@ export const chartDataGenerators: Record<
         {
           label: `Распределение по ${selectedFeatures['single']}`,
           data: Object.values(counts),
-          backgroundColor: widget.lineColor || 'rgba(75,192,192,0.4)',
-          borderColor: widget.lineColor || 'rgba(75,192,192,1)',
-          borderWidth: widget.lineWidth || 1,
+          backgroundColor: widget.backgroundColor,
+          borderColor: widget.borderColor,
+          borderWidth: widget.borderWidth,
         },
       ],
     };
@@ -49,9 +49,9 @@ export const chartDataGenerators: Record<
         {
           label: `Scatter: ${x} vs ${y}`,
           data: dataPoints,
-          backgroundColor: widget.lineColor || 'rgba(75,192,192,1)',
-          borderColor: widget.lineColor || 'rgba(75,192,192,1)',
-          borderWidth: widget.lineWidth || 1,
+          backgroundColor: widget.backgroundColor || 'rgba(75,192,192,1)',
+          borderColor: widget.borderColor || 'rgba(75,192,192,1)',
+          borderWidth: widget.borderWidth || 1,
           showLine: false,
           pointRadius: 5,
           type: 'scatter',

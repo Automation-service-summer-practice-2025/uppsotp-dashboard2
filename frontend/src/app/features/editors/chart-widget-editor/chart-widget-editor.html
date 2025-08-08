@@ -38,8 +38,8 @@
     <label>Цвет линии:</label>
     <input
       type="color"
-      [value]="widget.lineColor || '#4bc0c0'"
-      (change)="onParamChange('lineColor', $event)"
+      [value]="widget.backgroundColor"
+      (change)="onParamChange('backgroundColor', $event)"
     />
   </div>
 
@@ -49,8 +49,8 @@
       type="number"
       min="1"
       max="10"
-      [value]="widget.lineWidth || 1"
-      (change)="onParamChange('lineWidth', $event)"
+      [value]="widget.borderWidth"
+      (change)="onParamChange('borderWidth', $event)"
     />
   </div>
 
@@ -58,7 +58,7 @@
     <label>
       <input
         type="checkbox"
-        [checked]="widget.showLegend ?? true"
+        [checked]="widget.showLegend"
         (change)="onParamChange('showLegend', $event)"
       />
       Показать легенду
@@ -69,7 +69,7 @@
     <label>
       <input
         type="checkbox"
-        [checked]="widget.showGrid ?? true"
+        [checked]="widget.showGrid"
         (change)="onParamChange('showGrid', $event)"
       />
       Показать сетку

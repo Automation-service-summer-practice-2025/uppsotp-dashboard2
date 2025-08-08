@@ -177,6 +177,7 @@ export class ChartWidgetEditor implements OnInit {
       };
     }
     console.log('Обновлены опции графика:', this.widget.chartOptions);
+    this.widget.chartData = { ...this.widget.chartData };
     this.widget.chartOptions = { ...this.widget.chartOptions };
   }
 }
