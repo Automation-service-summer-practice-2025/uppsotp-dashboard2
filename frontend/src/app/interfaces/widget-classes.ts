@@ -47,16 +47,22 @@ export class ChartWidget extends Widget {
     scales: {
       x: {
         title: { display: true, text: 'Ось X', color: '#94a3b8' },
-        grid: { display: true, color: '#627d9c' },
+        grid: { display: true, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
-        min: 0,
-        max: 200,
+        border: {
+          color: '#3b82f6',
+          width: 2,
+        },
       },
       y: {
         beginAtZero: true,
         stacked: true,
-        grid: { display: true, color: '#627d9c' },
+        grid: { display: true, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
+        border: {
+          color: '#3b82f6',
+          width: 2,
+        },
       },
     },
   };

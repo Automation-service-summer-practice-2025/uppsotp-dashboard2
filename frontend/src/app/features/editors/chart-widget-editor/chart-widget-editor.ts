@@ -135,47 +135,99 @@ export class ChartWidgetEditor implements OnInit {
   }
 
   updateChartOptions() {
+    // Базовые настройки стиля сетки и осей
+    const defaultGridStyle = {
+      color: '#4a5a6d',
+      display: this.widget.showGrid ?? true,
+    };
+
+    const defaultTicksStyle = {
+      color: '#94a3b8',
+      width: 2,
+    };
+
+    const defaultAxisStyle = {
+      color: '#3b82f6',
+      width: 2,
+    };
+
     if (this.widget.chartType === 'bar') {
       this.widget.chartOptions = {
         responsive: true,
-        plugins: { legend: { display: this.widget.showLegend ?? true } },
+        plugins: {
+          legend: {
+            display: this.widget.showLegend ?? true,
+            labels: { color: '#94a3b8' },
+          },
+        },
         scales: {
           x: {
             type: 'category',
-            grid: { display: this.widget.showGrid },
+            grid: defaultGridStyle,
+            ticks: defaultTicksStyle,
+            border: defaultAxisStyle,
           },
           y: {
             beginAtZero: true,
-            grid: { display: this.widget.showGrid },
+            grid: defaultGridStyle,
+            ticks: defaultTicksStyle,
+            border: defaultAxisStyle,
           },
         },
       };
     } else if (this.widget.chartType === 'scatter') {
       this.widget.chartOptions = {
         responsive: true,
-        plugins: { legend: { display: this.widget.showLegend ?? true } },
+        plugins: {
+          legend: {
+            display: this.widget.showLegend ?? true,
+            labels: { color: '#94a3b8' },
+          },
+        },
         scales: {
           x: {
             type: 'linear',
             position: 'bottom',
-            grid: { display: this.widget.showGrid ?? true },
+            grid: defaultGridStyle,
+            ticks: defaultTicksStyle,
           },
           y: {
             type: 'linear',
-            grid: { display: this.widget.showGrid ?? true },
+            grid: defaultGridStyle,
+            ticks: defaultTicksStyle,
           },
         },
       };
     } else {
       this.widget.chartOptions = {
         responsive: true,
-        plugins: { legend: { display: this.widget.showLegend ?? true } },
+        plugins: {
+          legend: {
+            display: this.widget.showLegend ?? true,
+            labels: { color: '#94a3b8' },
+          },
+        },
         scales: {
-          x: { grid: { display: this.widget.showGrid ?? true } },
-          y: { grid: { display: this.widget.showGrid ?? true } },
+          x: {
+            grid: defaultGridStyle,
+            ticks: defaultTicksStyle,
+          },
+          y: {
+            grid: defaultGridStyle,
+            ticks: defaultTicksStyle,
+          },
         },
       };
     }
+
+    if (this.widget.chartOptions.plugins?.title) {
+      this.widget.chartOptions.plugins.title = {
+        ...this.widget.chartOptions.plugins.title,
+        color: '#94a3b8',
+        font: { size: 20 },
+      };
+    }
+
     console.log('Обновлены опции графика:', this.widget.chartOptions);
     this.widget.chartData = { ...this.widget.chartData };
     this.widget.chartOptions = { ...this.widget.chartOptions };

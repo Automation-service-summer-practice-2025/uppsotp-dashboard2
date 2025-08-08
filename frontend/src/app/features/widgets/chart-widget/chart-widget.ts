@@ -9,6 +9,5 @@ import { BaseChartDirective } from 'ng2-charts';
   styleUrls: ['./chart-widget.css'],
 })
 export class ChartWidgetComponent {
-  // @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
   @Input() widget!: ChartWidget;
 }
