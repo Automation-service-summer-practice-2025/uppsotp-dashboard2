@@ -1,4 +1,4 @@
-<gridster [options]="options" class="gridster">
+<gridster [options]="options">
   @for (widget of dashboardWidgets; track $index) {
   <gridster-item [item]="widget" (dblclick)="onDoubleClick(widget)">
     <widget-render [widget]="widget"></widget-render>
