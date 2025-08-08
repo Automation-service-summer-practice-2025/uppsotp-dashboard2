@@ -35,6 +35,7 @@ export class ChartWidget extends Widget {
         display: true,
         text: 'График',
         font: { size: 20 },
+        color: '#94a3b8',
       },
       tooltip: {
         enabled: true,
@@ -45,26 +46,26 @@ export class ChartWidget extends Widget {
     },
     scales: {
       x: {
-        title: { display: true, text: 'Ось X' },
-        grid: { display: false },
+        title: { display: true, text: 'Ось X', color: '#94a3b8' },
+        grid: { display: true, color: '#627d9c' },
         ticks: { color: '#94a3b8' },
         min: 0,
         max: 200,
       },
-      y: { beginAtZero: true, stacked: true },
+      y: {
+        beginAtZero: true,
+        stacked: true,
+        grid: { display: true, color: '#627d9c' },
+        ticks: { color: '#94a3b8' },
+      },
     },
   };
 
-  //Настройка данных. Пойдут в chartData
   backgroundColor?: string;
   borderColor?: string;
   borderWidth?: number;
-  categoryPercentage?: number; //[0;1]
-  barPercentage?: number; //[0;1]
-  hoverBackgroundColor?: string;
-  hoverBorderColor?: string;
-  hoverBorderWidth?: number;
-  indexAxis?: 'x' | 'y';
+  categoryPercentage?: number;
+
   showLegend?: boolean;
   showGrid?: boolean;
 

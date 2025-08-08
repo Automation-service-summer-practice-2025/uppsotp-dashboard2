@@ -29,6 +29,7 @@ export const chartDataGenerators: Record<
           backgroundColor: widget.backgroundColor,
           borderColor: widget.borderColor,
           borderWidth: widget.borderWidth,
+          categoryPercentage: widget.categoryPercentage,
         },
       ],
     };
@@ -49,9 +50,9 @@ export const chartDataGenerators: Record<
         {
           label: `Scatter: ${x} vs ${y}`,
           data: dataPoints,
-          backgroundColor: widget.backgroundColor || 'rgba(75,192,192,1)',
-          borderColor: widget.borderColor || 'rgba(75,192,192,1)',
-          borderWidth: widget.borderWidth || 1,
+          backgroundColor: widget.backgroundColor,
+          borderColor: widget.borderColor,
+          borderWidth: widget.borderWidth,
           showLine: false,
           pointRadius: 5,
           type: 'scatter',

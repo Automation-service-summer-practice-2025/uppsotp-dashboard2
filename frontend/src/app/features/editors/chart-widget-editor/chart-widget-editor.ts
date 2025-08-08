@@ -102,7 +102,7 @@ export class ChartWidgetEditor implements OnInit {
     if (!input) return;
 
     const booleanKeys = ['showLegend', 'showGrid'];
-    const numberKeys = ['lineWidth'];
+    const numberKeys = ['borderWidth'];
 
     const keyStr = key as string;
 
@@ -142,11 +142,11 @@ export class ChartWidgetEditor implements OnInit {
         scales: {
           x: {
             type: 'category',
-            grid: { display: this.widget.showGrid ?? true },
+            grid: { display: this.widget.showGrid },
           },
           y: {
             beginAtZero: true,
-            grid: { display: this.widget.showGrid ?? true },
+            grid: { display: this.widget.showGrid },
           },
         },
       };
