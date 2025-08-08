@@ -15,19 +15,19 @@ import { ZoomService } from '../../services/zoom.service';
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit, OnDestroy {
-  options!: GridsterConfig;
-  widgets: Widget[] = [];
-  baseCellSize = 40;
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
+
+  options: GridsterConfig;
+  widgets: Widget[] = [];
+  focusedWidget: Widget | null = null;
+  baseCellSize = 40;
 
   constructor(
     private editSidebarService: EditSidebarService,
     private widgetService: WidgetService,
     private zoomService: ZoomService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.options = {
       gridType: GridType.Fixed,
 
@@ -55,7 +55,9 @@ export class Dashboard implements OnInit, OnDestroy {
         },
       },
     };
+  }
 
+  ngOnInit(): void {
     this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
       this.widgets = widgets;
     });
@@ -80,5 +82,9 @@ export class Dashboard implements OnInit, OnDestroy {
 
   onDoubleClick(widget: Widget) {
     this.editSidebarService.toggleSidebarFor(widget);
+  }
+
+  onWidgetClick(widget: Widget): void {
+    this.focusedWidget = widget;
   }
 }
