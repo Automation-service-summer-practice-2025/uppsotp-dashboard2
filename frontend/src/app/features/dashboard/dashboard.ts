@@ -19,10 +19,10 @@ export class Dashboard implements OnInit, OnDestroy {
   widgetsSub?: Subscription;
   focusedWidgetSub?: Subscription;
 
-  options: GridsterConfig;
   widgets: Widget[] = [];
-  focusedWidget: Widget | null = null;
+  focusedWidget: Widget | undefined = undefined;
 
+  options: GridsterConfig;
   baseCellSize: number = 40;
   wasDraggedOrResized: boolean = false;
 
@@ -72,7 +72,7 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
-        this.focusedWidget = widget ?? null;
+        this.focusedWidget = widget ?? undefined;
       }
     );
 
