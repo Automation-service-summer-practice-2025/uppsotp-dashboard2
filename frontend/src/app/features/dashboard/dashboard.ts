@@ -85,8 +85,10 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onWidgetClick(widget: Widget): void {
-    this.focusedWidget = widget;
-    this.editSidebarService.openEditSidebar(widget);
+    if (!this.focusedWidget || widget.id != this.focusedWidget.id) {
+      this.focusedWidget = widget;
+      this.editSidebarService.openEditSidebar(widget);
+    }
   }
 
   onClickOutsideWidget(event: MouseEvent) {
