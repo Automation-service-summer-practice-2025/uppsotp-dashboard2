@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
 import { Subscription } from 'rxjs';
@@ -11,7 +10,7 @@ import { ZoomService } from '../../services/zoom.service';
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [CommonModule, GridsterModule, WidgetRender],
+  imports: [GridsterModule, WidgetRender],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
@@ -40,6 +39,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxRows: 100,
       draggable: {
         enabled: true,
+        delayStart: 1000,
       },
       resizable: {
         enabled: true,

@@ -6,7 +6,7 @@
     </button>
   </header>
 
-  <div class="sidebar-header-buttons" *ngIf="widget">
+  <div class="sidebar-header-buttons">
     <div class="button-row">
       <button class="btn save" (click)="onSave()">Сохранить</button>
       <button class="btn cancel" (click)="onCancel()">Отмена</button>
@@ -16,7 +16,7 @@
 
   <template #editorContainer></template>
 
-  <div class="sidebar-footer-delete" *ngIf="widget">
+  <div class="sidebar-footer-delete">
     <div class="divider"></div>
     <button class="btn delete full-width" (click)="onDelete()">Удалить</button>
   </div>
