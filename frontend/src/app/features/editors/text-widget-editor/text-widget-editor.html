@@ -1,6 +1,8 @@
-<div class="editor-container" *ngIf="widget.editor">
+@if (widget.editor) {
+<div class="editor-container">
   <ngx-editor-menu
     [editor]="widget.editor"
     [toolbar]="toolbar"
   ></ngx-editor-menu>
 </div>
+}
