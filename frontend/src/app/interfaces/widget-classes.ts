@@ -1,9 +1,11 @@
-import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Widget } from './widget.interface';
+import { ChartData, ChartOptions, ChartType } from 'chart.js';
+import { Editor } from 'ngx-editor';
 
 export class TextWidget extends Widget {
   override type: string = 'text';
-  mockParam1: string = 'this is text.mockParam1';
+  htmlContent: string = '';
+  editor: Editor = new Editor();
 }
 
 export class ImageWidget extends Widget {

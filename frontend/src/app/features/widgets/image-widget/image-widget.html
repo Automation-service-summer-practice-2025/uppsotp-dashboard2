@@ -1,5 +1,7 @@
 <div class="image-widget">
   @if (widget.previewUrl) {
   <img [src]="widget.previewUrl" alt="image" />
+  } @else {
+  <lucide-icon [img]="iconImage" [size]="90" />
   }
 </div>
