@@ -1,5 +1,5 @@
 <gridster [options]="options" class="gridster">
-  @for (widget of dashboardWidgets; track $index) {
+  @for (widget of widgets; track $index) {
   <gridster-item [item]="widget" (dblclick)="onDoubleClick(widget)">
     <widget-render [widget]="widget"></widget-render>
   </gridster-item>

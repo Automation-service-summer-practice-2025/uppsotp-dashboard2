@@ -16,7 +16,7 @@ import { ZoomService } from '../../services/zoom.service';
 })
 export class Dashboard implements OnInit, OnDestroy {
   options!: GridsterConfig;
-  dashboardWidgets: Widget[] = [];
+  widgets: Widget[] = [];
   baseCellSize = 40;
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
@@ -57,7 +57,7 @@ export class Dashboard implements OnInit, OnDestroy {
     };
 
     this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
-      this.dashboardWidgets = widgets;
+      this.widgets = widgets;
     });
 
     this.zoomSub = this.zoomService.zoomLevel$.subscribe((level) => {
