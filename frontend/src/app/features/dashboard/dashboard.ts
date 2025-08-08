@@ -17,6 +17,7 @@ import { ZoomService } from '../../services/zoom.service';
 export class Dashboard implements OnInit, OnDestroy {
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
+  focusedWidgetSub?: Subscription;
 
   options: GridsterConfig;
   widgets: Widget[] = [];
@@ -27,7 +28,7 @@ export class Dashboard implements OnInit, OnDestroy {
 
   constructor(
     private editSidebarService: EditSidebarService,
-    private elementRef: ElementRef,
+    private dashboardElRef: ElementRef,
     private widgetService: WidgetService,
     private zoomService: ZoomService
   ) {
@@ -69,6 +70,12 @@ export class Dashboard implements OnInit, OnDestroy {
   ngOnInit(): void {
     document.addEventListener('click', this.onClickOutsideWidget.bind(this));
 
+    this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
+      (widget) => {
+        this.focusedWidget = widget ?? null;
+      }
+    );
+
     this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
       this.widgets = widgets;
     });
@@ -82,6 +89,7 @@ export class Dashboard implements OnInit, OnDestroy {
     document.removeEventListener('click', this.onClickOutsideWidget.bind(this));
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
+    this.focusedWidgetSub?.unsubscribe();
   }
 
   updateGridSize(zoomLevel: number): void {
@@ -96,21 +104,18 @@ export class Dashboard implements OnInit, OnDestroy {
     if (this.wasDraggedOrResized) {
       this.wasDraggedOrResized = false;
       return;
-    } else if (!this.focusedWidget || widget.id != this.focusedWidget.id) {
-      this.focusedWidget = widget;
-      this.editSidebarService.openEditSidebar(widget);
     }
+    this.editSidebarService.openEditSidebar(widget);
   }
 
   onClickOutsideWidget(event: MouseEvent) {
     const target = event.target as HTMLElement;
 
     const clickedInsideDashboard =
-      this.elementRef.nativeElement.contains(target);
+      this.dashboardElRef.nativeElement.contains(target);
     const clickedOnWidget = target.closest('gridster-item') !== null;
 
     if (clickedInsideDashboard && !clickedOnWidget) {
-      this.focusedWidget = null;
       this.editSidebarService.closeEditSidebar();
     }
   }
