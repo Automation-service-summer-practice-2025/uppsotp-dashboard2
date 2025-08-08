@@ -12,10 +12,12 @@
     />
     <p class="paste-hint">или нажмите Ctrl + V, чтобы вставить изображение</p>
   </div>
-  <ng-container *ngIf="widget.previewUrl">
+  @if (widget.previewUrl) {
+  <ng-container>
     <p class="preview-title">Предпросмотр</p>
     <div class="img-preview-container">
       <img [src]="widget.previewUrl" alt="preview" />
     </div>
   </ng-container>
+  }
 </div>

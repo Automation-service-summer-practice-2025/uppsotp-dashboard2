@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { WidgetSideBarBtn } from '../../../interfaces/widget-sb-btn.interface';
@@ -9,7 +8,7 @@ import { WidgetService } from '../../../services/widget.service';
 @Component({
   selector: 'widget-sidebar',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule, Zoom],
+  imports: [LucideAngularModule, Zoom],
   templateUrl: './widget-sidebar.html',
   styleUrl: './widget-sidebar.css',
 })

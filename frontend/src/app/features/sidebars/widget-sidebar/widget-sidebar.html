@@ -3,15 +3,16 @@
     <header class="header">Виджеты</header>
 
     <div class="widget-buttons-container">
+      @for (button of buttonsConfig; track $index) {
       <div
         class="widget-button"
-        *ngFor="let button of buttonsConfig"
         (click)="addWidget(button.name)"
         [title]="button.label"
       >
         <lucide-icon [img]="button.icon"></lucide-icon>
         <span class="widget-button-label">{{ button.label }}</span>
       </div>
+      }
     </div>
   </div>
   <zoom></zoom>

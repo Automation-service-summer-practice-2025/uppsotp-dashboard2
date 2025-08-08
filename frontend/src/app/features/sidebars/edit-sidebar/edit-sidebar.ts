@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   Component,
   OnDestroy,
@@ -16,7 +15,7 @@ import { WidgetService } from '../../../services/widget.service';
 @Component({
   selector: 'edit-sidebar',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
