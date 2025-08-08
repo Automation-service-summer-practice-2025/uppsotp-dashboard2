@@ -21,7 +21,9 @@ export class Dashboard implements OnInit, OnDestroy {
   options: GridsterConfig;
   widgets: Widget[] = [];
   focusedWidget: Widget | null = null;
-  baseCellSize = 40;
+
+  baseCellSize: number = 40;
+  wasDraggedOrResized: boolean = false;
 
   constructor(
     private editSidebarService: EditSidebarService,
@@ -41,6 +43,9 @@ export class Dashboard implements OnInit, OnDestroy {
       draggable: {
         enabled: true,
         delayStart: 1000,
+        stop: () => {
+          this.wasDraggedOrResized = true;
+        },
       },
       resizable: {
         enabled: true,
@@ -53,6 +58,9 @@ export class Dashboard implements OnInit, OnDestroy {
           ne: false,
           sw: false,
           nw: false,
+        },
+        stop: () => {
+          this.wasDraggedOrResized = true;
         },
       },
     };
@@ -85,7 +93,10 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onWidgetClick(widget: Widget): void {
-    if (!this.focusedWidget || widget.id != this.focusedWidget.id) {
+    if (this.wasDraggedOrResized) {
+      this.wasDraggedOrResized = false;
+      return;
+    } else if (!this.focusedWidget || widget.id != this.focusedWidget.id) {
       this.focusedWidget = widget;
       this.editSidebarService.openEditSidebar(widget);
     }
