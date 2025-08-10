@@ -9,7 +9,16 @@
 
   <div class="chart-load-file">
     <label>Загрузить CSV файл:</label>
-    <input type="file" (change)="handleFileInput($event)" accept=".csv" />
+
+    <input
+      type="file"
+      id="csvFileInput"
+      style="display: none"
+      (change)="handleFileInput($event)"
+      accept=".csv"
+    />
+
+    <button type="button" (click)="onSelectFileClick()">Выбрать файл</button>
   </div>
 
   <ng-container *ngIf="csvHeaders.length > 0">
