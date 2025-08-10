@@ -8,29 +8,7 @@
   background-color: #1e293b;
   padding: 0px 10px;
   overflow: auto;
-  transform: translateX(100%);
-  opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
 }
-
-/*
-@keyframes slideIn {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOut {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-} */
 
 .edit-sidebar-container::-webkit-scrollbar {
   width: 10px;
