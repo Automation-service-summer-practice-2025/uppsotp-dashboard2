@@ -1,3 +1,4 @@
+import { ChartOptions } from 'chart.js';
 import { ChartWidget } from '../interfaces/widget-classes';
 
 export const chartDataGenerators: Record<
@@ -60,6 +61,59 @@ export const chartDataGenerators: Record<
       ],
     };
   },
+};
+
+export const chartOptionsGenerators: Record<
+  string,
+  (widget: ChartWidget) => ChartOptions
+> = {
+  bar: (widget) => ({
+    responsive: true,
+    plugins: {
+      legend: {
+        display: widget.showLegend ?? true,
+        labels: { color: '#94a3b8' },
+      },
+    },
+    scales: {
+      x: {
+        type: 'category',
+        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        ticks: { color: '#94a3b8' },
+        border: { color: '#3b82f6', width: 2 },
+        title: { display: true, color: '#94a3b8', text: 'Ось X' },
+      },
+      y: {
+        beginAtZero: true,
+        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        ticks: { color: '#94a3b8' },
+        border: { color: '#3b82f6', width: 2 },
+      },
+    },
+  }),
+
+  scatter: (widget) => ({
+    responsive: true,
+    plugins: {
+      legend: {
+        display: widget.showLegend ?? true,
+        labels: { color: '#94a3b8' },
+      },
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        position: 'bottom',
+        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        ticks: { color: '#94a3b8' },
+      },
+      y: {
+        type: 'linear',
+        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        ticks: { color: '#94a3b8' },
+      },
+    },
+  }),
 };
 
 export const chartFeatureSelectors: Record<

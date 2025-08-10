@@ -23,30 +23,18 @@ export class ChartWidget extends Widget {
   chartData: ChartData = { labels: [], datasets: [] };
 
   chartOptions: ChartOptions = {
-    responsive: true,
-    maintainAspectRatio: true,
     plugins: {
       legend: {
-        display: false,
-        position: 'top',
         labels: { color: '#94a3b8' },
       },
       title: {
-        display: true,
-        text: 'График',
         font: { size: 20 },
         color: '#94a3b8',
-      },
-      tooltip: {
-        enabled: true,
-        backgroundColor: '#0f172a',
-        titleColor: '#a2b8d7ff',
-        bodyColor: '#94a3b8',
       },
     },
     scales: {
       x: {
-        title: { display: true, text: 'Ось X', color: '#94a3b8' },
+        title: { display: true, color: '#94a3b8' },
         grid: { display: true, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
         border: {
@@ -55,8 +43,6 @@ export class ChartWidget extends Widget {
         },
       },
       y: {
-        beginAtZero: true,
-        stacked: true,
         grid: { display: true, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
         border: {

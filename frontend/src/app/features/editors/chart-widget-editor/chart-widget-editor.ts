@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import {
   chartDataGenerators,
   chartFeatureSelectors,
+  chartOptionsGenerators,
 } from '../../../configs/chart.config';
 
 @Component({
@@ -66,8 +67,6 @@ export class ChartWidgetEditor implements OnInit {
       this.widget.csvRawData = text;
       this.parseCSV(text);
 
-      console.log('CSV загружен и распарсен:', this.csvData, this.csvHeaders);
-
       this.updateChartData();
       this.updateChartOptions();
     };
@@ -107,7 +106,7 @@ export class ChartWidgetEditor implements OnInit {
     if (!input) return;
 
     const booleanKeys = ['showLegend', 'showGrid'];
-    const numberKeys = ['borderWidth'];
+    const numberKeys = ['borderWidth', 'categoryPercentage'];
 
     const keyStr = key as string;
 
@@ -127,114 +126,16 @@ export class ChartWidgetEditor implements OnInit {
     const generator = chartDataGenerators[this.widget.chartType];
     if (generator) {
       generator(this.csvData, this.selectedFeatures, this.widget);
-      console.log('Сгенерированы данные графика:', this.widget.chartData);
-    } else {
-      console.warn(
-        'Генератор данных для типа',
-        this.widget.chartType,
-        'не найден'
-      );
     }
     this.widget.chartData = { ...this.widget.chartData };
     this.widget.chartOptions = { ...this.widget.chartOptions };
   }
 
   updateChartOptions() {
-    // Базовые настройки стиля сетки и осей
-    const defaultGridStyle = {
-      color: '#4a5a6d',
-      display: this.widget.showGrid ?? true,
-    };
-
-    const defaultTicksStyle = {
-      color: '#94a3b8',
-      width: 2,
-    };
-
-    const defaultAxisStyle = {
-      color: '#3b82f6',
-      width: 2,
-    };
-
-    if (this.widget.chartType === 'bar') {
-      this.widget.chartOptions = {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: this.widget.showLegend ?? true,
-            labels: { color: '#94a3b8' },
-          },
-        },
-        scales: {
-          x: {
-            type: 'category',
-            grid: defaultGridStyle,
-            ticks: defaultTicksStyle,
-            border: defaultAxisStyle,
-          },
-          y: {
-            beginAtZero: true,
-            grid: defaultGridStyle,
-            ticks: defaultTicksStyle,
-            border: defaultAxisStyle,
-          },
-        },
-      };
-    } else if (this.widget.chartType === 'scatter') {
-      this.widget.chartOptions = {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: this.widget.showLegend ?? true,
-            labels: { color: '#94a3b8' },
-          },
-        },
-        scales: {
-          x: {
-            type: 'linear',
-            position: 'bottom',
-            grid: defaultGridStyle,
-            ticks: defaultTicksStyle,
-          },
-          y: {
-            type: 'linear',
-            grid: defaultGridStyle,
-            ticks: defaultTicksStyle,
-          },
-        },
-      };
-    } else {
-      this.widget.chartOptions = {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: this.widget.showLegend ?? true,
-            labels: { color: '#94a3b8' },
-          },
-        },
-        scales: {
-          x: {
-            grid: defaultGridStyle,
-            ticks: defaultTicksStyle,
-          },
-          y: {
-            grid: defaultGridStyle,
-            ticks: defaultTicksStyle,
-          },
-        },
-      };
+    const generator = chartOptionsGenerators[this.widget.chartType];
+    if (generator) {
+      this.widget.chartOptions = generator(this.widget);
+      this.widget.chartOptions = { ...this.widget.chartOptions };
     }
-
-    if (this.widget.chartOptions.plugins?.title) {
-      this.widget.chartOptions.plugins.title = {
-        ...this.widget.chartOptions.plugins.title,
-        color: '#94a3b8',
-        font: { size: 20 },
-      };
-    }
-
-    console.log('Обновлены опции графика:', this.widget.chartOptions);
-    this.widget.chartData = { ...this.widget.chartData };
-    this.widget.chartOptions = { ...this.widget.chartOptions };
   }
 }
