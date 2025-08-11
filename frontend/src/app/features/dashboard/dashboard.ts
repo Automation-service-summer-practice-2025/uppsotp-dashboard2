@@ -48,6 +48,7 @@ export class Dashboard implements OnInit, OnDestroy {
           this.wasDraggedOrResized = true;
         },
       },
+      pushItems: true,
       resizable: {
         enabled: true,
         handles: {
