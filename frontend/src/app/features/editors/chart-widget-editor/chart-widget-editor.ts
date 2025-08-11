@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChartWidget } from '../../../interfaces/widget-classes';
-import { CommonModule } from '@angular/common';
 import {
   chartDataGenerators,
   chartFeatureSelectors,
@@ -10,7 +9,7 @@ import {
 @Component({
   selector: 'chart-widget-editor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './chart-widget-editor.html',
   styleUrl: './chart-widget-editor.css',
 })

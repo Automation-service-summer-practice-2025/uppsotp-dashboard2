@@ -106,11 +106,13 @@ export const chartOptionsGenerators: Record<
         position: 'bottom',
         grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
+        border: { color: '#3b82f6', width: 2 },
       },
       y: {
         type: 'linear',
         grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
+        border: { color: '#3b82f6', width: 2 },
       },
     },
   }),

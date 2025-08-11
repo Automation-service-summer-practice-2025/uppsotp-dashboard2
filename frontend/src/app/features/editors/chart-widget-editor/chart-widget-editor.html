@@ -21,27 +21,20 @@
     <button type="button" (click)="onSelectFileClick()">Выбрать файл</button>
   </div>
 
-  <ng-container *ngIf="csvHeaders.length > 0">
-    <ng-container
-      *ngFor="let selector of chartFeatureSelectors[widget.chartType]"
-    >
-      <div class="chart-select-feature">
-        <label>{{ selector.label }}:</label>
-        <select (change)="onFeatureSelect(selector.key, $event)">
-          <option
-            value=""
-            disabled
-            [selected]="!selectedFeatures[selector.key]"
-          >
-            -- Выберите --
-          </option>
-          <option *ngFor="let header of csvHeaders" [value]="header">
-            {{ header }}
-          </option>
-        </select>
-      </div>
-    </ng-container>
-  </ng-container>
+  @if (csvHeaders.length > 0) { @for (selector of
+  chartFeatureSelectors[widget.chartType]; track $index) {
+  <div class="chart-select-feature">
+    <label>{{ selector.label }}</label>
+    <select (change)="onFeatureSelect(selector.key, $event)">
+      <option value="" disabled selected="@(!selectedFeatures[selector.key])">
+        -- Выберите --
+      </option>
+      @for (header of csvHeaders; track $index) {
+      <option [value]="header">{{ header }}</option>
+      }
+    </select>
+  </div>
+  } }
 
   <div class="chart-line-color">
     <label>Цвет линии:</label>
