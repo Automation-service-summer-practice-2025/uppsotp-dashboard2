@@ -2,9 +2,6 @@
   width: 100%;
   height: 100%;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
 }
 
 .image-widget img {
@@ -12,13 +9,6 @@
   height: 100%;
   border-radius: 4px;
   user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
   pointer-events: none;
 }
 

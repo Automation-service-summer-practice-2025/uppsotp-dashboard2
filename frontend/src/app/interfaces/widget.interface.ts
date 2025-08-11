@@ -15,7 +15,6 @@ export class Widget implements GridsterItem {
   y: number = 0;
   cols: number = 3;
   rows: number = 3;
-  dragEnabled: boolean = true;
 
   constructor() {
     this.id = uuidv4();
