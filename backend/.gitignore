@@ -1,0 +1,31 @@
+# Build
+bin/
+obj/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Configs
+appsettings.Development.json
+appsettings.Local.json
+
+# System
+.DS_Store
+Thumbs.db
+
+# Cache
+*.tmp
+*.temp
+*.bak
+*.swp
+*.lock
+
+# Docker
+*.pid
