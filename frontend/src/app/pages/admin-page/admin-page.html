@@ -4,5 +4,6 @@
   <header></header>
   <dashboard></dashboard>
 </div>
-
-<edit-sidebar></edit-sidebar>
+@if (isEditSidebarOpen) {
+<edit-sidebar [@OpenCloseAnimation]></edit-sidebar>
+}
