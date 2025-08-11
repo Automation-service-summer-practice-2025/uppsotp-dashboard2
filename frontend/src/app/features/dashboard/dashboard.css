@@ -21,6 +21,11 @@ gridster-item.gridster-item-moving {
   z-index: 1000;
 }
 
+gridster-item.focused {
+  border-color: #2563eb;
+  box-shadow: 0 0 8px #3b82f6;
+}
+
 /* Элементы сетки */
 gridster-item {
   background-color: #1e293b;
