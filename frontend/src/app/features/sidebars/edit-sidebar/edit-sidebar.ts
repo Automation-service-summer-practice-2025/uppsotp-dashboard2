@@ -11,12 +11,11 @@ import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget, WidgetConfig } from '../../../interfaces/widget.interface';
 import { widgetConfigs } from '../../../configs/widget.config';
 import { WidgetService } from '../../../services/widget.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'edit-sidebar',
   standalone: true,
-  imports: [LucideAngularModule, CommonModule],
+  imports: [LucideAngularModule],
   templateUrl: './edit-sidebar.html',
   styleUrl: './edit-sidebar.css',
 })
