@@ -10,3 +10,10 @@
 .user-page-content.edit-sidebar-open {
   margin-right: 200px;
 }
+
+edit-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 200px;
+}
