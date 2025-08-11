@@ -54,7 +54,6 @@ export class ChartWidget extends Widget {
   };
 
   backgroundColor?: string;
-  borderColor?: string;
   borderWidth?: number;
   categoryPercentage?: number;
 

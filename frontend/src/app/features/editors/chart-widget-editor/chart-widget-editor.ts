@@ -106,6 +106,7 @@ export class ChartWidgetEditor implements OnInit {
 
     const booleanKeys = ['showLegend', 'showGrid'];
     const numberKeys = ['borderWidth', 'categoryPercentage'];
+    const stringKeys = ['backgroundColor'];
 
     const keyStr = key as string;
 
@@ -115,7 +116,7 @@ export class ChartWidgetEditor implements OnInit {
     } else if (numberKeys.includes(keyStr)) {
       this.widget[key] = +input.value as any;
       this.updateChartData();
-    } else {
+    } else if (stringKeys.includes(keyStr)) {
       this.widget[key] = input.value as any;
       this.updateChartData();
     }

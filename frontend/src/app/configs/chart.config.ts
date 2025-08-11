@@ -28,7 +28,6 @@ export const chartDataGenerators: Record<
           label: `Распределение по ${selectedFeatures['single']}`,
           data: Object.values(counts),
           backgroundColor: widget.backgroundColor,
-          borderColor: widget.borderColor,
           borderWidth: widget.borderWidth,
           categoryPercentage: widget.categoryPercentage,
         },
@@ -52,7 +51,6 @@ export const chartDataGenerators: Record<
           label: `Scatter: ${x} vs ${y}`,
           data: dataPoints,
           backgroundColor: widget.backgroundColor,
-          borderColor: widget.borderColor,
           borderWidth: widget.borderWidth,
           showLine: false,
           pointRadius: 5,
@@ -71,21 +69,21 @@ export const chartOptionsGenerators: Record<
     responsive: true,
     plugins: {
       legend: {
-        display: widget.showLegend ?? true,
+        display: widget.showLegend,
         labels: { color: '#94a3b8' },
       },
     },
     scales: {
       x: {
         type: 'category',
-        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        grid: { display: widget.showGrid, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
         border: { color: '#3b82f6', width: 2 },
         title: { display: true, color: '#94a3b8', text: 'Ось X' },
       },
       y: {
         beginAtZero: true,
-        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        grid: { display: widget.showGrid, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
         border: { color: '#3b82f6', width: 2 },
       },
@@ -96,7 +94,7 @@ export const chartOptionsGenerators: Record<
     responsive: true,
     plugins: {
       legend: {
-        display: widget.showLegend ?? true,
+        display: widget.showLegend,
         labels: { color: '#94a3b8' },
       },
     },
@@ -104,13 +102,13 @@ export const chartOptionsGenerators: Record<
       x: {
         type: 'linear',
         position: 'bottom',
-        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        grid: { display: widget.showGrid, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
         border: { color: '#3b82f6', width: 2 },
       },
       y: {
         type: 'linear',
-        grid: { display: widget.showGrid ?? true, color: '#4a5a6d' },
+        grid: { display: widget.showGrid, color: '#4a5a6d' },
         ticks: { color: '#94a3b8' },
         border: { color: '#3b82f6', width: 2 },
       },
