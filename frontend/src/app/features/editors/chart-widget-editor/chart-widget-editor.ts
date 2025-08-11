@@ -51,11 +51,6 @@ export class ChartWidgetEditor implements OnInit {
     this.updateChartData();
   }
 
-  onSelectFileClick() {
-    const input = document.getElementById('csvFileInput') as HTMLInputElement;
-    input?.click();
-  }
-
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (!file) return;

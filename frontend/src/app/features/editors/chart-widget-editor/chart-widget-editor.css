@@ -34,3 +34,15 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+.chart-load-file label {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #e2e8f0;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
