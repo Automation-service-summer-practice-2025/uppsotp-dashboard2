@@ -49,6 +49,7 @@
 .header p {
   padding: 15px 10px;
   margin: 0px;
+  text-align: center;
 }
 
 .close-edit-sidebar-btn {
