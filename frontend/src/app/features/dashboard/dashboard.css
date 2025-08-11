@@ -11,14 +11,6 @@ gridster {
   overflow: visible;
 }
 
-widget-toolbar {
-  opacity: 0;
-}
-
-gridster-item:hover widget-toolbar {
-  opacity: 1;
-}
-
 gridster-item:hover {
   border-color: #3b82f6;
 }
