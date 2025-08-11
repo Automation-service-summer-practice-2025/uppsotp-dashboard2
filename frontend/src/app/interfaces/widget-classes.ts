@@ -1,11 +1,17 @@
 import { Widget } from './widget.interface';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Editor } from 'ngx-editor';
+import { Type, Image, ChartLine } from 'lucide-angular';
 
 export class TextWidget extends Widget {
   override type: string = 'text';
   htmlContent: string = '';
   editor: Editor = new Editor();
+  defaultIcon = Type;
+
+  override isNull(): boolean {
+    return !this.htmlContent || this.htmlContent.trim() === '';
+  }
 }
 
 export class ImageWidget extends Widget {
@@ -13,10 +19,17 @@ export class ImageWidget extends Widget {
 
   file?: File | null = null;
   previewUrl?: string | null = null;
+  defaultIcon = Image;
+
+  override isNull(): boolean {
+    return !this.previewUrl;
+  }
 }
 
 export class ChartWidget extends Widget {
   override type: string = 'chart';
+
+  defaultIcon = ChartLine;
 
   chartType: ChartType = 'bar';
 
@@ -64,4 +77,8 @@ export class ChartWidget extends Widget {
   csvHeaders?: string[];
 
   [key: string]: any;
+
+  override isNull(): boolean {
+    return !this.chartData.labels?.length || !this.chartData.datasets?.length;
+  }
 }
