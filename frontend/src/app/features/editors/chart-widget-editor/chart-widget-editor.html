@@ -1,0 +1,94 @@
+<div class="chart-widget-editor">
+  <div class="chart-type">
+    <label>Тип графика:</label>
+    <select [value]="widget.chartType" (change)="setChartType($event)">
+      <option value="bar">Гистограмма (Bar Chart)</option>
+      <option value="scatter">Точечный график (Scatter Chart)</option>
+    </select>
+  </div>
+
+  <div class="chart-load-file">
+    <label for="csvFileInput" class="chart-load-file">{{
+      "Загрузить CSV файл:"
+    }}</label>
+
+    <input
+      type="file"
+      id="csvFileInput"
+      style="display: none"
+      (change)="handleFileInput($event)"
+      accept=".csv"
+    />
+  </div>
+
+  @if (csvHeaders.length > 0) { @for (selector of
+  chartFeatureSelectors[widget.chartType]; track $index) {
+  <div class="chart-select-feature">
+    <label>{{ selector.label }}</label>
+    <select (change)="onFeatureSelect(selector.key, $event)">
+      <option value="" disabled selected="@(!selectedFeatures[selector.key])">
+        -- Выберите --
+      </option>
+      @for (header of csvHeaders; track $index) {
+      <option [value]="header">{{ header }}</option>
+      }
+    </select>
+  </div>
+  } }
+
+  <div class="chart-line-color">
+    <label>Цвет линии:</label>
+    <input
+      type="color"
+      [value]="widget.backgroundColor ?? '#2a6593'"
+      (change)="onParamChange('backgroundColor', $event)"
+    />
+  </div>
+
+  <div class="chart-line-width">
+    <label>Толщина границы:</label>
+    <input
+      type="number"
+      min="1"
+      max="10"
+      [value]="widget.borderWidth || 1"
+      (change)="onParamChange('borderWidth', $event)"
+    />
+  </div>
+
+  <div class="chart-display-legend">
+    <label>
+      <input
+        type="checkbox"
+        [checked]="widget.showLegend ?? true"
+        (change)="onParamChange('showLegend', $event)"
+      />
+      Показать легенду
+    </label>
+  </div>
+
+  <div class="chart-display-grid">
+    <label>
+      <input
+        type="checkbox"
+        [checked]="widget.showGrid ?? true"
+        (change)="onParamChange('showGrid', $event)"
+      />
+      Показать сетку
+    </label>
+  </div>
+
+  <div class="chart-bar-width">
+    <label>
+      Толщина столбца (0-1)
+      <input
+        type="number"
+        min="0.1"
+        max="1.0"
+        step="0.1"
+        [value]="widget.categoryPercentage || 0.8"
+        (change)="onParamChange('categoryPercentage', $event)"
+      />
+    </label>
+  </div>
+</div>
