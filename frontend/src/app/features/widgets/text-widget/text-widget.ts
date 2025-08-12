@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { TextWidget } from '../../../interfaces/widget-classes';
 import { NgxEditorComponent } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
@@ -15,4 +15,12 @@ export class TextWidgetComponent {
   @Input() widget!: TextWidget;
 
   textIcon = Text;
+  isClicked = false;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  onClick() {
+    this.isClicked = true;
+    this.cdr.detectChanges();
+  }
 }

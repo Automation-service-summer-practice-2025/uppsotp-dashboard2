@@ -1,5 +1,5 @@
-<div class="text-widget">
-  @if (widget.htmlContent){
+<div class="text-widget" (click)="onClick()">
+  @if (widget.htmlContent || isClicked){
   <ngx-editor
     [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
