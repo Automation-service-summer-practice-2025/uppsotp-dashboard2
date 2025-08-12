@@ -1,11 +1,12 @@
-<div class="text-widget" (click)="onClick()">
-  @if (widget.htmlContent || isClicked){
+<div class="text-widget">
+  @if (!isEmptyContent(widget.htmlContent) || this.focusedWidget?.id ===
+  this.widget.id) {
   <ngx-editor
     [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
-    [placeholder]="'Введите текст... '"
-  ></ngx-editor
-  >} @else {
+    [placeholder]="'Введите текст...'"
+  ></ngx-editor>
+  } @else {
   <lucide-icon [img]="textIcon" [size]="90" />
   }
 </div>
