@@ -22,28 +22,12 @@ export class WidgetRender implements AfterViewInit {
   @Input() widget!: Widget;
   widgetConfigs: Record<string, WidgetConfig> = widgetConfigs;
 
-  showDefaultIcon = false;
-  defaultIcon: any;
-
   ngAfterViewInit(): void {
-    this.showDefaultIcon = this.widget.isNull();
-
-    if (this.showDefaultIcon && 'defaultIcon' in this.widget) {
-      this.defaultIcon = this.widget['defaultIcon'];
-    }
-
-    if (!this.showDefaultIcon) {
-      this.loadWidgetComponent();
-    }
+    this.loadWidgetComponent();
   }
 
   loadWidgetComponent(): void {
-    const widgetComponent = this.widgetConfigs[this.widget.type]?.Component;
-
-    if (!widgetComponent) {
-      console.warn(`Компонент для виджета типа ${this.widget.type} не найден`);
-      return;
-    }
+    const widgetComponent = this.widgetConfigs[this.widget.type].Component;
 
     this.widgetContainer.clear();
     const componentRef = this.widgetContainer.createComponent(widgetComponent);

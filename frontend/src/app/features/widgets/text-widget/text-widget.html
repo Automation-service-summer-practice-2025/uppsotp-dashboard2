@@ -1,7 +1,11 @@
 <div class="text-widget">
+  @if (widget.htmlContent){
   <ngx-editor
     [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
     [placeholder]="'Введите текст... '"
-  ></ngx-editor>
+  ></ngx-editor
+  >} @else {
+  <lucide-icon [img]="textIcon" [size]="90" />
+  }
 </div>

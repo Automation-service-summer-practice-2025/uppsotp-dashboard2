@@ -1,4 +1,5 @@
 <div class="chart-container">
+  @if (widget.chartData.labels?.length || widget.chartData.datasets.length) {
   <canvas
     baseChart
     [data]="widget.chartData"
@@ -6,4 +7,7 @@
     [type]="widget.chartType"
   >
   </canvas>
+  } @else {
+  <lucide-icon [img]="chartIcon" [size]="90" />
+  }
 </div>
