@@ -19,8 +19,4 @@ export class Widget implements GridsterItem {
   constructor() {
     this.id = uuidv4();
   }
-
-  isNull(): boolean {
-    return false;
-  }
 }
