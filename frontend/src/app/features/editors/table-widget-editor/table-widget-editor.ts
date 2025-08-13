@@ -1,11 +1,18 @@
 import { Component, Input } from '@angular/core';
 import { TableWidget } from '../../../interfaces/widget-classes';
 import { ColDef } from 'ag-grid-community';
+import {
+  LucideAngularModule,
+  Minus,
+  Plus,
+  StretchHorizontal,
+  StretchVertical,
+} from 'lucide-angular';
 
 @Component({
   selector: 'table-widget-editor',
   standalone: true,
-  imports: [],
+  imports: [LucideAngularModule],
   templateUrl: './table-widget-editor.html',
   styleUrl: './table-widget-editor.css',
 })
@@ -15,10 +22,33 @@ export class TableWidgetEditor {
   private nextColId = 1;
   private nextRowId = 1;
 
-  toggleTheme(theme: string): void {
-    this.widget.themeTable = theme;
-    // Если нужно принудительно обновить таблицу после смены темы
-    this.widget.gridApi?.refreshHeader();
+  buttons = [
+    {
+      label: 'Добавить колонку',
+      func: this.addColumn.bind(this),
+      icon: [Plus, StretchVertical],
+    },
+    {
+      label: 'Удалить колонку',
+      func: this.removeColumn.bind(this),
+      icon: [Minus, StretchVertical],
+    },
+    {
+      label: 'Добавить строку',
+      func: this.addRow.bind(this),
+      icon: [Plus, StretchHorizontal],
+    },
+    {
+      label: 'Удалить строку',
+      func: this.removeRow.bind(this),
+      icon: [Minus, StretchHorizontal],
+    },
+  ];
+
+  changeTheme(theme: any): void {
+    this.widget.currentTheme = theme;
+    this.widget.gridApi.refreshHeader();
+    this.widget.gridApi.redrawRows();
   }
 
   addColumn() {

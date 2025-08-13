@@ -1,19 +1,26 @@
-<div>
-  <button (click)="addColumn()">Добавить колонку</button>
-  <button (click)="removeColumn()">Удалить колонку</button>
-  <button (click)="addRow()">Добавить строку</button>
-  <button (click)="removeRow()">Удалить строку</button>
+<div class="tableButtons">
+  @for (btn of buttons; track $index) {
+  <button (click)="btn.func()">
+    <div>
+      <lucide-icon [img]="btn.icon[0]" [size]="20"></lucide-icon>
+      <lucide-icon [img]="btn.icon[1]" [size]="20"></lucide-icon>
+    </div>
+    <span>{{ btn.label }}</span>
+  </button>
+  }
 </div>
-<!-- <div class="theme-selector">
+
+<div class="theme-selector">
   <label>Тема таблицы:</label>
   <select
-    (change)="toggleTheme($any($event.target).value)"
-    [value]="widget.themeTable"
+    (change)="
+      changeTheme(widget.availableThemes[$any($event.target).value].theme)
+    "
   >
-    @for( theme of widget.availableThemes; track $index) {
-    <option [value]="theme">
-      {{ theme.replace("ag-theme-", "") }}
+    @for (theme of widget.availableThemes; track $index) {
+    <option [value]="$index" [selected]="theme.theme === widget.currentTheme">
+      {{ theme.name }}
     </option>
     }
   </select>
-</div> -->
+</div>
