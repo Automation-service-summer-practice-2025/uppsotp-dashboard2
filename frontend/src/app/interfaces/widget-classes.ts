@@ -1,6 +1,7 @@
 import { Widget } from './widget.interface';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Editor } from 'ngx-editor';
+import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
 
 export class TextWidget extends Widget {
   override type: string = 'text';
@@ -64,4 +65,19 @@ export class ChartWidget extends Widget {
   csvHeaders?: string[];
 
   [key: string]: any;
+}
+
+export class TableWidget extends Widget {
+  override type: string = 'table';
+  columnsTable: ColDef[] = [];
+  rowsTable: any[] = [];
+  gridApi: GridApi = {} as GridApi;
+  themeTable: string = 'ag-theme-alpine-dark';
+  availableThemes: string[] = [
+    'ag-theme-alpine',
+    'ag-theme-alpine-dark',
+    'ag-theme-balham',
+    'ag-theme-balham-dark',
+    'ag-theme-material',
+  ];
 }

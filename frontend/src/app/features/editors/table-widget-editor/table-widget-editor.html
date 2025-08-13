@@ -1,0 +1,19 @@
+<div>
+  <button (click)="addColumn()">Добавить колонку</button>
+  <button (click)="removeColumn()">Удалить колонку</button>
+  <button (click)="addRow()">Добавить строку</button>
+  <button (click)="removeRow()">Удалить строку</button>
+</div>
+<!-- <div class="theme-selector">
+  <label>Тема таблицы:</label>
+  <select
+    (change)="toggleTheme($any($event.target).value)"
+    [value]="widget.themeTable"
+  >
+    @for( theme of widget.availableThemes; track $index) {
+    <option [value]="theme">
+      {{ theme.replace("ag-theme-", "") }}
+    </option>
+    }
+  </select>
+</div> -->

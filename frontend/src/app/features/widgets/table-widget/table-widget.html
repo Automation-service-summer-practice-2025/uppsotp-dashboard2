@@ -1,0 +1,11 @@
+<ag-grid-angular
+  [class]="widget.themeTable"
+  [rowData]="widget.rowsTable"
+  [columnDefs]="widget.columnsTable"
+  [components]="frameworkComponents"
+  [rowSelection]="'single'"
+  (gridReady)="onGridReady($event)"
+  [editType]="'fullRow'"
+  [suppressClickEdit]="false"
+  [stopEditingWhenCellsLoseFocus]="true"
+></ag-grid-angular>
