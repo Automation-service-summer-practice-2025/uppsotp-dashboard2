@@ -1,7 +1,15 @@
 <div class="text-widget">
+  @if (!isEmptyContent(widget.htmlContent) || this.focusedWidget?.id ===
+  this.widget.id) {
   <ngx-editor
     [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
-    [placeholder]="'Введите текст... '"
+    [placeholder]="'Введите текст...'"
   ></ngx-editor>
+  } @else {
+  <div class="widget-placeholder">
+    <lucide-icon [img]="textIcon" [size]="50"></lucide-icon>
+    <p class="widget-placeholder-caption">Нажмите для изменения</p>
+  </div>
+  }
 </div>

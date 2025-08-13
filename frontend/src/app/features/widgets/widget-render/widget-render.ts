@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { Widget, WidgetConfig } from '../../../interfaces/widget.interface';
 import { widgetConfigs } from '../../../configs/widget.config';
+import { LucideAngularModule } from 'lucide-angular';
 
 @Component({
   selector: 'widget-render',
-  imports: [],
+  imports: [LucideAngularModule],
   templateUrl: './widget-render.html',
   styleUrl: './widget-render.css',
 })
@@ -30,7 +31,6 @@ export class WidgetRender implements AfterViewInit {
 
     this.widgetContainer.clear();
     const componentRef = this.widgetContainer.createComponent(widgetComponent);
-
     componentRef.setInput('widget', this.widget);
   }
 }
