@@ -1,7 +1,17 @@
 import { Widget } from './widget.interface';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Editor } from 'ngx-editor';
-import type { ColDef, GridApi, GridOptions } from 'ag-grid-community';
+import {
+  colorSchemeDarkBlue,
+  colorSchemeDarkWarm,
+  colorSchemeLightCold,
+  colorSchemeLightWarm,
+  themeBalham,
+  themeMaterial,
+  themeQuartz,
+  type ColDef,
+  type GridApi,
+} from 'ag-grid-community';
 
 export class TextWidget extends Widget {
   override type: string = 'text';
@@ -72,12 +82,40 @@ export class TableWidget extends Widget {
   columnsTable: ColDef[] = [];
   rowsTable: any[] = [];
   gridApi: GridApi = {} as GridApi;
-  themeTable: string = 'ag-theme-alpine-dark';
-  availableThemes: string[] = [
-    'ag-theme-alpine',
-    'ag-theme-alpine-dark',
-    'ag-theme-balham',
-    'ag-theme-balham-dark',
-    'ag-theme-material',
+  currentTheme = themeQuartz.withPart(colorSchemeDarkBlue);
+
+  availableThemes = [
+    {
+      name: 'Quartz Dark Blue',
+      theme: themeQuartz.withPart(colorSchemeDarkBlue),
+    },
+    {
+      name: 'Quartz Dark Warm',
+      theme: themeQuartz.withPart(colorSchemeDarkWarm),
+    },
+    {
+      name: 'Quartz Light Warm',
+      theme: themeQuartz.withPart(colorSchemeLightWarm),
+    },
+    {
+      name: 'Quartz Light Cold',
+      theme: themeQuartz.withPart(colorSchemeLightCold),
+    },
+    {
+      name: 'Balham Light',
+      theme: themeBalham.withPart(colorSchemeLightWarm),
+    },
+    {
+      name: 'Balham Dark',
+      theme: themeBalham.withPart(colorSchemeDarkWarm),
+    },
+    {
+      name: 'Material Light',
+      theme: themeMaterial.withPart(colorSchemeLightCold),
+    },
+    {
+      name: 'Material Dark',
+      theme: themeMaterial.withPart(colorSchemeDarkBlue),
+    },
   ];
 }
