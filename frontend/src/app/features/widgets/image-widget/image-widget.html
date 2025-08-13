@@ -2,6 +2,9 @@
   @if (widget.previewUrl) {
   <img [src]="widget.previewUrl" alt="image" />
   } @else {
-  <lucide-icon [img]="iconImage" [size]="90" />
+  <div class="widget-placeholder">
+    <lucide-icon [img]="iconImage" [size]="50"></lucide-icon>
+    <p class="widget-placeholder-caption">Нажмите для изменения</p>
+  </div>
   }
 </div>

@@ -9,7 +9,7 @@ import { TextWidget } from '../../../interfaces/widget-classes';
 import { NgxEditorComponent } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Text, LucideAngularModule } from 'lucide-angular';
+import { Type, LucideAngularModule } from 'lucide-angular';
 import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget } from '../../../interfaces/widget.interface';
 import { Subscription } from 'rxjs';
@@ -23,7 +23,7 @@ import { Subscription } from 'rxjs';
 export class TextWidgetComponent implements OnInit, OnDestroy {
   @Input() widget!: TextWidget;
 
-  textIcon = Text;
+  textIcon = Type;
   focusedWidgetSub?: Subscription;
   focusedWidget: Widget | undefined = undefined;
 

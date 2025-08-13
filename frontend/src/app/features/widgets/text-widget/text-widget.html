@@ -7,6 +7,9 @@
     [placeholder]="'Введите текст...'"
   ></ngx-editor>
   } @else {
-  <lucide-icon [img]="textIcon" [size]="90" />
+  <div class="widget-placeholder">
+    <lucide-icon [img]="textIcon" [size]="50"></lucide-icon>
+    <p class="widget-placeholder-caption">Нажмите для изменения</p>
+  </div>
   }
 </div>
