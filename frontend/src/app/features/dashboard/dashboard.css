@@ -32,6 +32,7 @@ gridster-item {
   border: 1px solid #334155;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  user-select: none;
 }
 
 /* Стилизация скроллбара для gridster */
