@@ -41,6 +41,20 @@ export class WidgetService {
     });
   }
 
+  deleteWidget(currentWidget: Widget): void {
+    this.deleteWidgetLocal(currentWidget);
+
+    this.backendApiService.deleteWidget(currentWidget).subscribe({
+      next: () => {
+        console.log('Successfully deleted widget');
+      },
+      error: (error) => {
+        console.log('Error deleting widget: ', error);
+        this.widgetsSubject.next([...this.widgetsSubject.value, currentWidget]);
+      },
+    });
+  }
+
   deleteWidgetLocal(currentWidget: Widget): void {
     this.widgetsSubject.next([
       ...this.widgetsSubject.value.filter(
