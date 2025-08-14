@@ -111,7 +111,9 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onWidgetClick(widget: Widget): void {
-    if (this.wasDraggedOrResized) {
+    if (!this.viewModeService.isAdminMode) {
+      return;
+    } else if (this.wasDraggedOrResized) {
       this.wasDraggedOrResized = false;
       return;
     }
