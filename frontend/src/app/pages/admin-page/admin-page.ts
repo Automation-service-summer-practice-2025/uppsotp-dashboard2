@@ -6,6 +6,7 @@ import { EditSidebar } from '../../features/sidebars/edit-sidebar/edit-sidebar';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ViewModeService } from '../../services/view-mode.service';
 
 @Component({
   selector: 'admin-page',
@@ -29,7 +30,12 @@ export class AdminPage implements OnInit, OnDestroy {
   isEditSidebarOpen: boolean = false;
   private destroyEditSidebar$ = new Subject<void>();
 
-  constructor(private editsidebarServise: EditSidebarService) {}
+  constructor(
+    private editsidebarServise: EditSidebarService,
+    private viewModeService: ViewModeService
+  ) {
+    this.viewModeService.setEditMode(true);
+  }
 
   ngOnInit() {
     this.editsidebarServise.isOpen$

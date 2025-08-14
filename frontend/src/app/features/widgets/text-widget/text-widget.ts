@@ -13,6 +13,7 @@ import { Type, LucideAngularModule } from 'lucide-angular';
 import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget } from '../../../interfaces/widget.interface';
 import { Subscription } from 'rxjs';
+import { ViewModeService } from '../../../services/view-mode.service';
 
 @Component({
   selector: 'text-widget',
@@ -29,7 +30,8 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
 
   constructor(
     private editSidebarService: EditSidebarService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public viewModeServie: ViewModeService
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +39,6 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
       (widget) => {
         this.focusedWidget = widget ?? undefined;
         this.cdr.detectChanges();
-        console.log(this.widget.htmlContent);
       }
     );
   }
