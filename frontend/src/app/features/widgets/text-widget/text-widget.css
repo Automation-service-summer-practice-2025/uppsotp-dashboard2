@@ -48,3 +48,8 @@
   color: #64748b;
   text-align: center;
 }
+
+::ng-deep text-widget .NgxEditor__Content--Disabled {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
