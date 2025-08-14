@@ -6,6 +6,7 @@ import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
 import { ZoomService } from '../../services/zoom.service';
+import { ViewModeService } from '../../services/view-mode.service';
 
 @Component({
   selector: 'dashboard',
@@ -30,7 +31,8 @@ export class Dashboard implements OnInit, OnDestroy {
     private editSidebarService: EditSidebarService,
     private dashboardElRef: ElementRef,
     private widgetService: WidgetService,
-    private zoomService: ZoomService
+    private zoomService: ZoomService,
+    private viewModeService: ViewModeService
   ) {
     this.options = {
       gridType: GridType.Fixed,
@@ -42,7 +44,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxCols: 54,
       maxRows: 100,
       draggable: {
-        enabled: true,
+        enabled: this.viewModeService.isAdminMode,
         delayStart: 100,
         stop: () => {
           this.wasDraggedOrResized = true;
@@ -50,7 +52,7 @@ export class Dashboard implements OnInit, OnDestroy {
       },
       pushItems: true,
       resizable: {
-        enabled: true,
+        enabled: this.viewModeService.isAdminMode,
         handles: {
           s: true,
           e: true,
@@ -73,12 +75,14 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
-        this.focusedWidget = widget ?? undefined;
-        this.options.draggable = {
-          ...this.options.draggable,
-          enabled: !this.focusedWidget,
-        };
-        this.options.api?.optionsChanged?.();
+        if (this.viewModeService.isAdminMode) {
+          this.focusedWidget = widget ?? undefined;
+          this.options.draggable = {
+            ...this.options.draggable,
+            enabled: !this.focusedWidget,
+          };
+          this.options.api?.optionsChanged?.();
+        }
       }
     );
 
@@ -107,7 +111,9 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onWidgetClick(widget: Widget): void {
-    if (this.wasDraggedOrResized) {
+    if (!this.viewModeService.isAdminMode) {
+      return;
+    } else if (this.wasDraggedOrResized) {
       this.wasDraggedOrResized = false;
       return;
     }
