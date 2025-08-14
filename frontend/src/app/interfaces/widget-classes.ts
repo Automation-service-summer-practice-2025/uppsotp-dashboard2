@@ -9,8 +9,8 @@ import {
   themeBalham,
   themeMaterial,
   themeQuartz,
-  type ColDef,
-  type GridApi,
+  ColDef,
+  GridApi,
 } from 'ag-grid-community';
 
 export class TextWidget extends Widget {
