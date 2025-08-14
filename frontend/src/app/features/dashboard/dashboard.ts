@@ -32,7 +32,7 @@ export class Dashboard implements OnInit, OnDestroy {
     private dashboardElRef: ElementRef,
     private widgetService: WidgetService,
     private zoomService: ZoomService,
-    public viewModeService: ViewModeService
+    private viewModeService: ViewModeService
   ) {
     this.options = {
       gridType: GridType.Fixed,
