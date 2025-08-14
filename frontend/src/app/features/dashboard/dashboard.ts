@@ -71,6 +71,8 @@ export class Dashboard implements OnInit, OnDestroy {
   ngOnInit(): void {
     document.addEventListener('click', this.onClickOutsideWidget.bind(this));
 
+    // this.widgetService.loadWidgets();
+
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
         this.focusedWidget = widget ?? undefined;
