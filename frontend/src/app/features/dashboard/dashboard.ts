@@ -43,7 +43,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxRows: 100,
       draggable: {
         enabled: true,
-        delayStart: 100,
+        delayStart: 1000,
         stop: () => {
           this.wasDraggedOrResized = true;
         },
@@ -74,11 +74,6 @@ export class Dashboard implements OnInit, OnDestroy {
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
         this.focusedWidget = widget ?? undefined;
-        this.options.draggable = {
-          ...this.options.draggable,
-          enabled: !this.focusedWidget,
-        };
-        this.options.api?.optionsChanged?.();
       }
     );
 
