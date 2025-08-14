@@ -12,18 +12,22 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getWidgets(): Observable<Widget[]> {
-    throw new Error('Method not implemented');
+    const endpoint = `${this.apiUrl}/widgets`;
+    return this.http.get<Widget[]>(endpoint);
   }
 
   createWidget(widget: Widget): Observable<Widget> {
-    throw new Error('Method not implemented');
+    const endpoint = `${this.apiUrl}/widgets`;
+    return this.http.post<Widget>(endpoint, widget);
   }
 
   updateWidget(widget: Widget): Observable<Widget> {
-    throw new Error('Method not implemented');
+    const endpoint = `${this.apiUrl}/widgets/${widget.id}`;
+    return this.http.put<Widget>(endpoint, widget);
   }
 
-  deleteWidget(widget: Widget): Observable<Widget> {
-    throw new Error('Method not implemented');
+  deleteWidget(widget: Widget): Observable<void> {
+    const endpoint = `${this.apiUrl}/widgets/${widget.id}`;
+    return this.http.delete<void>(endpoint);
   }
 }
