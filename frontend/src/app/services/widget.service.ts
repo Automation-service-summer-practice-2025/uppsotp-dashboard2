@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Widget, WidgetConfig } from '../interfaces/widget.interface';
 import { widgetConfigs } from '../configs/widget.config';
-import { BackendApiService } from './api.service';
+import { BackendApiService } from './backend-api.service';
 
 @Injectable({
   providedIn: 'root',
