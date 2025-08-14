@@ -6,6 +6,7 @@ import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
 import { ZoomService } from '../../services/zoom.service';
+import { ViewModeService } from '../../services/view-mode.service';
 
 @Component({
   selector: 'dashboard',
@@ -18,6 +19,7 @@ export class Dashboard implements OnInit, OnDestroy {
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
   focusedWidgetSub?: Subscription;
+  viewModeSub?: Subscription;
 
   widgets: Widget[] = [];
   focusedWidget: Widget | undefined = undefined;
@@ -30,7 +32,8 @@ export class Dashboard implements OnInit, OnDestroy {
     private editSidebarService: EditSidebarService,
     private dashboardElRef: ElementRef,
     private widgetService: WidgetService,
-    private zoomService: ZoomService
+    private zoomService: ZoomService,
+    public viewModeService: ViewModeService
   ) {
     this.options = {
       gridType: GridType.Fixed,
@@ -42,7 +45,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxCols: 54,
       maxRows: 100,
       draggable: {
-        enabled: true,
+        enabled: this.viewModeService.isAdminMode,
         delayStart: 100,
         stop: () => {
           this.wasDraggedOrResized = true;
@@ -50,7 +53,7 @@ export class Dashboard implements OnInit, OnDestroy {
       },
       pushItems: true,
       resizable: {
-        enabled: true,
+        enabled: this.viewModeService.isAdminMode,
         handles: {
           s: true,
           e: true,
@@ -89,6 +92,19 @@ export class Dashboard implements OnInit, OnDestroy {
     this.zoomSub = this.zoomService.zoomLevel$.subscribe((level) => {
       this.updateGridSize(level);
     });
+
+    this.viewModeSub = this.viewModeService.isAdminMode$.subscribe(
+      (isEditMode) => {
+        this.options.draggable!.enabled = isEditMode;
+        this.options.resizable!.enabled = isEditMode;
+
+        this.options.api?.optionsChanged?.();
+
+        if (!isEditMode) {
+          this.focusedWidget = undefined;
+        }
+      }
+    );
   }
 
   ngOnDestroy(): void {
@@ -96,6 +112,7 @@ export class Dashboard implements OnInit, OnDestroy {
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
     this.focusedWidgetSub?.unsubscribe();
+    this.viewModeSub?.unsubscribe();
   }
 
   updateGridSize(zoomLevel: number): void {
@@ -107,7 +124,9 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onWidgetClick(widget: Widget): void {
-    if (this.wasDraggedOrResized) {
+    if (!this.viewModeService.isAdminMode) {
+      return;
+    } else if (this.wasDraggedOrResized) {
       this.wasDraggedOrResized = false;
       return;
     }
