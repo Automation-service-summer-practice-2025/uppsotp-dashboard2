@@ -13,11 +13,9 @@
 <div class="theme-selector">
   <label>Тема таблицы:</label>
   <select
-    (change)="
-      changeTheme(widget.availableThemes[$any($event.target).value].theme)
-    "
+    (change)="changeTheme(availableThemes[$any($event.target).value].theme)"
   >
-    @for (theme of widget.availableThemes; track $index) {
+    @for (theme of availableThemes; track $index) {
     <option [value]="$index" [selected]="theme.theme === widget.currentTheme">
       {{ theme.name }}
     </option>

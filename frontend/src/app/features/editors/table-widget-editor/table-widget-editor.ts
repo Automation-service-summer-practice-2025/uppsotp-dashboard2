@@ -1,6 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { TableWidget } from '../../../interfaces/widget-classes';
-import { ColDef } from 'ag-grid-community';
+import {
+  ColDef,
+  colorSchemeDarkBlue,
+  colorSchemeDarkWarm,
+  colorSchemeLightCold,
+  colorSchemeLightWarm,
+  themeBalham,
+  themeMaterial,
+  themeQuartz,
+} from 'ag-grid-community';
 import {
   LucideAngularModule,
   Minus,
@@ -8,6 +17,7 @@ import {
   StretchHorizontal,
   StretchVertical,
 } from 'lucide-angular';
+import { getTableEditorButtons } from '../../../configs/table-editor-btn.config';
 
 @Component({
   selector: 'table-widget-editor',
@@ -22,28 +32,49 @@ export class TableWidgetEditor {
   private nextColId = 1;
   private nextRowId = 1;
 
-  buttons = [
+  readonly availableThemes = [
     {
-      label: 'Добавить колонку',
-      func: this.addColumn.bind(this),
-      icon: [Plus, StretchVertical],
+      name: 'Quartz Dark Blue',
+      theme: themeQuartz.withPart(colorSchemeDarkBlue),
     },
     {
-      label: 'Удалить колонку',
-      func: this.removeColumn.bind(this),
-      icon: [Minus, StretchVertical],
+      name: 'Quartz Dark Warm',
+      theme: themeQuartz.withPart(colorSchemeDarkWarm),
     },
     {
-      label: 'Добавить строку',
-      func: this.addRow.bind(this),
-      icon: [Plus, StretchHorizontal],
+      name: 'Quartz Light Warm',
+      theme: themeQuartz.withPart(colorSchemeLightWarm),
     },
     {
-      label: 'Удалить строку',
-      func: this.removeRow.bind(this),
-      icon: [Minus, StretchHorizontal],
+      name: 'Quartz Light Cold',
+      theme: themeQuartz.withPart(colorSchemeLightCold),
+    },
+    {
+      name: 'Balham Light',
+      theme: themeBalham.withPart(colorSchemeLightWarm),
+    },
+    {
+      name: 'Balham Dark',
+      theme: themeBalham.withPart(colorSchemeDarkWarm),
+    },
+    {
+      name: 'Material Light',
+      theme: themeMaterial.withPart(colorSchemeLightCold),
+    },
+    {
+      name: 'Material Dark',
+      theme: themeMaterial.withPart(colorSchemeDarkBlue),
     },
   ];
+
+  get buttons() {
+    return getTableEditorButtons({
+      addColumn: () => this.addColumn(),
+      removeColumn: () => this.removeColumn(),
+      addRow: () => this.addRow(),
+      removeRow: () => this.removeRow(),
+    });
+  }
 
   changeTheme(theme: any): void {
     this.widget.currentTheme = theme;
