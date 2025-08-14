@@ -14,6 +14,18 @@ export class WidgetService {
 
   constructor(private backendApiService: BackendApiService) {}
 
+  loadWidgets(): void {
+    this.backendApiService.getWidgets().subscribe({
+      next: (widgets) => {
+        this.widgetsSubject.next(widgets);
+      },
+      error: (error) => {
+        console.log('Error loading widgets:', error);
+        this.widgetsSubject.next([]);
+      },
+    });
+  }
+
   addWidget(widgetType: string): void {
     const newWidget = new widgetConfigs[widgetType].Widget();
     this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
