@@ -19,7 +19,6 @@ export class Dashboard implements OnInit, OnDestroy {
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
   focusedWidgetSub?: Subscription;
-  viewModeSub?: Subscription;
 
   widgets: Widget[] = [];
   focusedWidget: Widget | undefined = undefined;
@@ -76,12 +75,14 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
-        this.focusedWidget = widget ?? undefined;
-        this.options.draggable = {
-          ...this.options.draggable,
-          enabled: !this.focusedWidget,
-        };
-        this.options.api?.optionsChanged?.();
+        if (this.viewModeService.isAdminMode) {
+          this.focusedWidget = widget ?? undefined;
+          this.options.draggable = {
+            ...this.options.draggable,
+            enabled: !this.focusedWidget,
+          };
+          this.options.api?.optionsChanged?.();
+        }
       }
     );
 
@@ -92,19 +93,6 @@ export class Dashboard implements OnInit, OnDestroy {
     this.zoomSub = this.zoomService.zoomLevel$.subscribe((level) => {
       this.updateGridSize(level);
     });
-
-    this.viewModeSub = this.viewModeService.isAdminMode$.subscribe(
-      (isEditMode) => {
-        this.options.draggable!.enabled = isEditMode;
-        this.options.resizable!.enabled = isEditMode;
-
-        this.options.api?.optionsChanged?.();
-
-        if (!isEditMode) {
-          this.focusedWidget = undefined;
-        }
-      }
-    );
   }
 
   ngOnDestroy(): void {
@@ -112,7 +100,6 @@ export class Dashboard implements OnInit, OnDestroy {
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
     this.focusedWidgetSub?.unsubscribe();
-    this.viewModeSub?.unsubscribe();
   }
 
   updateGridSize(zoomLevel: number): void {

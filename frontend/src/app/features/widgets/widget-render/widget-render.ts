@@ -22,8 +22,6 @@ export class WidgetRender implements AfterViewInit {
   @Input() widget!: Widget;
   widgetConfigs: Record<string, WidgetConfig> = widgetConfigs;
 
-  @Input() viewMode: 'edit' | 'view' = 'edit';
-
   ngAfterViewInit(): void {
     this.loadWidgetComponent();
   }

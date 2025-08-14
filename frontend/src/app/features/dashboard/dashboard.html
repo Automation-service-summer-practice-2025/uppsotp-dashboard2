@@ -2,16 +2,10 @@
   @for (widget of widgets; track $index) {
   <gridster-item
     [item]="widget"
-    [class.focused]="
-      viewModeService.isAdminMode && widget.id === focusedWidget?.id
-    "
+    [class.focused]="widget.id === focusedWidget?.id"
     (click)="onWidgetClick(widget)"
-    [class.no-interaction]="!viewModeService.isAdminMode"
   >
-    <widget-render
-      [widget]="widget"
-      [viewMode]="viewModeService.isAdminMode ? 'edit' : 'view'"
-    ></widget-render>
+    <widget-render [widget]="widget"></widget-render>
   </gridster-item>
   }
 </gridster>

@@ -37,7 +37,6 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
       (widget) => {
         this.focusedWidget = widget ?? undefined;
         this.cdr.detectChanges();
-        console.log(this.widget.htmlContent);
       }
     );
   }
