@@ -29,9 +29,19 @@ export class WidgetService {
   addWidget(widgetType: string): void {
     const newWidget = new widgetConfigs[widgetType].Widget();
     this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
+
+    this.backendApiService.createWidget(newWidget).subscribe({
+      next: () => {
+        console.log('Successfully saved widget');
+      },
+      error: (error) => {
+        console.log('Error creating widget: ', error);
+        this.deleteWidgetLocal(newWidget);
+      },
+    });
   }
 
-  delWidget(currentWidget: Widget): void {
+  deleteWidgetLocal(currentWidget: Widget): void {
     this.widgetsSubject.next([
       ...this.widgetsSubject.value.filter(
         (widget) => widget.id !== currentWidget.id

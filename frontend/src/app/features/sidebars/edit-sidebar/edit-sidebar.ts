@@ -78,7 +78,7 @@ export class EditSidebar implements OnInit, OnDestroy {
 
   onDelete(): void {
     if (this.widget) {
-      this.widgetService.delWidget(this.widget);
+      this.widgetService.deleteWidgetLocal(this.widget);
       this.editsidebarServise.closeEditSidebar();
     }
   }
