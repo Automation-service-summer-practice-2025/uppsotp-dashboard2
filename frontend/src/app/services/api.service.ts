@@ -6,7 +6,7 @@ import { Widget } from '../interfaces/widget.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class BackendApiService {
   private readonly apiUrl = 'http://localhost:5062';
 
   constructor(private http: HttpClient) {}
