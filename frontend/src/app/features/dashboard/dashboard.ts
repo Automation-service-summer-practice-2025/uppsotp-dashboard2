@@ -1,5 +1,10 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
+import {
+  GridsterConfig,
+  GridsterItem,
+  GridsterModule,
+  GridType,
+} from 'angular-gridster2';
 import { Subscription } from 'rxjs';
 import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Widget } from '../../interfaces/widget.interface';
@@ -65,13 +70,15 @@ export class Dashboard implements OnInit, OnDestroy {
           this.wasDraggedOrResized = true;
         },
       },
+      itemChangeCallback: this.onItemChange.bind(this),
+      itemResizeCallback: this.onItemChange.bind(this),
     };
   }
 
   ngOnInit(): void {
     document.addEventListener('click', this.onClickOutsideWidget.bind(this));
 
-    // this.widgetService.loadWidgets();
+    this.widgetService.loadWidgets();
 
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
@@ -126,5 +133,9 @@ export class Dashboard implements OnInit, OnDestroy {
     if (clickedInsideDashboard && !clickedOnWidget) {
       this.editSidebarService.closeEditSidebar();
     }
+  }
+
+  onItemChange(item: GridsterItem): void {
+    this.widgetService.saveWidget(item as Widget);
   }
 }
