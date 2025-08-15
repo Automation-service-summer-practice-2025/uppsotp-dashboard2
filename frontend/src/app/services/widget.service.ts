@@ -20,7 +20,7 @@ export class WidgetService {
         this.widgetsSubject.next(widgets);
       },
       error: (error) => {
-        console.log('Error loading widgets:', error);
+        console.error('Error loading widgets:', error);
         this.widgetsSubject.next([]);
       },
     });
@@ -35,7 +35,7 @@ export class WidgetService {
         console.info('Successfully saved widget');
       },
       error: (error) => {
-        console.warn('Error creating widget: ', error);
+        console.error('Error creating widget: ', error.message);
       },
     });
   }
@@ -43,10 +43,10 @@ export class WidgetService {
   saveWidget(widget: Widget): void {
     this.backendApiService.updateWidget(widget).subscribe({
       next: () => {
-        console.log('Successfully saved widget changes');
+        console.info('Successfully saved widget changes');
       },
       error: (error) => {
-        console.warn('Error saving widget: ', error);
+        console.error('Error saving widget: ', error);
       },
     });
   }
@@ -56,10 +56,10 @@ export class WidgetService {
 
     this.backendApiService.deleteWidget(currentWidget).subscribe({
       next: () => {
-        console.log('Successfully deleted widget');
+        console.info('Successfully deleted widget');
       },
       error: (error) => {
-        console.log('Error deleting widget: ', error);
+        console.error('Error deleting widget: ', error);
       },
     });
   }
