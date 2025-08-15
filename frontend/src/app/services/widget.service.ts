@@ -32,11 +32,21 @@ export class WidgetService {
 
     this.backendApiService.createWidget(newWidget).subscribe({
       next: () => {
-        console.log('Successfully saved widget');
+        console.info('Successfully saved widget');
       },
       error: (error) => {
-        console.log('Error creating widget: ', error);
-        this.deleteWidgetLocal(newWidget);
+        console.warn('Error creating widget: ', error);
+      },
+    });
+  }
+
+  saveWidget(widget: Widget): void {
+    this.backendApiService.updateWidget(widget).subscribe({
+      next: () => {
+        console.log('Successfully saved widget changes');
+      },
+      error: (error) => {
+        console.warn('Error saving widget: ', error);
       },
     });
   }
@@ -50,7 +60,6 @@ export class WidgetService {
       },
       error: (error) => {
         console.log('Error deleting widget: ', error);
-        this.widgetsSubject.next([...this.widgetsSubject.value, currentWidget]);
       },
     });
   }
