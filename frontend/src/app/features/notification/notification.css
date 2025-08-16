@@ -10,7 +10,7 @@
 }
 
 .notification {
-  background: white;
+  background: #1e293b;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border-left: 4px solid #6b7280;
@@ -72,7 +72,7 @@
   flex-grow: 1;
   font-size: 14px;
   line-height: 1.4;
-  color: #374151;
+  color: #94a3b8;
   word-wrap: break-word;
 }
 
