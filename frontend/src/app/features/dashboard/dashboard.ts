@@ -6,12 +6,13 @@ import {
   GridType,
 } from 'angular-gridster2';
 import { Subscription } from 'rxjs';
-import { EditSidebarService } from '../../services/edit-sidebar.service';
+
+import { CurrentWidgetService } from '../../services/current-widget.service';
+import { NotificationPanel } from '../notification/notification';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
 import { ZoomService } from '../../services/zoom.service';
-import { NotificationPanel } from '../notification/notification';
 
 @Component({
   selector: 'dashboard',
@@ -23,17 +24,17 @@ import { NotificationPanel } from '../notification/notification';
 export class Dashboard implements OnInit, OnDestroy {
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
-  focusedWidgetSub?: Subscription;
-
-  widgets: Widget[] = [];
-  focusedWidget: Widget | undefined = undefined;
+  currentWidgetSub?: Subscription;
 
   options: GridsterConfig;
+  widgets: Widget[] = [];
+  currentWidget: Widget | undefined = undefined;
+
   baseCellSize: number = 40;
   wasDraggedOrResized: boolean = false;
 
   constructor(
-    private editSidebarService: EditSidebarService,
+    private currentWidgetService: CurrentWidgetService,
     private dashboardElRef: ElementRef,
     private widgetService: WidgetService,
     private zoomService: ZoomService
@@ -80,12 +81,12 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.widgetService.readWidgets();
 
-    this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
+    this.currentWidgetSub = this.currentWidgetService.currentWidget$.subscribe(
       (widget) => {
-        this.focusedWidget = widget ?? undefined;
+        this.currentWidget = widget ?? undefined;
         this.options.draggable = {
           ...this.options.draggable,
-          enabled: !this.focusedWidget,
+          enabled: !this.currentWidget,
         };
         this.options.api?.optionsChanged?.();
       }
@@ -104,7 +105,7 @@ export class Dashboard implements OnInit, OnDestroy {
     document.removeEventListener('click', this.onClickOutsideWidget.bind(this));
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
-    this.focusedWidgetSub?.unsubscribe();
+    this.currentWidgetSub?.unsubscribe();
   }
 
   updateGridSize(zoomLevel: number): void {
@@ -120,7 +121,7 @@ export class Dashboard implements OnInit, OnDestroy {
       this.wasDraggedOrResized = false;
       return;
     }
-    this.editSidebarService.openEditSidebar(widget);
+    this.currentWidgetService.setCurrentWidget(widget);
   }
 
   onClickOutsideWidget(event: MouseEvent) {
@@ -131,7 +132,7 @@ export class Dashboard implements OnInit, OnDestroy {
     const clickedOnWidget = target.closest('gridster-item') !== null;
 
     if (clickedInsideDashboard && !clickedOnWidget) {
-      this.editSidebarService.closeEditSidebar();
+      this.currentWidgetService.clearCurrentWidget();
     }
   }
 
