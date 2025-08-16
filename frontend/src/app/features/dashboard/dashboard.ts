@@ -11,11 +11,12 @@ import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
 import { ZoomService } from '../../services/zoom.service';
+import { NotificationPanel } from '../notification/notification';
 
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [GridsterModule, WidgetRender],
+  imports: [GridsterModule, WidgetRender, NotificationPanel],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
