@@ -5,12 +5,12 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
-import { combineLatest, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { LucideAngularModule, LucideIconData, X } from 'lucide-angular';
-import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget, WidgetConfig } from '../../../interfaces/widget.interface';
 import { widgetConfigs } from '../../../configs/widget.config';
 import { WidgetService } from '../../../services/widget.service';
+import { CurrentWidgetService } from '../../../services/current-widget.service';
 
 @Component({
   selector: 'edit-sidebar',
@@ -23,29 +23,25 @@ export class EditSidebar implements OnInit, OnDestroy {
   @ViewChild('editorContainer', { read: ViewContainerRef, static: true })
   editorContainer!: ViewContainerRef;
 
-  isOpenEditSidebar: boolean = false;
-  widget?: Widget | undefined = undefined;
+  widget!: Widget;
   destroyEditSidebar$ = new Subject<void>();
   btn_close: LucideIconData = X;
   widgetConfigs: Record<string, WidgetConfig> = widgetConfigs;
 
   constructor(
-    private editsidebarServise: EditSidebarService,
+    private currentWidgetService: CurrentWidgetService,
     private widgetService: WidgetService
   ) {}
 
   ngOnInit() {
-    combineLatest([
-      this.editsidebarServise.currentWidget$,
-      this.editsidebarServise.isOpen$,
-    ])
+    this.currentWidgetService.currentWidget$
       .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe(([currentWidget, isOpenEditSidebar]) => {
-        this.widget = currentWidget;
-        this.isOpenEditSidebar = isOpenEditSidebar;
-
-        if (isOpenEditSidebar && currentWidget) {
+      .subscribe((currentWidget) => {
+        if (currentWidget) {
+          this.widget = currentWidget;
           this.loadEditorComponent();
+        } else {
+          this.editorContainer.clear();
         }
       });
   }
@@ -56,10 +52,6 @@ export class EditSidebar implements OnInit, OnDestroy {
   }
 
   loadEditorComponent(): void {
-    if (!this.widget) {
-      console.log('Error: widget is underfined');
-      return;
-    }
     const editorComponent = this.widgetConfigs[this.widget.type].Editor;
 
     this.editorContainer.clear();
@@ -69,17 +61,11 @@ export class EditSidebar implements OnInit, OnDestroy {
   }
 
   onClose(): void {
-    this.editsidebarServise.closeEditSidebar();
+    this.currentWidgetService.clearCurrentWidget();
   }
 
-  onCancel(): void {}
-
-  onSave(): void {}
-
   onDelete(): void {
-    if (this.widget) {
-      this.widgetService.deleteWidget(this.widget);
-      this.editsidebarServise.closeEditSidebar();
-    }
+    this.widgetService.deleteWidget(this.widget);
+    this.currentWidgetService.clearCurrentWidget();
   }
 }
