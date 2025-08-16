@@ -72,7 +72,6 @@ export class Dashboard implements OnInit, OnDestroy {
         },
       },
       itemChangeCallback: this.onItemChange.bind(this),
-      itemResizeCallback: this.onItemChange.bind(this),
     };
   }
 
