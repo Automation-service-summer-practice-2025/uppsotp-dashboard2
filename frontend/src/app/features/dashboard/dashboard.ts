@@ -78,7 +78,7 @@ export class Dashboard implements OnInit, OnDestroy {
   ngOnInit(): void {
     document.addEventListener('click', this.onClickOutsideWidget.bind(this));
 
-    this.widgetService.loadWidgets();
+    this.widgetService.readWidgets();
 
     this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
       (widget) => {
@@ -136,6 +136,6 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onItemChange(item: GridsterItem): void {
-    this.widgetService.saveWidget(item as Widget);
+    this.widgetService.updateWidget(item as Widget);
   }
 }

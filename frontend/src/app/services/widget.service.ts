@@ -14,19 +14,7 @@ export class WidgetService {
 
   constructor(private backendApiService: BackendApiService) {}
 
-  loadWidgets(): void {
-    this.backendApiService.getWidgets().subscribe({
-      next: (widgets) => {
-        this.widgetsSubject.next(widgets);
-      },
-      error: (error) => {
-        console.error('Error loading widgets:', error);
-        this.widgetsSubject.next([]);
-      },
-    });
-  }
-
-  addWidget(widgetType: string): void {
+  createWidget(widgetType: string): void {
     const newWidget = new widgetConfigs[widgetType].Widget();
     this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
 
@@ -40,19 +28,35 @@ export class WidgetService {
     });
   }
 
-  saveWidget(widget: Widget): void {
+  readWidgets(): void {
+    this.backendApiService.getWidgets().subscribe({
+      next: (widgets) => {
+        this.widgetsSubject.next(widgets);
+      },
+      error: (error) => {
+        console.error('Error reading widgets:', error);
+        this.widgetsSubject.next([]);
+      },
+    });
+  }
+
+  updateWidget(widget: Widget): void {
     this.backendApiService.updateWidget(widget).subscribe({
       next: () => {
         console.info('Successfully saved widget changes');
       },
       error: (error) => {
-        console.error('Error saving widget: ', error);
+        console.error('Error updating widget: ', error);
       },
     });
   }
 
   deleteWidget(currentWidget: Widget): void {
-    this.deleteWidgetLocal(currentWidget);
+    this.widgetsSubject.next([
+      ...this.widgetsSubject.value.filter(
+        (widget) => widget.id !== currentWidget.id
+      ),
+    ]);
 
     this.backendApiService.deleteWidget(currentWidget).subscribe({
       next: () => {
@@ -62,13 +66,5 @@ export class WidgetService {
         console.error('Error deleting widget: ', error);
       },
     });
-  }
-
-  deleteWidgetLocal(currentWidget: Widget): void {
-    this.widgetsSubject.next([
-      ...this.widgetsSubject.value.filter(
-        (widget) => widget.id !== currentWidget.id
-      ),
-    ]);
   }
 }

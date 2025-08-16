@@ -6,7 +6,7 @@
       @for (button of buttonsConfig; track $index) {
       <button
         class="widget-button"
-        (click)="addWidget(button.name)"
+        (click)="createWidget(button.name)"
         [title]="button.label"
       >
         <lucide-icon [img]="button.icon"></lucide-icon>

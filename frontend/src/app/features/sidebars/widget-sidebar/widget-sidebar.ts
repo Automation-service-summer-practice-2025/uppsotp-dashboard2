@@ -17,7 +17,7 @@ export class WidgetSidebar {
 
   constructor(private widgetService: WidgetService) {}
 
-  addWidget(type: string) {
-    this.widgetService.addWidget(type);
+  createWidget(type: string) {
+    this.widgetService.createWidget(type);
   }
 }

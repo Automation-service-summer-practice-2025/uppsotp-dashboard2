@@ -21,7 +21,7 @@ export class EditSidebarService {
     if (currentWidget && currentWidget.id === widget.id) {
       return;
     } else if (currentWidget) {
-      this.widgetService.saveWidget(currentWidget);
+      this.widgetService.updateWidget(currentWidget);
     }
     this.isOpenEditSidebar.next(true);
     this.currentWidget.next(widget);
@@ -31,7 +31,7 @@ export class EditSidebarService {
     const currentWidget = this.currentWidget.getValue();
 
     if (currentWidget) {
-      this.widgetService.saveWidget(currentWidget);
+      this.widgetService.updateWidget(currentWidget);
     }
 
     this.isOpenEditSidebar.next(false);
