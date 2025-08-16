@@ -2,7 +2,7 @@
   @for (widget of widgets; track $index) {
   <gridster-item
     [item]="widget"
-    [class.focused]="widget.id === focusedWidget?.id"
+    [class.focused]="widget.id === currentWidget?.id"
     (click)="onWidgetClick(widget)"
   >
     <widget-render [widget]="widget"></widget-render>
