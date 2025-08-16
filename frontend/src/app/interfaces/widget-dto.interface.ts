@@ -7,30 +7,32 @@ export interface WidgetDTO {
   y: number;
   cols: number;
   rows: number;
+  data: Record<string, any>;
 }
 
 export interface TextWidgetDTO extends WidgetDTO {
-  type: 'text';
-  htmlContent: string;
-  // editor объект исключен, так как не сериализуется
+  data: {
+    htmlContent: string;
+  };
 }
 
 export interface ImageWidgetDTO extends WidgetDTO {
-  type: 'image';
-  previewUrl?: string | null;
+  data: {
+    previewUrl?: string | null;
+  };
 }
 
 export interface ChartWidgetDTO extends WidgetDTO {
-  type: 'chart';
-  chartType: ChartType;
-  chartData: ChartData;
-  chartOptions: ChartOptions;
-  backgroundColor?: string;
-  borderWidth?: number;
-  categoryPercentage?: number;
-  showLegend?: boolean;
-  showGrid?: boolean;
-  csvRawData?: string;
-  csvHeaders?: string[];
-  [key: string]: any;
+  data: {
+    chartType: ChartType;
+    chartData: ChartData;
+    chartOptions: ChartOptions;
+    backgroundColor?: string;
+    borderWidth?: number;
+    categoryPercentage?: number;
+    showLegend?: boolean;
+    showGrid?: boolean;
+    csvRawData?: string;
+    csvHeaders?: string[];
+  };
 }
