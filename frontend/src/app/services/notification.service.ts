@@ -50,19 +50,19 @@ export class NotificationService {
     this.notificationsSubject.next([]);
   }
 
-  showError(message: string, duration: number = 7000): void {
+  showError(message: string, duration: number = 2000): void {
     this.showNotification(message, 'error', duration);
   }
 
-  showSuccess(message: string, duration: number = 3000): void {
+  showSuccess(message: string, duration: number = 2000): void {
     this.showNotification(message, 'success', duration);
   }
 
-  showWarning(message: string, duration: number = 5000): void {
+  showWarning(message: string, duration: number = 2000): void {
     this.showNotification(message, 'warning', duration);
   }
 
-  showInfo(message: string, duration: number = 4000): void {
+  showInfo(message: string, duration: number = 2000): void {
     this.showNotification(message, 'info', duration);
   }
 }
