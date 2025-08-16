@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
 import { WidgetDTO } from '../interfaces/widget-dto.interface';
 import { widgetConfigs } from '../configs/widget.config';
-import { environment } from '../../environments/environment';
+import { environment as env } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class BackendApiService {
   constructor(private http: HttpClient) {}
 
   getWidgets(): Observable<Widget[]> {
-    const endpoint = `${environment.backendApiUrl}/widgets`;
+    const endpoint = `${env.backendApiUrl}/widgets`;
 
     return this.http
       .get<WidgetDTO[]>(endpoint)
@@ -21,7 +21,7 @@ export class BackendApiService {
   }
 
   createWidget(widget: Widget): Observable<Widget> {
-    const endpoint = `${environment.backendApiUrl}/widgets`;
+    const endpoint = `${env.backendApiUrl}/widgets`;
     const dto = widget.toDTO();
 
     return this.http
@@ -30,7 +30,7 @@ export class BackendApiService {
   }
 
   updateWidget(widget: Widget): Observable<Widget> {
-    const endpoint = `${environment.backendApiUrl}/widgets/${widget.id}`;
+    const endpoint = `${env.backendApiUrl}/widgets/${widget.id}`;
     const dto = widget.toDTO();
 
     return this.http
@@ -39,7 +39,7 @@ export class BackendApiService {
   }
 
   deleteWidget(widget: Widget): Observable<void> {
-    const endpoint = `${environment.backendApiUrl}/widgets/${widget.id}`;
+    const endpoint = `${env.backendApiUrl}/widgets/${widget.id}`;
 
     return this.http.delete<void>(endpoint);
   }
