@@ -42,7 +42,6 @@ export class WidgetService {
       error: (error) => {
         this.notificationService.showError('Ошибка загрузки виджетов');
         console.error('Error reading widgets:', error);
-        this.widgetsSubject.next([]);
       },
     });
   }
