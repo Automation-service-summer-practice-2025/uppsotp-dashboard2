@@ -2,39 +2,31 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
 import { WidgetService } from './widget.service';
+import { CurrentWidgetService } from './current-widget.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EditSidebarService {
   private isOpenEditSidebar = new BehaviorSubject<boolean>(false);
-  private currentWidget = new BehaviorSubject<Widget | undefined>(undefined);
 
   isOpen$ = this.isOpenEditSidebar.asObservable();
-  currentWidget$ = this.currentWidget.asObservable();
 
-  constructor(private widgetService: WidgetService) {}
+  constructor(private currentWidgetService: CurrentWidgetService) {}
 
   openEditSidebar(widget: Widget): void {
-    const currentWidget = this.currentWidget.getValue();
+    const currentWidget = this.currentWidgetService.getCurrentWidget();
 
     if (currentWidget && currentWidget.id === widget.id) {
       return;
-    } else if (currentWidget) {
-      this.widgetService.updateWidget(currentWidget);
     }
+
+    this.currentWidgetService.setCurrentWidget(widget);
     this.isOpenEditSidebar.next(true);
-    this.currentWidget.next(widget);
   }
 
   closeEditSidebar(): void {
-    const currentWidget = this.currentWidget.getValue();
-
-    if (currentWidget) {
-      this.widgetService.updateWidget(currentWidget);
-    }
-
+    this.currentWidgetService.clearCurrentWidget();
     this.isOpenEditSidebar.next(false);
-    this.currentWidget.next(undefined);
   }
 }
