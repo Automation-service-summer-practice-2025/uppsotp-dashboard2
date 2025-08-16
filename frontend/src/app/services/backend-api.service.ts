@@ -4,17 +4,16 @@ import { map, Observable } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
 import { WidgetDTO } from '../interfaces/widget-dto.interface';
 import { widgetConfigs } from '../configs/widget.config';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BackendApiService {
-  private readonly apiUrl = 'http://localhost:5062';
-
   constructor(private http: HttpClient) {}
 
   getWidgets(): Observable<Widget[]> {
-    const endpoint = `${this.apiUrl}/widgets`;
+    const endpoint = `${environment.backendApiUrl}/widgets`;
 
     return this.http
       .get<WidgetDTO[]>(endpoint)
@@ -22,23 +21,26 @@ export class BackendApiService {
   }
 
   createWidget(widget: Widget): Observable<Widget> {
-    const endpoint = `${this.apiUrl}/widgets`;
+    const endpoint = `${environment.backendApiUrl}/widgets`;
     const dto = widget.toDTO();
+
     return this.http
       .post<WidgetDTO>(endpoint, dto)
       .pipe(map((dto) => this.dtoToWidget(dto)));
   }
 
   updateWidget(widget: Widget): Observable<Widget> {
-    const endpoint = `${this.apiUrl}/widgets/${widget.id}`;
+    const endpoint = `${environment.backendApiUrl}/widgets/${widget.id}`;
     const dto = widget.toDTO();
+
     return this.http
       .put<WidgetDTO>(endpoint, dto)
       .pipe(map((dto) => this.dtoToWidget(dto)));
   }
 
   deleteWidget(widget: Widget): Observable<void> {
-    const endpoint = `${this.apiUrl}/widgets/${widget.id}`;
+    const endpoint = `${environment.backendApiUrl}/widgets/${widget.id}`;
+
     return this.http.delete<void>(endpoint);
   }
 
