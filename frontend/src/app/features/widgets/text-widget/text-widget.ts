@@ -26,7 +26,7 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
 
   textIcon = Type;
   dashboardCurrentWidgetSub?: Subscription;
-  dsahboardCurrentWidget: Widget | undefined = undefined;
+  dashboardCurrentWidget: Widget | undefined = undefined;
 
   constructor(
     private currentWidgetService: CurrentWidgetService,
@@ -37,7 +37,7 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dashboardCurrentWidgetSub =
       this.currentWidgetService.currentWidget$.subscribe((widget) => {
-        this.dsahboardCurrentWidget = widget ?? undefined;
+        this.dashboardCurrentWidget = widget ?? undefined;
         this.cdr.detectChanges();
       });
   }
