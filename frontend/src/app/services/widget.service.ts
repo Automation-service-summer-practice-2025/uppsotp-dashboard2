@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { Widget, WidgetConfig } from '../interfaces/widget.interface';
 import { widgetConfigs } from '../configs/widget.config';
 import { BackendApiService } from './backend-api.service';
-import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +12,7 @@ export class WidgetService {
   widgets$ = this.widgetsSubject.asObservable();
   widgetConfigs: Record<string, WidgetConfig> = widgetConfigs;
 
-  constructor(
-    private backendApiService: BackendApiService,
-    private notificationService: NotificationService
-  ) {}
+  constructor(private backendApiService: BackendApiService) {}
 
   createWidget(widgetType: string): void {
     const newWidget = new widgetConfigs[widgetType].Widget();
@@ -24,11 +20,9 @@ export class WidgetService {
 
     this.backendApiService.createWidget(newWidget).subscribe({
       next: () => {
-        this.notificationService.showSuccess('Виджет успешно создан');
         console.info('Successfully saved widget');
       },
       error: (error) => {
-        this.notificationService.showError('Ошибка создания виджета');
         console.error('Error creating widget: ', error.message);
       },
     });
@@ -40,7 +34,6 @@ export class WidgetService {
         this.widgetsSubject.next(widgets);
       },
       error: (error) => {
-        this.notificationService.showError('Ошибка загрузки виджетов');
         console.error('Error reading widgets:', error);
       },
     });
@@ -49,13 +42,9 @@ export class WidgetService {
   updateWidget(widget: Widget): void {
     this.backendApiService.updateWidget(widget).subscribe({
       next: () => {
-        this.notificationService.showSuccess('Изменения виджета сохранены');
         console.info('Successfully saved widget changes');
       },
       error: (error) => {
-        this.notificationService.showError(
-          'Ошибка сохранения изменений виджета'
-        );
         console.error('Error updating widget: ', error);
       },
     });
@@ -70,11 +59,9 @@ export class WidgetService {
 
     this.backendApiService.deleteWidget(currentWidget).subscribe({
       next: () => {
-        this.notificationService.showSuccess('Виджет успешно удален');
         console.info('Successfully deleted widget');
       },
       error: (error) => {
-        this.notificationService.showError('Ошибка удаления виджета');
         console.error('Error deleting widget: ', error);
       },
     });

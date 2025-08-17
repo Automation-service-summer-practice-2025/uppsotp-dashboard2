@@ -8,7 +8,6 @@ import {
 import { Subscription } from 'rxjs';
 
 import { CurrentWidgetService } from '../../services/current-widget.service';
-import { NotificationPanel } from '../notification/notification';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
@@ -17,7 +16,7 @@ import { ZoomService } from '../../services/zoom.service';
 @Component({
   selector: 'dashboard',
   standalone: true,
-  imports: [GridsterModule, WidgetRender, NotificationPanel],
+  imports: [GridsterModule, WidgetRender],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
