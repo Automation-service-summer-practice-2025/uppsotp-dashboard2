@@ -40,8 +40,6 @@ export class EditSidebar implements OnInit, OnDestroy {
         if (currentWidget) {
           this.widget = currentWidget;
           this.loadEditorComponent();
-        } else {
-          this.editorContainer.clear();
         }
       });
   }
