@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { Type, LucideAngularModule } from 'lucide-angular';
 import { Widget } from '../../../interfaces/widget.interface';
 import { Subscription } from 'rxjs';
+import { ViewModeService } from '../../../services/view-mode.service';
 import { CurrentWidgetService } from '../../../services/current-widget.service';
 
 @Component({
@@ -29,7 +30,8 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
 
   constructor(
     private currentWidgetService: CurrentWidgetService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    public viewModeServie: ViewModeService
   ) {}
 
   ngOnInit(): void {

@@ -5,6 +5,7 @@ import { WidgetSidebar } from '../../features/sidebars/widget-sidebar/widget-sid
 import { EditSidebar } from '../../features/sidebars/edit-sidebar/edit-sidebar';
 import { Subject, takeUntil } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ViewModeService } from '../../services/view-mode.service';
 import { CurrentWidgetService } from '../../services/current-widget.service';
 
 @Component({
@@ -29,8 +30,12 @@ export class AdminPage implements OnInit, OnDestroy {
   isEditSidebarOpen: boolean = false;
   private destroyEditSidebar$ = new Subject<void>();
 
-  constructor(private currentWidgetService: CurrentWidgetService) {}
-
+  constructor(
+    private currentWidgetService: CurrentWidgetService,
+    private viewModeService: ViewModeService
+  ) {
+    this.viewModeService.setEditMode(true);
+  }
   ngOnInit() {
     this.currentWidgetService.currentWidget$
       .pipe(takeUntil(this.destroyEditSidebar$))

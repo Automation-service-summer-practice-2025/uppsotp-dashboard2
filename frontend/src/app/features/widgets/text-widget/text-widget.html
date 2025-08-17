@@ -5,6 +5,7 @@
     [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
     [placeholder]="'Введите текст...'"
+    [disabled]="!viewModeServie.isAdminMode"
   ></ngx-editor>
   } @else {
   <div class="widget-placeholder">
