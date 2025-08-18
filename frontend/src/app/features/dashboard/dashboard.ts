@@ -1,7 +1,13 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
-import { GridsterConfig, GridsterModule, GridType } from 'angular-gridster2';
+import {
+  GridsterConfig,
+  GridsterItem,
+  GridsterModule,
+  GridType,
+} from 'angular-gridster2';
 import { Subscription } from 'rxjs';
-import { EditSidebarService } from '../../services/edit-sidebar.service';
+
+import { CurrentWidgetService } from '../../services/current-widget.service';
 import { Widget } from '../../interfaces/widget.interface';
 import { WidgetRender } from '../widgets/widget-render/widget-render';
 import { WidgetService } from '../../services/widget.service';
@@ -18,17 +24,17 @@ import { ViewModeService } from '../../services/view-mode.service';
 export class Dashboard implements OnInit, OnDestroy {
   zoomSub?: Subscription;
   widgetsSub?: Subscription;
-  focusedWidgetSub?: Subscription;
-
-  widgets: Widget[] = [];
-  focusedWidget: Widget | undefined = undefined;
+  currentWidgetSub?: Subscription;
 
   options: GridsterConfig;
+  widgets: Widget[] = [];
+  currentWidget: Widget | undefined = undefined;
+
   baseCellSize: number = 40;
   wasDraggedOrResized: boolean = false;
 
   constructor(
-    private editSidebarService: EditSidebarService,
+    private currentWidgetService: CurrentWidgetService,
     private dashboardElRef: ElementRef,
     private widgetService: WidgetService,
     private zoomService: ZoomService,
@@ -45,7 +51,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxRows: 100,
       draggable: {
         enabled: this.viewModeService.isAdminMode,
-        delayStart: 100,
+        delayStart: 150,
         stop: () => {
           this.wasDraggedOrResized = true;
         },
@@ -67,19 +73,22 @@ export class Dashboard implements OnInit, OnDestroy {
           this.wasDraggedOrResized = true;
         },
       },
+      itemChangeCallback: this.onItemChange.bind(this),
     };
   }
 
   ngOnInit(): void {
     document.addEventListener('click', this.onClickOutsideWidget.bind(this));
 
-    this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
+    this.widgetService.readWidgets();
+
+    this.currentWidgetSub = this.currentWidgetService.currentWidget$.subscribe(
       (widget) => {
         if (this.viewModeService.isAdminMode) {
-          this.focusedWidget = widget ?? undefined;
+          this.currentWidget = widget ?? undefined;
           this.options.draggable = {
             ...this.options.draggable,
-            enabled: !this.focusedWidget,
+            enabled: !this.currentWidget,
           };
           this.options.api?.optionsChanged?.();
         }
@@ -99,7 +108,7 @@ export class Dashboard implements OnInit, OnDestroy {
     document.removeEventListener('click', this.onClickOutsideWidget.bind(this));
     this.zoomSub?.unsubscribe();
     this.widgetsSub?.unsubscribe();
-    this.focusedWidgetSub?.unsubscribe();
+    this.currentWidgetSub?.unsubscribe();
   }
 
   updateGridSize(zoomLevel: number): void {
@@ -117,7 +126,7 @@ export class Dashboard implements OnInit, OnDestroy {
       this.wasDraggedOrResized = false;
       return;
     }
-    this.editSidebarService.openEditSidebar(widget);
+    this.currentWidgetService.setCurrentWidget(widget);
   }
 
   onClickOutsideWidget(event: MouseEvent) {
@@ -128,7 +137,11 @@ export class Dashboard implements OnInit, OnDestroy {
     const clickedOnWidget = target.closest('gridster-item') !== null;
 
     if (clickedInsideDashboard && !clickedOnWidget) {
-      this.editSidebarService.closeEditSidebar();
+      this.currentWidgetService.clearCurrentWidget();
     }
+  }
+
+  onItemChange(item: GridsterItem): void {
+    this.widgetService.updateWidget(item as Widget);
   }
 }
