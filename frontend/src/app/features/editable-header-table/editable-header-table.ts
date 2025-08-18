@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { IHeaderParams } from 'ag-grid-community';
 
 @Component({
-  selector: 'app-editable-header-table',
+  selector: 'editable-header-table',
+  standalone: true,
   imports: [FormsModule],
   templateUrl: './editable-header-table.html',
   styleUrl: './editable-header-table.css',
