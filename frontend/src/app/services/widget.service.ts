@@ -18,36 +18,15 @@ export class WidgetService {
     const newWidget = new widgetConfigs[widgetType].Widget();
     this.widgetsSubject.next([...this.widgetsSubject.value, newWidget]);
 
-    this.backendApiService.createWidget(newWidget).subscribe({
-      next: () => {
-        console.info('Successfully saved widget');
-      },
-      error: (error) => {
-        console.error('Error creating widget: ', error.message);
-      },
-    });
+    this.backendApiService.createWidget(newWidget).subscribe();
   }
 
   readWidgets(): void {
-    this.backendApiService.getWidgets().subscribe({
-      next: (widgets) => {
-        this.widgetsSubject.next(widgets);
-      },
-      error: (error) => {
-        console.error('Error reading widgets:', error);
-      },
-    });
+    this.backendApiService.getWidgets().subscribe();
   }
 
   updateWidget(widget: Widget): void {
-    this.backendApiService.updateWidget(widget).subscribe({
-      next: () => {
-        console.info('Successfully saved widget changes');
-      },
-      error: (error) => {
-        console.error('Error updating widget: ', error);
-      },
-    });
+    this.backendApiService.updateWidget(widget).subscribe();
   }
 
   deleteWidget(currentWidget: Widget): void {
@@ -57,13 +36,6 @@ export class WidgetService {
       ),
     ]);
 
-    this.backendApiService.deleteWidget(currentWidget).subscribe({
-      next: () => {
-        console.info('Successfully deleted widget');
-      },
-      error: (error) => {
-        console.error('Error deleting widget: ', error);
-      },
-    });
+    this.backendApiService.deleteWidget(currentWidget).subscribe();
   }
 }

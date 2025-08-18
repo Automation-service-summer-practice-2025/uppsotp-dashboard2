@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap, catchError, throwError } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
 import { WidgetDTO } from '../interfaces/widget-dto.interface';
 import { widgetConfigs } from '../configs/widget.config';
@@ -15,29 +15,52 @@ export class BackendApiService {
   getWidgets(): Observable<Widget[]> {
     const endpoint = `${env.backendApiUrl}/widgets`;
 
-    return this.http
-      .get<WidgetDTO[]>(endpoint)
-      .pipe(map((dtos) => dtos.map((dto) => this.dtoToWidget(dto))));
+    return this.http.get<WidgetDTO[]>(endpoint).pipe(
+      map((dtos) => dtos.map((dto) => this.dtoToWidget(dto))),
+      tap(() => console.info('Successfully fetched widgets')),
+      catchError((error) => {
+        console.error('Error reading widgets:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
-  createWidget(widget: Widget): void {
+  createWidget(widget: Widget): Observable<void> {
     const endpoint = `${env.backendApiUrl}/widgets`;
     const dto = widget.toDTO();
 
-    this.http.post<WidgetDTO>(endpoint, dto);
+    return this.http.post<void>(endpoint, dto).pipe(
+      tap(() => console.info('Successfully saved widget')),
+      catchError((error) => {
+        console.error('Error creating widget:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
-  updateWidget(widget: Widget): void {
+  updateWidget(widget: Widget): Observable<void> {
     const endpoint = `${env.backendApiUrl}/widgets/${widget.id}`;
     const dto = widget.toDTO();
 
-    this.http.put<WidgetDTO>(endpoint, dto);
+    return this.http.put<void>(endpoint, dto).pipe(
+      tap(() => console.info('Successfully saved widget changes')),
+      catchError((error) => {
+        console.error('Error updating widget:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
   deleteWidget(widget: Widget): Observable<void> {
     const endpoint = `${env.backendApiUrl}/widgets/${widget.id}`;
 
-    return this.http.delete<void>(endpoint);
+    return this.http.delete<void>(endpoint).pipe(
+      tap(() => console.info('Successfully deleted widget')),
+      catchError((error) => {
+        console.error('Error deleting widget:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
   private dtoToWidget(dto: WidgetDTO): Widget {
