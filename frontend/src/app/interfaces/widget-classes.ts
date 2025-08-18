@@ -3,11 +3,6 @@ import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Editor } from 'ngx-editor';
 import {
   colorSchemeDarkBlue,
-  colorSchemeDarkWarm,
-  colorSchemeLightCold,
-  colorSchemeLightWarm,
-  themeBalham,
-  themeMaterial,
   themeQuartz,
   ColDef,
   GridApi,
