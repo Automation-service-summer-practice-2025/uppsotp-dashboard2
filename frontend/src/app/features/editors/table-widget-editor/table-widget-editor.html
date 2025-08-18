@@ -1,0 +1,24 @@
+<div class="tableButtons">
+  @for (btn of buttons; track $index) {
+  <button (click)="btn.func()">
+    <div>
+      <lucide-icon [img]="btn.icon[0]" [size]="20"></lucide-icon>
+      <lucide-icon [img]="btn.icon[1]" [size]="20"></lucide-icon>
+    </div>
+    <span>{{ btn.label }}</span>
+  </button>
+  }
+</div>
+
+<div class="theme-selector">
+  <label>Тема таблицы:</label>
+  <select
+    (change)="changeTheme(availableThemes[$any($event.target).value].theme)"
+  >
+    @for (theme of availableThemes; track $index) {
+    <option [value]="$index" [selected]="theme.theme === widget.currentTheme">
+      {{ theme.name }}
+    </option>
+    }
+  </select>
+</div>

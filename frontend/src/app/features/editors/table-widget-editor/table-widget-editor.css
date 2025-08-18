@@ -1,0 +1,77 @@
+/* Контейнер кнопок */
+.tableButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #475569;
+}
+
+.tableButtons button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: 12px;
+  background-color: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.tableButtons span {
+  align-content: center;
+}
+
+.tableButtons button:hover {
+  background-color: #475569;
+  border-color: #3b82f6;
+}
+
+.tableButtons button:active {
+  transform: scale(0.97);
+}
+
+.theme-selector {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.theme-selector label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.theme-selector select {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  color: #e2e8f0;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.theme-selector select:hover {
+  border-color: #3b82f6;
+}
+
+.theme-selector select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.theme-selector option {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 8px;
+}
