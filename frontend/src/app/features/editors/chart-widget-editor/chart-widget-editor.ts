@@ -18,6 +18,7 @@ export class ChartWidgetEditor implements OnInit {
 
   csvData: any[] = [];
   csvHeaders: string[] = [];
+  uploadedFileName: string = '';
 
   chartFeatureSelectors = chartFeatureSelectors;
 
@@ -54,6 +55,8 @@ export class ChartWidgetEditor implements OnInit {
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (!file) return;
+
+    this.uploadedFileName = file.name;
 
     const reader = new FileReader();
     reader.onload = () => {

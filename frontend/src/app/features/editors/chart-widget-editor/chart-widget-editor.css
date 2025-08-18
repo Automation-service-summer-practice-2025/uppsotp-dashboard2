@@ -46,3 +46,12 @@
   text-align: center;
   transition: background-color 0.2s, border-color 0.2s;
 }
+
+.chart-load-filename {
+  font-size: 12px;
+  color: #94a3b8;
+  padding: 4px 8px;
+  background-color: #1e293b;
+  border-radius: 4px;
+  text-align: center;
+}
