@@ -20,22 +20,18 @@ export class BackendApiService {
       .pipe(map((dtos) => dtos.map((dto) => this.dtoToWidget(dto))));
   }
 
-  createWidget(widget: Widget): Observable<Widget> {
+  createWidget(widget: Widget): void {
     const endpoint = `${env.backendApiUrl}/widgets`;
     const dto = widget.toDTO();
 
-    return this.http
-      .post<WidgetDTO>(endpoint, dto)
-      .pipe(map((dto) => this.dtoToWidget(dto)));
+    this.http.post<WidgetDTO>(endpoint, dto);
   }
 
-  updateWidget(widget: Widget): Observable<Widget> {
+  updateWidget(widget: Widget): void {
     const endpoint = `${env.backendApiUrl}/widgets/${widget.id}`;
     const dto = widget.toDTO();
 
-    return this.http
-      .put<WidgetDTO>(endpoint, dto)
-      .pipe(map((dto) => this.dtoToWidget(dto)));
+    this.http.put<WidgetDTO>(endpoint, dto);
   }
 
   deleteWidget(widget: Widget): Observable<void> {
