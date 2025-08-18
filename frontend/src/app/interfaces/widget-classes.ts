@@ -20,9 +20,7 @@ export class TextWidget extends Widget {
       y: this.y,
       cols: this.cols,
       rows: this.rows,
-      data: {
-        htmlContent: this.htmlContent,
-      },
+      htmlContent: this.htmlContent,
     };
   }
 }
@@ -41,9 +39,7 @@ export class ImageWidget extends Widget {
       y: this.y,
       cols: this.cols,
       rows: this.rows,
-      data: {
-        previewUrl: this.previewUrl,
-      },
+      previewUrl: this.previewUrl,
     };
   }
 }
@@ -106,18 +102,16 @@ export class ChartWidget extends Widget {
       y: this.y,
       cols: this.cols,
       rows: this.rows,
-      data: {
-        chartType: this.chartType,
-        chartData: this.chartData,
-        chartOptions: this.chartOptions,
-        backgroundColor: this.backgroundColor,
-        borderWidth: this.borderWidth,
-        categoryPercentage: this.categoryPercentage,
-        showLegend: this.showLegend,
-        showGrid: this.showGrid,
-        csvRawData: this.csvRawData,
-        csvHeaders: this.csvHeaders,
-      },
+      chartType: this.chartType,
+      chartData: this.chartData,
+      chartOptions: this.chartOptions,
+      backgroundColor: this.backgroundColor,
+      borderWidth: this.borderWidth,
+      categoryPercentage: this.categoryPercentage,
+      showLegend: this.showLegend,
+      showGrid: this.showGrid,
+      csvRawData: this.csvRawData,
+      csvHeaders: this.csvHeaders,
     };
   }
 }

@@ -7,32 +7,25 @@ export interface WidgetDTO {
   y: number;
   cols: number;
   rows: number;
-  data: Record<string, any>;
 }
 
 export interface TextWidgetDTO extends WidgetDTO {
-  data: {
-    htmlContent: string;
-  };
+  htmlContent: string;
 }
 
 export interface ImageWidgetDTO extends WidgetDTO {
-  data: {
-    previewUrl?: string | null;
-  };
+  previewUrl?: string | null;
 }
 
 export interface ChartWidgetDTO extends WidgetDTO {
-  data: {
-    chartType: ChartType;
-    chartData: ChartData;
-    chartOptions: ChartOptions;
-    backgroundColor?: string;
-    borderWidth?: number;
-    categoryPercentage?: number;
-    showLegend?: boolean;
-    showGrid?: boolean;
-    csvRawData?: string;
-    csvHeaders?: string[];
-  };
+  chartType: ChartType;
+  chartData: ChartData;
+  chartOptions: ChartOptions;
+  backgroundColor?: string;
+  borderWidth?: number;
+  categoryPercentage?: number;
+  showLegend?: boolean;
+  showGrid?: boolean;
+  csvRawData?: string;
+  csvHeaders?: string[];
 }
