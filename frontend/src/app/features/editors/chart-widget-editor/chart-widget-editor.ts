@@ -70,6 +70,10 @@ export class ChartWidgetEditor implements OnInit {
     reader.readAsText(file);
   }
 
+  get chartUploadLabel(): string {
+    return this.widget.csvHeaders ? 'Заменить CSV файл' : 'Загрузить CSV файл';
+  }
+
   parseCSV(csvText: string) {
     const lines = csvText.split(/\r\n|\n/);
 
