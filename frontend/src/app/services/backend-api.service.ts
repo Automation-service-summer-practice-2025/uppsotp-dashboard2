@@ -17,9 +17,7 @@ export class BackendApiService {
 
     return this.http.get<WidgetDTO[]>(endpoint).pipe(
       map((dtos) => dtos.map((dto) => this.dtoToWidget(dto))),
-      tap(() => console.info('Successfully fetched widgets')),
       catchError((error) => {
-        console.error('Error reading widgets:', error);
         return throwError(() => error);
       })
     );
@@ -30,9 +28,7 @@ export class BackendApiService {
     const dto = widget.toDTO();
 
     return this.http.post<void>(endpoint, dto).pipe(
-      tap(() => console.info('Successfully saved widget')),
       catchError((error) => {
-        console.error('Error creating widget:', error);
         return throwError(() => error);
       })
     );
@@ -43,9 +39,7 @@ export class BackendApiService {
     const dto = widget.toDTO();
 
     return this.http.put<void>(endpoint, dto).pipe(
-      tap(() => console.info('Successfully saved widget changes')),
       catchError((error) => {
-        console.error('Error updating widget:', error);
         return throwError(() => error);
       })
     );
@@ -55,9 +49,7 @@ export class BackendApiService {
     const endpoint = `${env.backendApiUrl}/widgets/${widget.id}`;
 
     return this.http.delete<void>(endpoint).pipe(
-      tap(() => console.info('Successfully deleted widget')),
       catchError((error) => {
-        console.error('Error deleting widget:', error);
         return throwError(() => error);
       })
     );

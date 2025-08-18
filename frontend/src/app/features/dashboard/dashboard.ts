@@ -51,7 +51,7 @@ export class Dashboard implements OnInit, OnDestroy {
       maxRows: 100,
       draggable: {
         enabled: this.viewModeService.isAdminMode,
-        delayStart: 100,
+        delayStart: 150,
         stop: () => {
           this.wasDraggedOrResized = true;
         },
