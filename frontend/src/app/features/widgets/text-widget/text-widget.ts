@@ -10,10 +10,10 @@ import { NgxEditorComponent } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Type, LucideAngularModule } from 'lucide-angular';
-import { EditSidebarService } from '../../../services/edit-sidebar.service';
 import { Widget } from '../../../interfaces/widget.interface';
 import { Subscription } from 'rxjs';
 import { ViewModeService } from '../../../services/view-mode.service';
+import { CurrentWidgetService } from '../../../services/current-widget.service';
 
 @Component({
   selector: 'text-widget',
@@ -25,22 +25,21 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
   @Input() widget!: TextWidget;
 
   textIcon = Type;
-  focusedWidgetSub?: Subscription;
-  focusedWidget: Widget | undefined = undefined;
+  dashboardCurrentWidgetSub?: Subscription;
+  dashboardCurrentWidget: Widget | undefined = undefined;
 
   constructor(
-    private editSidebarService: EditSidebarService,
+    private currentWidgetService: CurrentWidgetService,
     private cdr: ChangeDetectorRef,
     public viewModeServie: ViewModeService
   ) {}
 
   ngOnInit(): void {
-    this.focusedWidgetSub = this.editSidebarService.currentWidget$.subscribe(
-      (widget) => {
-        this.focusedWidget = widget ?? undefined;
+    this.dashboardCurrentWidgetSub =
+      this.currentWidgetService.currentWidget$.subscribe((widget) => {
+        this.dashboardCurrentWidget = widget ?? undefined;
         this.cdr.detectChanges();
-      }
-    );
+      });
   }
 
   isEmptyContent(html: string | undefined): boolean {
@@ -50,6 +49,6 @@ export class TextWidgetComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.focusedWidgetSub?.unsubscribe();
+    this.dashboardCurrentWidgetSub?.unsubscribe();
   }
 }

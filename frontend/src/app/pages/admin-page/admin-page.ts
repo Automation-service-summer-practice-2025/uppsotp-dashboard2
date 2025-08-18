@@ -3,10 +3,10 @@ import { Header } from '../../features/header/header';
 import { Dashboard } from '../../features/dashboard/dashboard';
 import { WidgetSidebar } from '../../features/sidebars/widget-sidebar/widget-sidebar';
 import { EditSidebar } from '../../features/sidebars/edit-sidebar/edit-sidebar';
-import { EditSidebarService } from '../../services/edit-sidebar.service';
 import { Subject, takeUntil } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ViewModeService } from '../../services/view-mode.service';
+import { CurrentWidgetService } from '../../services/current-widget.service';
 
 @Component({
   selector: 'admin-page',
@@ -31,17 +31,16 @@ export class AdminPage implements OnInit, OnDestroy {
   private destroyEditSidebar$ = new Subject<void>();
 
   constructor(
-    private editsidebarServise: EditSidebarService,
+    private currentWidgetService: CurrentWidgetService,
     private viewModeService: ViewModeService
   ) {
     this.viewModeService.setEditMode(true);
   }
-
   ngOnInit() {
-    this.editsidebarServise.isOpen$
+    this.currentWidgetService.currentWidget$
       .pipe(takeUntil(this.destroyEditSidebar$))
-      .subscribe((isOpen) => {
-        this.isEditSidebarOpen = isOpen;
+      .subscribe((currentWidget) => {
+        this.isEditSidebarOpen = !!currentWidget;
       });
   }
 
