@@ -1,7 +1,9 @@
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
      WORKDIR /app
-     EXPOSE 5001
-     EXPOSE 5000
+     EXPOSE 5062
+     ENV ASPNETCORE_URLS=http://+:5062
+     ENV ASPNETCORE_ENVIRONMENT=Development
+     
 
      FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
      WORKDIR /src
