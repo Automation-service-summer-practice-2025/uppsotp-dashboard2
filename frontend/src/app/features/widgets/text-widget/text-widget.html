@@ -1,7 +1,16 @@
 <div class="text-widget">
+  @if (!isEmptyContent(widget.htmlContent) || this.dashboardCurrentWidget?.id
+  === this.widget.id) {
   <ngx-editor
     [editor]="widget.editor"
     [(ngModel)]="widget.htmlContent"
-    [placeholder]="'Введите текст... '"
+    [placeholder]="'Введите текст...'"
+    [disabled]="!viewModeServie.isAdminMode"
   ></ngx-editor>
+  } @else {
+  <div class="widget-placeholder">
+    <lucide-icon [img]="textIcon" [size]="50"></lucide-icon>
+    <p class="widget-placeholder-caption">Нажмите для изменения</p>
+  </div>
+  }
 </div>

@@ -1,11 +1,28 @@
 import { Widget } from './widget.interface';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Editor } from 'ngx-editor';
+import {
+  ChartWidgetDTO,
+  ImageWidgetDTO,
+  TextWidgetDTO,
+} from './widget-dto.interface';
 
 export class TextWidget extends Widget {
   override type: string = 'text';
   htmlContent: string = '';
   editor: Editor = new Editor();
+
+  override toDTO(): TextWidgetDTO {
+    return {
+      id: this.id,
+      type: this.type,
+      x: this.x,
+      y: this.y,
+      cols: this.cols,
+      rows: this.rows,
+      htmlContent: this.htmlContent,
+    };
+  }
 }
 
 export class ImageWidget extends Widget {
@@ -13,6 +30,18 @@ export class ImageWidget extends Widget {
 
   file?: File | null = null;
   previewUrl?: string | null = null;
+
+  toDTO(): ImageWidgetDTO {
+    return {
+      id: this.id,
+      type: this.type,
+      x: this.x,
+      y: this.y,
+      cols: this.cols,
+      rows: this.rows,
+      previewUrl: this.previewUrl,
+    };
+  }
 }
 
 export class ChartWidget extends Widget {
@@ -64,4 +93,25 @@ export class ChartWidget extends Widget {
   csvHeaders?: string[];
 
   [key: string]: any;
+
+  toDTO(): ChartWidgetDTO {
+    return {
+      id: this.id,
+      type: this.type,
+      x: this.x,
+      y: this.y,
+      cols: this.cols,
+      rows: this.rows,
+      chartType: this.chartType,
+      chartData: this.chartData,
+      chartOptions: this.chartOptions,
+      backgroundColor: this.backgroundColor,
+      borderWidth: this.borderWidth,
+      categoryPercentage: this.categoryPercentage,
+      showLegend: this.showLegend,
+      showGrid: this.showGrid,
+      csvRawData: this.csvRawData,
+      csvHeaders: this.csvHeaders,
+    };
+  }
 }

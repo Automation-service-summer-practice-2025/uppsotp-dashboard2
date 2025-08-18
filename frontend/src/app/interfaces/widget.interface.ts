@@ -1,6 +1,7 @@
 import { Type } from '@angular/core';
 import { GridsterItem } from 'angular-gridster2';
 import { v4 as uuidv4 } from 'uuid';
+import { WidgetDTO } from './widget-dto.interface';
 
 export interface WidgetConfig {
   Component: Type<any>;
@@ -8,7 +9,7 @@ export interface WidgetConfig {
   Widget: Type<Widget>;
 }
 
-export class Widget implements GridsterItem {
+export abstract class Widget implements GridsterItem {
   id: string;
   type!: string;
   x: number = 0;
@@ -19,4 +20,6 @@ export class Widget implements GridsterItem {
   constructor() {
     this.id = uuidv4();
   }
+
+  abstract toDTO(): WidgetDTO;
 }

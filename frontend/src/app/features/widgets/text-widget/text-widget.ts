@@ -1,15 +1,54 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { TextWidget } from '../../../interfaces/widget-classes';
 import { NgxEditorComponent } from 'ngx-editor';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Type, LucideAngularModule } from 'lucide-angular';
+import { Widget } from '../../../interfaces/widget.interface';
+import { Subscription } from 'rxjs';
+import { ViewModeService } from '../../../services/view-mode.service';
+import { CurrentWidgetService } from '../../../services/current-widget.service';
 
 @Component({
   selector: 'text-widget',
-  imports: [NgxEditorComponent, FormsModule, CommonModule],
+  imports: [NgxEditorComponent, FormsModule, CommonModule, LucideAngularModule],
   templateUrl: './text-widget.html',
   styleUrl: './text-widget.css',
 })
-export class TextWidgetComponent {
+export class TextWidgetComponent implements OnInit, OnDestroy {
   @Input() widget!: TextWidget;
+
+  textIcon = Type;
+  dashboardCurrentWidgetSub?: Subscription;
+  dashboardCurrentWidget: Widget | undefined = undefined;
+
+  constructor(
+    private currentWidgetService: CurrentWidgetService,
+    private cdr: ChangeDetectorRef,
+    public viewModeServie: ViewModeService
+  ) {}
+
+  ngOnInit(): void {
+    this.dashboardCurrentWidgetSub =
+      this.currentWidgetService.currentWidget$.subscribe((widget) => {
+        this.dashboardCurrentWidget = widget ?? undefined;
+        this.cdr.detectChanges();
+      });
+  }
+
+  isEmptyContent(html: string | undefined): boolean {
+    if (!html) return true;
+    const textContent = html.replace(/<[^>]*>/g, '').trim();
+    return textContent === '';
+  }
+
+  ngOnDestroy(): void {
+    this.dashboardCurrentWidgetSub?.unsubscribe();
+  }
 }
