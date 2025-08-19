@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=WidgetDB;Username=user;Password=password123"
     ports:
       - "5062:5062"
     depends_on:

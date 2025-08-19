@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
      EXPOSE 5062
      ENV ASPNETCORE_URLS=http://+:5062
      ENV ASPNETCORE_ENVIRONMENT=Development
-     
+
 
      FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
      WORKDIR /src
@@ -19,4 +19,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
      FROM base AS final
      WORKDIR /app
      COPY --from=publish /app/publish .
-     ENTRYPOINT ["dotnet", "Dashboard.dll"]
+     ENTRYPOINT ["dotnet", "Dashboard.dll", "database", "update"]
