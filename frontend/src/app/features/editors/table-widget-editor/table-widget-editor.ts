@@ -25,7 +25,6 @@ export class TableWidgetEditor {
   }
 
   private initializeCounters() {
-    // Находим максимальный ID колонки
     let maxColId = 0;
     this.widget.columnsTable.forEach((col) => {
       if (col.field && col.field.startsWith('col')) {
@@ -37,7 +36,6 @@ export class TableWidgetEditor {
     });
     this.nextColId = maxColId + 1;
 
-    // Находим максимальный ID строки
     let maxRowId = 0;
     this.widget.rowsTable.forEach((row) => {
       if (row.id) {
@@ -83,11 +81,7 @@ export class TableWidgetEditor {
   }
 
   removeColumn() {
-    if (
-      !this.widget ||
-      !this.widget.columnsTable ||
-      this.widget.columnsTable.length <= 1
-    ) {
+    if (this.widget.columnsTable.length <= 1) {
       return;
     }
     this.widget.columnsTable.pop();
@@ -111,11 +105,7 @@ export class TableWidgetEditor {
   }
 
   removeRow() {
-    if (
-      !this.widget ||
-      !this.widget.rowsTable ||
-      !this.widget.rowsTable.length
-    ) {
+    if (!this.widget.rowsTable.length) {
       return;
     }
     const selectedRows = this.widget.gridApi.getSelectedRows();
