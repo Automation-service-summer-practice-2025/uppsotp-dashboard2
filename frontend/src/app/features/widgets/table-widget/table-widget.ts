@@ -8,6 +8,7 @@ import { CurrentWidgetService } from '../../../services/current-widget.service';
 import { Subscription } from 'rxjs';
 import { Widget } from '../../../interfaces/widget.interface';
 import { EditableHeaderTable } from './editable-header-table/editable-header-table';
+import { ViewModeService } from '../../../services/view-mode.service';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -24,14 +25,25 @@ export class TableWidgetComponent {
   readonly iconTable = Table;
   dashboardCurrentWidgetSub?: Subscription;
   dashboardCurrentWidget: Widget | undefined = undefined;
+  gridOptions = {};
 
-  constructor(private currentWidgetService: CurrentWidgetService) {}
+  constructor(
+    private currentWidgetService: CurrentWidgetService,
+    public viewModeServie: ViewModeService
+  ) {}
 
   ngOnInit(): void {
     this.dashboardCurrentWidgetSub =
       this.currentWidgetService.currentWidget$.subscribe((widget) => {
         this.dashboardCurrentWidget = widget ?? undefined;
       });
+
+    this.gridOptions = {
+      suppressCellFocus: this.viewModeServie.isAdminMode,
+      singleClickEdit: this.viewModeServie.isAdminMode,
+      editType: this.viewModeServie.isAdminMode ? 'fullRow' : false,
+      rowSelection: 'single',
+    };
   }
 
   public frameworkComponents = {

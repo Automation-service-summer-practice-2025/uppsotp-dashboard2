@@ -5,8 +5,8 @@ this.widget.id) {
   [rowData]="widget.rowsTable"
   [columnDefs]="widget.columnsTable"
   [components]="frameworkComponents"
-  [rowSelection]="'single'"
   (gridReady)="onGridReady($event)"
+  [gridOptions]="gridOptions"
 ></ag-grid-angular>
 } @else {
 <div class="widget-placeholder">
