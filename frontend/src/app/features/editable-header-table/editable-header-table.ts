@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IHeaderParams } from 'ag-grid-community';
+import { CustomHeaderParams } from '../../interfaces/table-custom-header.interface';
 
 @Component({
   selector: 'editable-header-table',
@@ -10,7 +11,7 @@ import { IHeaderParams } from 'ag-grid-community';
   styleUrl: './editable-header-table.css',
 })
 export class EditableHeaderTable {
-  private params!: IHeaderParams;
+  private params!: CustomHeaderParams;
   headerName: string = '';
 
   agInit(params: IHeaderParams): void {
@@ -19,12 +20,21 @@ export class EditableHeaderTable {
   }
 
   onBlur() {
-    if (this.headerName.trim()) {
-      const newColDefs = this.params.column.getColDef();
-      newColDefs.headerName = this.headerName;
-      this.params.api.setGridOption('columnDefs', [
-        ...this.params.api.getColumnDefs()!,
-      ]);
+    if (this.headerName.trim() && this.params) {
+      const currentColumnField = this.params.column.getColDef().field;
+      if (currentColumnField) {
+        const colDef = this.params.column.getColDef();
+        colDef.headerName = this.headerName;
+        this.params.api.refreshHeader();
+        if (this.params.widget && this.params.widget.columnsTable) {
+          const widgetColumn = this.params.widget.columnsTable.find(
+            (col: any) => col.field === currentColumnField
+          );
+          if (widgetColumn) {
+            widgetColumn.headerName = this.headerName;
+          }
+        }
+      }
     }
   }
 }

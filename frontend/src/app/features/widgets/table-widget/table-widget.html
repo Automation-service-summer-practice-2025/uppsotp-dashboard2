@@ -1,4 +1,5 @@
-<!-- @if (widget.columnsTable.length || widget.rowsTable.length) {
+@if (widget.columnsTable.length > 1 || this.dashboardCurrentWidget?.id ===
+this.widget.id) {
 <ag-grid-angular
   [theme]="widget.currentTheme"
   [rowData]="widget.rowsTable"
@@ -12,12 +13,4 @@
   <lucide-icon [img]="iconTable" [size]="50"></lucide-icon>
   <p class="widget-placeholder-caption">Нажмите для изменения</p>
 </div>
-} -->
-<ag-grid-angular
-  [theme]="widget.currentTheme"
-  [rowData]="widget.rowsTable"
-  [columnDefs]="widget.columnsTable"
-  [components]="frameworkComponents"
-  [rowSelection]="'single'"
-  (gridReady)="onGridReady($event)"
-></ag-grid-angular>
+}

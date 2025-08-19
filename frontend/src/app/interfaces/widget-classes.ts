@@ -125,7 +125,18 @@ export class ChartWidget extends Widget {
 
 export class TableWidget extends Widget {
   override type: string = 'table';
-  columnsTable: ColDef[] = [];
+  columnsTable: ColDef[] = [
+    {
+      headerName: `ID`,
+      field: `id`,
+      width: 50,
+      resizable: false,
+      suppressSizeToFit: true,
+      suppressMovable: true,
+      lockPosition: true,
+      sortable: false,
+    },
+  ];
   rowsTable: any[] = [];
   gridApi: GridApi = {} as GridApi;
   currentTheme = themeQuartz.withPart(colorSchemeDarkBlue);
