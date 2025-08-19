@@ -72,9 +72,6 @@ export class TableWidgetEditor {
       field: newColId,
       editable: true,
       headerComponent: 'editableHeaderComponent',
-      headerComponentParams: {
-        widget: this.widget,
-      },
     };
     this.widget.columnsTable.push(newColumn);
     this.widget.gridApi.setGridOption('columnDefs', [

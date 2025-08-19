@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IHeaderParams } from 'ag-grid-community';
-import { CustomHeaderParams } from '../../interfaces/table-custom-header.interface';
+import { CustomHeaderParams } from '../../../../interfaces/table-custom-header.interface';
+import { Subscription } from 'rxjs';
+import { Widget } from '../../../../interfaces/widget.interface';
+import { CurrentWidgetService } from '../../../../services/current-widget.service';
+import { TableWidget } from '../../../../interfaces/widget-classes';
 
 @Component({
   selector: 'editable-header-table',
@@ -13,7 +17,17 @@ import { CustomHeaderParams } from '../../interfaces/table-custom-header.interfa
 export class EditableHeaderTable {
   private params!: CustomHeaderParams;
   headerName: string = '';
+  dashboardCurrentWidgetSub?: Subscription;
+  dashboardCurrentWidget: TableWidget | undefined = undefined;
 
+  constructor(private currentWidgetService: CurrentWidgetService) {}
+
+  ngOnInit(): void {
+    this.dashboardCurrentWidgetSub =
+      this.currentWidgetService.currentWidget$.subscribe((widget) => {
+        this.dashboardCurrentWidget = (widget as TableWidget) ?? undefined;
+      });
+  }
   agInit(params: IHeaderParams): void {
     this.params = params;
     this.headerName = params.displayName;
@@ -26,8 +40,11 @@ export class EditableHeaderTable {
         const colDef = this.params.column.getColDef();
         colDef.headerName = this.headerName;
         this.params.api.refreshHeader();
-        if (this.params.widget && this.params.widget.columnsTable) {
-          const widgetColumn = this.params.widget.columnsTable.find(
+        if (
+          this.dashboardCurrentWidget &&
+          this.dashboardCurrentWidget.columnsTable
+        ) {
+          const widgetColumn = this.dashboardCurrentWidget.columnsTable.find(
             (col: any) => col.field === currentColumnField
           );
           if (widgetColumn) {

@@ -3,11 +3,11 @@ import { AgGridAngular } from 'ag-grid-angular';
 import type { GridReadyEvent } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { TableWidget } from '../../../interfaces/widget-classes';
-import { EditableHeaderTable } from '../../editable-header-table/editable-header-table';
 import { LucideAngularModule, Table } from 'lucide-angular';
 import { CurrentWidgetService } from '../../../services/current-widget.service';
 import { Subscription } from 'rxjs';
 import { Widget } from '../../../interfaces/widget.interface';
+import { EditableHeaderTable } from './editable-header-table/editable-header-table';
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
