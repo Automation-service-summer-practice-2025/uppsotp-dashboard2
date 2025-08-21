@@ -55,3 +55,12 @@
   border-radius: 4px;
   text-align: center;
 }
+
+.current-feature-label {
+  font-size: 12px;
+  color: #94a3b8;
+  padding: 4px 8px;
+  background-color: #1e293b;
+  border-radius: 4px;
+  text-align: center;
+}

@@ -32,13 +32,14 @@
   <div class="chart-select-feature">
     <label>{{ selector.label }}</label>
     <select (change)="onFeatureSelect(selector.key, $event)">
-      <option value="" disabled selected="@(!selectedFeatures[selector.key])">
-        -- Выберите --
-      </option>
+      <option>-- Выберите --</option>
       @for (header of csvHeaders; track $index) {
       <option [value]="header">{{ header }}</option>
       }
     </select>
+    <div class="current-feature-label">
+      Текущий признак: {{ selectedFeatures[selector.key] || "не выбран" }}
+    </div>
   </div>
   } }
 
