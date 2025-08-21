@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap, catchError, throwError } from 'rxjs';
+import { map, Observable, catchError, throwError, of } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
 import { WidgetDTO } from '../interfaces/widget-dto.interface';
 import { widgetConfigs } from '../configs/widget.config';
@@ -18,7 +18,10 @@ export class BackendApiService {
     return this.http.get<WidgetDTO[]>(endpoint).pipe(
       map((dtos) => dtos.map((dto) => this.dtoToWidget(dto))),
       catchError((error) => {
-        return throwError(() => error);
+        if (env.showApiErrors) {
+          return throwError(() => error);
+        }
+        return of([]);
       })
     );
   }
@@ -29,7 +32,10 @@ export class BackendApiService {
 
     return this.http.post<void>(endpoint, dto).pipe(
       catchError((error) => {
-        return throwError(() => error);
+        if (env.showApiErrors) {
+          return throwError(() => error);
+        }
+        return of(undefined);
       })
     );
   }
@@ -40,7 +46,10 @@ export class BackendApiService {
 
     return this.http.put<void>(endpoint, dto).pipe(
       catchError((error) => {
-        return throwError(() => error);
+        if (env.showApiErrors) {
+          return throwError(() => error);
+        }
+        return of(undefined);
       })
     );
   }
@@ -50,7 +59,10 @@ export class BackendApiService {
 
     return this.http.delete<void>(endpoint).pipe(
       catchError((error) => {
-        return throwError(() => error);
+        if (env.showApiErrors) {
+          return throwError(() => error);
+        }
+        return of(undefined);
       })
     );
   }

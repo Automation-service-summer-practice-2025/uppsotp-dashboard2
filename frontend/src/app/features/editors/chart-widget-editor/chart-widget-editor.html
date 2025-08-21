@@ -9,7 +9,7 @@
 
   <div class="chart-load-file">
     <label for="csvFileInput" class="chart-load-file">{{
-      "Загрузить CSV файл:"
+      chartUploadLabel
     }}</label>
 
     <input
@@ -19,6 +19,12 @@
       (change)="handleFileInput($event)"
       accept=".csv"
     />
+
+    @if (uploadedFileName) {
+    <div class="chart-load-filename">
+      {{ uploadedFileName }}
+    </div>
+    }
   </div>
 
   @if (csvHeaders.length > 0) { @for (selector of
