@@ -88,6 +88,11 @@ export class TableWidgetEditor {
     this.widget.gridApi.setGridOption('columnDefs', [
       ...this.widget.columnsTable,
     ]);
+    if (this.widget.columnsTable.length === 1) {
+      this.widget.rowsTable = [];
+      this.widget.gridApi.setGridOption('rowData', []);
+      return;
+    }
   }
 
   addRow() {
