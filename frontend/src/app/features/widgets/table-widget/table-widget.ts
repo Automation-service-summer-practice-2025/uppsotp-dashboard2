@@ -57,7 +57,10 @@ export class TableWidgetComponent {
       col.suppressMovable = disableMove;
     });
 
-    if (this.widget.gridApi) {
+    if (
+      this.widget.gridApi &&
+      typeof this.widget.gridApi.setGridOption === 'function'
+    ) {
       this.widget.gridApi.setGridOption('columnDefs', [
         ...this.widget.columnsTable,
       ]);
