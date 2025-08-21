@@ -36,11 +36,7 @@ export class ChartWidgetEditor implements OnInit {
       this.csvHeaders = this.widget.csvHeaders;
     }
 
-    this.selectedFeatures = this.widget.selectedFeature ?? {
-      single: '',
-      x: '',
-      y: '',
-    };
+    this.selectedFeatures = this.widget.selectedFeature;
 
     this.updateChartOptions();
     this.updateChartData();
@@ -54,11 +50,7 @@ export class ChartWidgetEditor implements OnInit {
     this.updateChartData();
     this.updateChartOptions();
 
-    this.selectedFeatures = {
-      single: '',
-      x: '',
-      y: '',
-    };
+    this.clearSelectedFeatures();
   }
 
   handleFileInput(event: any) {
@@ -74,6 +66,7 @@ export class ChartWidgetEditor implements OnInit {
 
       this.updateChartData();
       this.updateChartOptions();
+      this.clearSelectedFeatures();
     };
     reader.readAsText(file);
   }
@@ -143,5 +136,13 @@ export class ChartWidgetEditor implements OnInit {
       this.widget.chartOptions = generator(this.widget);
       this.widget.chartOptions = { ...this.widget.chartOptions };
     }
+  }
+
+  clearSelectedFeatures() {
+    this.selectedFeatures = {
+      single: '',
+      x: '',
+      y: '',
+    };
   }
 }
