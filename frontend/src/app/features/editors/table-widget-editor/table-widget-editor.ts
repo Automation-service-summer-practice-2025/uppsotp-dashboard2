@@ -79,6 +79,7 @@ export class TableWidgetEditor {
       ...this.widget.columnsTable,
     ]);
     if (this.widget.rowsTable.length === 0) {
+      this.nextRowId = 1;
       this.addRow();
     }
   }
@@ -108,6 +109,7 @@ export class TableWidgetEditor {
     this.widget.rowsTable.push(newRow);
     this.widget.gridApi.applyTransaction({ add: [newRow] });
     if (this.widget.columnsTable.length === 1) {
+      this.nextColId = 1;
       this.addColumn();
     }
   }
