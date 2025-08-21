@@ -127,8 +127,8 @@ export class TableWidget extends Widget {
   override type: string = 'table';
   columnsTable: ColDef[] = [
     {
-      headerName: `ID`,
-      field: `id`,
+      headerName: 'ID',
+      field: 'id',
       width: 50,
       resizable: false,
       suppressSizeToFit: true,

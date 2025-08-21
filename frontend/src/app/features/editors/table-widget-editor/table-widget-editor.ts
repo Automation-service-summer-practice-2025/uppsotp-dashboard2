@@ -169,20 +169,42 @@ export class TableWidgetEditor {
   }
 
   private handleCsvResults(results: Papa.ParseResult<any>): void {
-    this.widget.rowsTable = results.data;
+    this.nextRowId = 1;
+    this.widget.rowsTable = results.data.map((row, index) => ({
+      ...row,
+      id: `${this.nextRowId + index}`,
+    }));
+    this.nextRowId += results.data.length;
+    console.log(this.widget.rowsTable);
     this.createColumnDefs(results.meta.fields || Object.keys(results.data[0]));
     this.updateGrid();
   }
 
   private createColumnDefs(fields: string[]): void {
-    this.widget.columnsTable = fields.map((field) => ({
-      headerName: field,
-      field: field,
-      editable: true,
-      headerComponent: 'editableHeaderComponent',
-      filter: true,
-      sortable: true,
-    }));
+    const idColumn = this.widget.columnsTable.find(
+      (col) => col.field === 'id'
+    ) || {
+      headerName: 'ID',
+      field: 'id',
+      minWidth: 50,
+      resizable: false,
+      suppressSizeToFit: true,
+      suppressMovable: true,
+      lockPosition: true,
+      sortable: false,
+    };
+    const csvColumns = fields
+      .filter((field) => field !== 'id')
+      .map((field) => ({
+        headerName: field,
+        field: field,
+        editable: true,
+        headerComponent: 'editableHeaderComponent',
+        filter: true,
+        sortable: true,
+      }));
+
+    this.widget.columnsTable = [idColumn, ...csvColumns];
   }
 
   private updateGrid(): void {
