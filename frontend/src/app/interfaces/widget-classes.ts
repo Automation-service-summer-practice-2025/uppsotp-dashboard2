@@ -98,6 +98,7 @@ export class ChartWidget extends Widget {
 
   csvRawData?: string;
   csvHeaders?: string[];
+  selectedFeature?: Record<string, string>;
 
   [key: string]: any;
 

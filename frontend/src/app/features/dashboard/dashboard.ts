@@ -84,6 +84,7 @@ export class Dashboard implements OnInit, OnDestroy {
 
     this.currentWidgetSub = this.currentWidgetService.currentWidget$.subscribe(
       (widget) => {
+        console.log('Dashboard current focused widget changed:', widget?.id);
         if (this.viewModeService.isAdminMode) {
           this.currentWidget = widget ?? undefined;
           this.options.draggable = {
@@ -96,6 +97,7 @@ export class Dashboard implements OnInit, OnDestroy {
     );
 
     this.widgetsSub = this.widgetService.widgets$.subscribe((widgets) => {
+      console.log('Dashboard received widgets update, count:', widgets.length);
       this.widgets = widgets;
     });
 
@@ -120,6 +122,7 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   onWidgetClick(widget: Widget): void {
+    console.log('Widget clicked:', widget.id);
     if (!this.viewModeService.isAdminMode) {
       return;
     } else if (this.wasDraggedOrResized) {
