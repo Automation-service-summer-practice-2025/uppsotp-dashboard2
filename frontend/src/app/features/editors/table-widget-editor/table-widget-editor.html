@@ -22,3 +22,15 @@
     }
   </select>
 </div>
+
+<div class="csv-upload-section">
+  <label for="csvUpload" class="custom-file-label">Загрузить CSV файл</label>
+  <input
+    id="csvUpload"
+    type="file"
+    (change)="onCsvFileSelected($event)"
+    accept=".csv"
+    hidden
+  />
+  <p class="paste-hint">или нажмите Ctrl + V, чтобы вставить CSV данные</p>
+</div>
