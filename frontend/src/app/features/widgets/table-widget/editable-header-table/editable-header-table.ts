@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { IHeaderParams } from 'ag-grid-community';
 import { CustomHeaderParams } from '../../../../interfaces/table-custom-header.interface';
 import { Subscription } from 'rxjs';
-import { Widget } from '../../../../interfaces/widget.interface';
 import { CurrentWidgetService } from '../../../../services/current-widget.service';
 import { TableWidget } from '../../../../interfaces/widget-classes';
+import { ViewModeService } from '../../../../services/view-mode.service';
 
 @Component({
   selector: 'editable-header-table',
@@ -20,7 +20,10 @@ export class EditableHeaderTable {
   dashboardCurrentWidgetSub?: Subscription;
   dashboardCurrentWidget: TableWidget | undefined = undefined;
 
-  constructor(private currentWidgetService: CurrentWidgetService) {}
+  constructor(
+    private currentWidgetService: CurrentWidgetService,
+    public viewModeServie: ViewModeService
+  ) {}
 
   ngOnInit(): void {
     this.dashboardCurrentWidgetSub =

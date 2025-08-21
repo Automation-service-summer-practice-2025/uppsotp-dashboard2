@@ -44,6 +44,24 @@ export class TableWidgetComponent {
       editType: this.viewModeServie.isAdminMode ? 'fullRow' : false,
       rowSelection: 'single',
     };
+
+    this.updateColumnMovable();
+  }
+
+  private updateColumnMovable(): void {
+    if (!this.widget.columnsTable) return;
+
+    const disableMove = !this.viewModeServie.isAdminMode;
+
+    this.widget.columnsTable.forEach((col) => {
+      col.suppressMovable = disableMove;
+    });
+
+    if (this.widget.gridApi) {
+      this.widget.gridApi.setGridOption('columnDefs', [
+        ...this.widget.columnsTable,
+      ]);
+    }
   }
 
   public frameworkComponents = {
