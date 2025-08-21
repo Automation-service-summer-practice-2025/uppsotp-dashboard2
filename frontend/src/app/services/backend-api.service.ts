@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap, catchError, throwError, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Widget } from '../interfaces/widget.interface';
 import { WidgetDTO } from '../interfaces/widget-dto.interface';
 import { widgetConfigs } from '../configs/widget.config';
