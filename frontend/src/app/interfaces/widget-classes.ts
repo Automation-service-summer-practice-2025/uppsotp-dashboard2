@@ -129,9 +129,8 @@ export class TableWidget extends Widget {
     {
       headerName: 'ID',
       field: 'id',
-      width: 50,
-      resizable: false,
-      suppressSizeToFit: true,
+      minWidth: 50,
+      maxWidth: 100,
       suppressMovable: true,
       lockPosition: true,
       sortable: false,

@@ -158,7 +158,6 @@ export class TableWidgetEditor {
     const items = event.clipboardData?.items;
     if (!items) return;
     for (const item of items) {
-      console.log(item);
       if (item.type.endsWith('csv')) {
         const file = item.getAsFile();
         if (file) {
@@ -175,7 +174,6 @@ export class TableWidgetEditor {
       id: `${this.nextRowId + index}`,
     }));
     this.nextRowId += results.data.length;
-    console.log(this.widget.rowsTable);
     this.createColumnDefs(results.meta.fields || Object.keys(results.data[0]));
     this.updateGrid();
   }
