@@ -29,10 +29,6 @@ export class ChartWidgetEditor implements OnInit {
   };
 
   ngOnInit() {
-    console.log(
-      'ChartWidgetEditor ngOnInit, widget.csvRawData:',
-      this.widget.csvRawData
-    );
     if (this.widget.csvRawData) {
       this.parseCSV(this.widget.csvRawData);
     }
@@ -55,18 +51,24 @@ export class ChartWidgetEditor implements OnInit {
     if (!select) return;
 
     this.widget.chartType = select.value as any;
+    this.updateChartData();
+    this.updateChartOptions();
+
+    this.selectedFeatures = {
+      single: '',
+      x: '',
+      y: '',
+    };
   }
 
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (!file) return;
-    console.log('File selected:', file.name);
     this.uploadedFileName = file.name;
 
     const reader = new FileReader();
     reader.onload = () => {
       const text = reader.result as string;
-      console.log('File loaded, content length:', text.length);
       this.widget.csvRawData = text;
       this.parseCSV(text);
 
@@ -81,7 +83,6 @@ export class ChartWidgetEditor implements OnInit {
   }
 
   parseCSV(csvText: string) {
-    console.log('Parsing CSV data');
     const lines = csvText.split(/\r\n|\n/);
 
     this.csvHeaders = lines[0].split(',');
@@ -94,7 +95,6 @@ export class ChartWidgetEditor implements OnInit {
       return obj;
     });
     this.widget.csvHeaders = this.csvHeaders;
-    console.log('CSV parsed, headers:', this.csvHeaders);
   }
 
   onFeatureSelect(key: string, event: Event) {
@@ -103,11 +103,6 @@ export class ChartWidgetEditor implements OnInit {
 
     this.selectedFeatures[key] = select.value;
     this.widget.selectedFeature = { ...this.selectedFeatures };
-    console.log(
-      `Выбран признак: key=${key}, value=${select.value}`,
-      'selectedFeatures:',
-      this.selectedFeatures
-    );
     this.updateChartData();
   }
 
