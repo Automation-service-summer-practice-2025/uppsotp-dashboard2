@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { TableWidget } from '../../../interfaces/widget-classes';
 import { ColDef } from 'ag-grid-community';
 import { LucideAngularModule } from 'lucide-angular';
 import { getTableEditorButtons } from '../../../configs/table-editor-btn.config';
 import { availableThemes } from '../../../configs/table-availablethemes.config';
+import * as Papa from 'papaparse';
 
 @Component({
   selector: 'table-widget-editor',
@@ -70,6 +71,8 @@ export class TableWidgetEditor {
       field: newColId,
       editable: true,
       headerComponent: 'editableHeaderComponent',
+      filter: true,
+      sortable: true,
     };
     this.widget.columnsTable.push(newColumn);
     this.widget.gridApi.setGridOption('columnDefs', [
@@ -125,5 +128,66 @@ export class TableWidgetEditor {
         }
       });
     }
+  }
+
+  onCsvFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) return;
+    if (file && file.type.endsWith('csv')) {
+      this.processCsvFile(file);
+    }
+  }
+
+  private processCsvFile(file: File): void {
+    Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        this.handleCsvResults(results);
+      },
+      error: (error) => {
+        console.error('Ошибка парсинга CSV:', error);
+        alert('Ошибка при обработке CSV файла');
+      },
+    });
+  }
+
+  @HostListener('document:paste', ['$event'])
+  handlePaste(event: ClipboardEvent): void {
+    const items = event.clipboardData?.items;
+    if (!items) return;
+    for (const item of items) {
+      console.log(item);
+      if (item.type.endsWith('csv')) {
+        const file = item.getAsFile();
+        if (file) {
+          this.processCsvFile(file);
+        }
+      }
+    }
+  }
+
+  private handleCsvResults(results: Papa.ParseResult<any>): void {
+    this.widget.rowsTable = results.data;
+    this.createColumnDefs(results.meta.fields || Object.keys(results.data[0]));
+    this.updateGrid();
+  }
+
+  private createColumnDefs(fields: string[]): void {
+    this.widget.columnsTable = fields.map((field) => ({
+      headerName: field,
+      field: field,
+      editable: true,
+      headerComponent: 'editableHeaderComponent',
+      filter: true,
+      sortable: true,
+    }));
+  }
+
+  private updateGrid(): void {
+    this.widget.gridApi.setGridOption('columnDefs', this.widget.columnsTable);
+    this.widget.gridApi.setGridOption('rowData', this.widget.rowsTable);
+    this.widget.gridApi.autoSizeAllColumns();
   }
 }

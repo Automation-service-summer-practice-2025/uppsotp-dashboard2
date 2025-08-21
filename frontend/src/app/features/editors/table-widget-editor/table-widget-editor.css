@@ -1,3 +1,52 @@
+.csv-upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.csv-upload-section input[type="file"] {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #e2e8f0;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.csv-upload-section input[type="file"]:hover {
+  border-color: #3b82f6;
+  background-color: #475569;
+}
+
+.custom-file-label {
+  padding: 6px 10px;
+  font-size: 13px;
+  color: #e2e8f0;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.custom-file-label:hover {
+  border-color: #3b82f6;
+  background-color: #475569;
+}
+
+.custom-file-label:active {
+  transform: scale(0.97);
+}
+
+.paste-hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0 0 0 2px;
+  opacity: 0.8;
+}
+
 /* Контейнер кнопок */
 .tableButtons {
   display: flex;
@@ -38,6 +87,8 @@
 .theme-selector {
   margin-top: 1rem;
   margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #475569;
 }
 
 .theme-selector label {
