@@ -41,7 +41,7 @@ export class TableWidgetComponent {
     this.gridOptions = {
       suppressCellFocus: this.viewModeServie.isAdminMode,
       singleClickEdit: this.viewModeServie.isAdminMode,
-      editType: this.viewModeServie.isAdminMode ? 'fullRow' : false,
+      editType: this.viewModeServie.isAdminMode ? 'fullRow' : undefined,
       rowSelection: 'single',
     };
 
