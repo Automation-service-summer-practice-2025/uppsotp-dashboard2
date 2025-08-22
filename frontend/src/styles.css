@@ -2,12 +2,6 @@
   --font-family-primary: "Inter", sans-serif;
 }
 
-*,
-*::before,
-*::after {
-  font-family: var(--font-family-primary);
-}
-
 body {
   margin: 0;
   font-family: var(--font-family-primary);
