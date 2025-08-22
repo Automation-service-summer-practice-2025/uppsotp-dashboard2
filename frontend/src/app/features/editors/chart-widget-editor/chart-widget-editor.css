@@ -4,7 +4,6 @@
   margin-top: 10px;
   text-align: center;
   color: #94a3b8;
-  font-family: "Inter", sans-serif;
 }
 
 .chart-widget-editor select,
@@ -17,10 +16,9 @@
   background-color: #334155;
   border: 1px solid #475569;
   color: #e2e8f0;
-  font-family: "Inter", sans-serif;
   border-radius: 6px;
   font-size: 13px;
-  height: 32px;
+  height: 28.8px;
   box-sizing: border-box;
 }
 
@@ -47,13 +45,12 @@
   width: 100%;
   padding: 6px 10px;
   font-size: 13px;
-  font-family: "Inter", sans-serif;
   background: #334155;
   color: #e2e8f0;
   border: 1px solid #475569;
   border-radius: 6px;
   cursor: pointer;
-  height: 32px;
+  height: 28.8px;
   transition: background-color 0.2s, border-color 0.2s;
 }
 
@@ -66,7 +63,6 @@
   display: block;
   padding: 6px 10px;
   font-size: 13px;
-  font-family: "Inter", sans-serif;
   color: #e2e8f0;
   background-color: #334155;
   border: 1px solid #475569;
@@ -75,7 +71,7 @@
   text-align: center;
   transition: background-color 0.2s, border-color 0.2s;
   margin-top: 10px;
-  height: 32px;
+  height: 28.8px;
   box-sizing: border-box;
 }
 
@@ -104,6 +100,7 @@
   margin-top: 10px;
 }
 
+/* Стили для чекбоксов */
 .chart-display-legend,
 .chart-display-grid {
   display: flex;
@@ -121,9 +118,87 @@
   cursor: pointer;
 }
 
+/* Кастомные стили для чекбоксов */
+
 .chart-display-legend input[type="checkbox"],
 .chart-display-grid input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   margin: 0;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #475569;
+  border-radius: 3px;
+  background-color: #334155;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.chart-display-legend input[type="checkbox"]:hover,
+.chart-display-grid input[type="checkbox"]:hover {
+  border-color: #3b82f6;
+}
+
+.chart-display-legend input[type="checkbox"]:checked,
+.chart-display-grid input[type="checkbox"]:checked {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.chart-display-legend input[type="checkbox"]:checked::before,
+.chart-display-grid input[type="checkbox"]:checked::before {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Стили для ползунков числовых полей */
+
+.chart-widget-editor input[type="number"]::-webkit-outer-spin-button,
+.chart-widget-editor input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  position: relative;
+  right: -10px;
+  background-color: #334155;
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+}
+
+.chart-line-width,
+.chart-bar-width {
+  position: relative;
+}
+
+.chart-line-width::before,
+.chart-bar-width::before,
+.chart-line-width::after,
+.chart-bar-width::after {
+  position: absolute;
+  right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+.chart-line-width::before,
+.chart-bar-width::before {
+  content: "+";
+  right: 8px;
+  top: 37%;
+  z-index: 2;
+}
+
+.chart-line-width::after,
+.chart-bar-width::after {
+  content: "-";
+  bottom: 20%;
 }
