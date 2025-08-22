@@ -43,9 +43,10 @@ export class TableWidgetComponent {
       singleClickEdit: this.viewModeServie.isAdminMode,
       editType: this.viewModeServie.isAdminMode ? 'fullRow' : undefined,
       rowSelection: 'single',
+      onGridPreDestroyed: () => {
+        this.updateColumnMovable();
+      },
     };
-
-    this.updateColumnMovable();
   }
 
   private updateColumnMovable(): void {
