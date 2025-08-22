@@ -19,6 +19,10 @@ input {
   outline: none;
 }
 
+input:hover {
+  border: 1px solid #3b82f6;
+}
+
 :host {
   width: 100%;
   display: block;

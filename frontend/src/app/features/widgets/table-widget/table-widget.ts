@@ -1,7 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import type { GridReadyEvent } from 'ag-grid-community';
-import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
+import {
+  AllCommunityModule,
+  ModuleRegistry,
+  ValidationModule,
+} from 'ag-grid-community';
 import { TableWidget } from '../../../interfaces/widget-classes';
 import { LucideAngularModule, Table } from 'lucide-angular';
 import { CurrentWidgetService } from '../../../services/current-widget.service';
@@ -10,7 +14,7 @@ import { Widget } from '../../../interfaces/widget.interface';
 import { EditableHeaderTable } from './editable-header-table/editable-header-table';
 import { ViewModeService } from '../../../services/view-mode.service';
 
-ModuleRegistry.registerModules([AllCommunityModule]);
+ModuleRegistry.registerModules([AllCommunityModule, ValidationModule]);
 
 @Component({
   selector: 'table-widget',
@@ -39,33 +43,22 @@ export class TableWidgetComponent {
       });
 
     this.gridOptions = {
-      suppressCellFocus: this.viewModeServie.isAdminMode,
-      singleClickEdit: this.viewModeServie.isAdminMode,
-      editType: this.viewModeServie.isAdminMode ? 'fullRow' : undefined,
+      enterNavigatesVertically: true,
+      enterNavigatesVerticallyAfterEdit: true,
       rowSelection: 'single',
-      onGridPreDestroyed: () => {
-        this.updateColumnMovable();
-      },
+      stopEditingWhenCellsLoseFocus: true,
     };
+
+    this.updateColumnProperty();
   }
 
-  private updateColumnMovable(): void {
+  private updateColumnProperty(): void {
     if (!this.widget.columnsTable) return;
 
-    const disableMove = !this.viewModeServie.isAdminMode;
-
     this.widget.columnsTable.forEach((col) => {
-      col.suppressMovable = disableMove;
+      col.suppressMovable = !this.viewModeServie.isAdminMode;
+      col.editable = this.viewModeServie.isAdminMode;
     });
-
-    if (
-      this.widget.gridApi &&
-      typeof this.widget.gridApi.setGridOption === 'function'
-    ) {
-      this.widget.gridApi.setGridOption('columnDefs', [
-        ...this.widget.columnsTable,
-      ]);
-    }
   }
 
   public frameworkComponents = {
