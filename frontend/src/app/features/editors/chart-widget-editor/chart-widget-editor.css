@@ -45,14 +45,17 @@
 }
 
 .chart-widget-editor > div {
-  margin-bottom: 1.25rem;
+  margin-bottom: 15px;
   padding-bottom: 1rem;
-  border-bottom: 1px solid #94a3b8;
+  border-bottom: 1px solid #334155;
   background-color: #1e293b;
 }
 
+.chart-widget-editor:last-child {
+  margin-bottom: -15px;
+}
+
 .chart-load-file button {
-  margin-top: 10px;
   width: 100%;
   padding: 6px 10px;
   font-size: 13px;
@@ -60,9 +63,7 @@
   color: #e2e8f0;
   border: 1px solid #475569;
   border-radius: 6px;
-  cursor: pointer;
   height: 28.8px;
-  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .chart-load-file button:hover {
@@ -71,16 +72,13 @@
 }
 
 .chart-load-file label {
-  display: block;
   padding: 6px 10px;
   font-size: 13px;
   color: #e2e8f0;
   background-color: #334155;
   border: 1px solid #475569;
   border-radius: 6px;
-  cursor: pointer;
   text-align: center;
-  transition: background-color 0.2s, border-color 0.2s;
   margin-top: 10px;
   height: 28.8px;
   box-sizing: border-box;
