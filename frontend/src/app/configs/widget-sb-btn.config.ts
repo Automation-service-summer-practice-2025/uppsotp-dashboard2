@@ -9,7 +9,7 @@ export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
   },
   {
     name: 'image',
-    label: 'Картинка/GIF',
+    label: 'Изображение',
     icon: Image,
   },
   {
