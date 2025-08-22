@@ -46,8 +46,8 @@ export class TableWidgetComponent {
       enterNavigatesVertically: true,
       enterNavigatesVerticallyAfterEdit: true,
       stopEditingWhenCellsLoseFocus: true,
-      rowDragManaged: true,
-      rowDragEntireRow: true,
+      rowDragManaged: this.viewModeServie.isAdminMode,
+      rowDragEntireRow: this.viewModeServie.isAdminMode,
     };
   }
 
