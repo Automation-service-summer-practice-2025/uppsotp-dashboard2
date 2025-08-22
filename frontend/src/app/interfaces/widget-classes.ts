@@ -138,7 +138,7 @@ export class TableWidget extends Widget {
       maxWidth: 100,
       suppressMovable: true,
       lockPosition: true,
-      sortable: false,
+      sortable: true,
     },
   ];
   rowsTable: any[] = [];

@@ -1,11 +1,29 @@
 .header-container {
   height: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
 input {
   width: 100%;
+  min-width: 100%;
+  max-width: 100%;
   border: none;
   background: transparent;
   font-weight: bold;
+  box-sizing: border-box;
+  padding: 0 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  outline: none;
+}
+
+input:hover {
+  border: 1px solid #3b82f6;
+}
+
+:host {
+  width: 100%;
+  display: block;
 }
