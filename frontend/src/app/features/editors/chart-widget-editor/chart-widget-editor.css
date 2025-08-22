@@ -4,6 +4,7 @@
   margin-top: 10px;
   text-align: center;
   color: #94a3b8;
+  font-family: "Inter", sans-serif;
 }
 
 .chart-widget-editor select,
@@ -13,14 +14,18 @@
   margin-top: 10px;
   width: 100%;
   background-color: #334155;
-  border-color: #475569;
-  color: aliceblue;
+  border: #475569;
+  color: #e2e8f0;
+  font-family: "Inter", sans-serif;
+  border-radius: 4px;
+  font-size: 13px;
 }
 
 .chart-widget-editor > div {
   margin-bottom: 1.25rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #94a3b8;
+  background-color: #1e293b;
 }
 
 .chart-load-file button {
@@ -45,6 +50,7 @@
   cursor: pointer;
   text-align: center;
   transition: background-color 0.2s, border-color 0.2s;
+  font-family: "Inter", sans-serif;
 }
 
 .chart-load-filename {
