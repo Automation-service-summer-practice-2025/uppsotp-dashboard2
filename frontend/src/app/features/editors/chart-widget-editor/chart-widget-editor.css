@@ -7,7 +7,6 @@
 }
 
 .chart-widget-editor select,
-.chart-widget-editor input[type="color"],
 .chart-widget-editor input[type="number"],
 .chart-widget-editor input[type="file"] {
   margin-top: 10px;
@@ -20,6 +19,18 @@
   font-size: 13px;
   height: 28.8px;
   box-sizing: border-box;
+}
+
+.chart-widget-editor input[type="color"] {
+  margin-top: 10px;
+  width: 100%;
+  padding: 3px;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  height: 28.8px;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
 .chart-widget-editor select:hover,
