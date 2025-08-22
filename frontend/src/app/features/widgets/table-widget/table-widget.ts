@@ -1,11 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import type { GridReadyEvent } from 'ag-grid-community';
-import {
-  AllCommunityModule,
-  ModuleRegistry,
-  ValidationModule,
-} from 'ag-grid-community';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { TableWidget } from '../../../interfaces/widget-classes';
 import { LucideAngularModule, Table } from 'lucide-angular';
 import { CurrentWidgetService } from '../../../services/current-widget.service';
@@ -14,7 +10,7 @@ import { Widget } from '../../../interfaces/widget.interface';
 import { EditableHeaderTable } from './editable-header-table/editable-header-table';
 import { ViewModeService } from '../../../services/view-mode.service';
 
-ModuleRegistry.registerModules([AllCommunityModule, ValidationModule]);
+ModuleRegistry.registerModules([AllCommunityModule]);
 
 @Component({
   selector: 'table-widget',
@@ -29,7 +25,6 @@ export class TableWidgetComponent {
   readonly iconTable = Table;
   dashboardCurrentWidgetSub?: Subscription;
   dashboardCurrentWidget: Widget | undefined = undefined;
-  gridOptions = {};
 
   constructor(
     private currentWidgetService: CurrentWidgetService,
@@ -42,14 +37,18 @@ export class TableWidgetComponent {
         this.dashboardCurrentWidget = widget ?? undefined;
       });
 
-    this.gridOptions = {
+    this.updateColumnProperty();
+  }
+
+  get gridOptions() {
+    return {
+      mode: 'singleRow',
       enterNavigatesVertically: true,
       enterNavigatesVerticallyAfterEdit: true,
-      rowSelection: 'single',
       stopEditingWhenCellsLoseFocus: true,
+      rowDragManaged: true,
+      rowDragEntireRow: true,
     };
-
-    this.updateColumnProperty();
   }
 
   private updateColumnProperty(): void {
