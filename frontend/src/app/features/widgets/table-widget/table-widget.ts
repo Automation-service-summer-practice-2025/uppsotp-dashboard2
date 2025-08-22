@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import type { GridReadyEvent } from 'ag-grid-community';
+import type { GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community';
 import { TableWidget } from '../../../interfaces/widget-classes';
 import { LucideAngularModule, Table } from 'lucide-angular';
@@ -40,9 +40,9 @@ export class TableWidgetComponent {
     this.updateColumnProperty();
   }
 
-  get gridOptions() {
+  get gridOptions(): GridOptions {
     return {
-      mode: 'singleRow',
+      rowSelection: 'single',
       enterNavigatesVertically: true,
       enterNavigatesVerticallyAfterEdit: true,
       stopEditingWhenCellsLoseFocus: true,
