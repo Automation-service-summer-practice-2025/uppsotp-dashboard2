@@ -32,22 +32,9 @@ docker-compose up --build
 # Запуск в фоновом режиме
 docker-compose up -d --build
 
-# Остановка контейнера
-docker-compose down
-
 # Просмотр логов
 docker-compose logs
-
-# Принудительная пересборка
-docker-compose build --no-cache
 ```
-
-## 📦 Что внутри Docker контейнера?
-
-- **Node.js 22** для сборки Angular приложения
-- **Nginx** для обслуживания статических файлов
-- Автоматическая настройка роутинга для SPA приложений
-- Оптимизированная production-сборка
 
 ## 🛠️ Если вносите изменения в код
 
