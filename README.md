@@ -2,8 +2,6 @@
 
 ## ⚙️ Требования
 
-### Запуск через Docker (рекомендуется)
-
 Убедитесь, что у вас установлен:
 
 - **Docker**
@@ -11,12 +9,12 @@
 
 ## 🚀 Запуск проекта
 
-### Вариант 2: Запуск через Docker
+### Через Docker
 
 1. Клонировать репозиторий:
 
 ```bash
-git clone <URL репозитория>
+git clone <https://github.com/Automation-service-summer-practice-2025/uppsotp-dashboard2.git>
 cd dashboard-angular/frontend
 ```
 
