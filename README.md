@@ -14,7 +14,7 @@
 1. Клонировать репозиторий:
 
 ```bash
-git clone <https://github.com/Automation-service-summer-practice-2025/uppsotp-dashboard2.git>
+git clone https://github.com/Automation-service-summer-practice-2025/uppsotp-dashboard2.git
 cd dashboard-angular/frontend
 ```
 
@@ -49,17 +49,7 @@ docker-compose build --no-cache
 - Автоматическая настройка роутинга для SPA приложений
 - Оптимизированная production-сборка
 
-## 🌐 Доступные страницы
-
-После запуска доступны:
-
-- Главная страница: http://localhost:4200
-- Страница администратора: http://localhost:4200/admin
-- Страница входа: http://localhost:4200/login
-
-## 🛠️ Для разработчиков
-
-Если вносите изменения в код:
+## 🛠️ Если вносите изменения в код
 
 ```bash
 # Пересоберите контейнер после изменений
@@ -67,7 +57,3 @@ docker-compose down
 docker-compose build --no-cache
 docker-compose up
 ```
-
----
-
-💡 **Рекомендуем использовать Docker** - это гарантирует одинаковое поведение приложения на всех компьютерах!
