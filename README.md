@@ -15,7 +15,7 @@
 
 ```bash
 git clone https://github.com/Automation-service-summer-practice-2025/uppsotp-dashboard2.git
-cd dashboard-angular/frontend
+cd uppsotp-dashbord2/frontend
 ```
 
 2. Запустить контейнер:
