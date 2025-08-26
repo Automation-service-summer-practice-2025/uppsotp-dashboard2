@@ -8,6 +8,7 @@
   background-color: #1e293b;
   padding: 0px 10px;
   overflow: auto;
+  user-select: none;
 }
 
 .edit-sidebar-container::-webkit-scrollbar {
@@ -134,9 +135,4 @@
 .btn.delete.full-width {
   width: 100%;
   margin-top: 10px;
-}
-
-.divider {
-  border-bottom: 1px solid #334155;
-  margin-top: 4px;
 }

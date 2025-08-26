@@ -1,0 +1,8 @@
+<div class="header-container">
+  <input
+    [(ngModel)]="headerName"
+    (blur)="onBlur()"
+    (keydown.enter)="onBlur()"
+    [readOnly]="!this.viewModeServie.isAdminMode"
+  />
+</div>

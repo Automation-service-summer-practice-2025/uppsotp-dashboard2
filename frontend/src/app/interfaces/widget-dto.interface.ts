@@ -1,3 +1,4 @@
+import { ColDef, GridApi } from 'ag-grid-community';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 
 export interface WidgetDTO {
@@ -28,4 +29,10 @@ export interface ChartWidgetDTO extends WidgetDTO {
   showGrid?: boolean;
   csvRawData?: string;
   csvHeaders?: string[];
+}
+
+export interface TableWidgetDTO extends WidgetDTO {
+  columnsTable: ColDef[];
+  rowsTable: any[];
+  gridApi: GridApi;
 }

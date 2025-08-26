@@ -11,13 +11,35 @@
   color: #e2e8f0;
 }
 
+::ng-deep .NgxEditor__MenuItem--Icon {
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: #1e293b;
+  height: 30px;
+  width: 30px;
+}
+
+::ng-deep .NgxEditor__Dropdown--Text {
+  background-color: #1e293b;
+  color: #94a3b8;
+  border: #1e293b;
+  height: 30px;
+  width: 94px;
+  text-align: left;
+  font-size: 14px;
+}
+
 ::ng-deep .NgxEditor__MenuBar {
   --ngx-editor-menubar-bg-color: #1e293b;
   --ngx-editor-menu-item-hover-bg-color: #334155;
   --ngx-editor-menu-item-active-bg-color: #334155;
   --ngx-editor-popup-bg-color: #1e293b;
-  gap: 1rem 0.3rem !important;
+  gap: 1rem 0.3rem;
+  background-color: #1e293b;
   color: #94a3b8;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3px;
 }
 
 ::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Active {
