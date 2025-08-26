@@ -2,8 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Persistance;
 using Models.Dtos;
-using Mapping;
-using Interfaces;
+using Mappings;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using System.Text.Json;
@@ -15,96 +14,132 @@ namespace Controllers;
 [Route("api/widgets")]
 public class WidgetsController : ControllerBase
 {
-    private readonly AppDbContext _context;
-    public WidgetsController(AppDbContext context) => _context = context;
+    private readonly AppDbContext _db;
+    public WidgetsController(AppDbContext db) => _db = db;
 
     [HttpPost]
-    public async Task<IActionResult> Create(WidgetCreateDto dto)
+    public async Task<IActionResult> Create([FromBody] WidgetCreateDto dto)
     {
-        var widget = new Widget
+        try
         {
-            Type = dto.Type,
-            PositionX = dto.PositionX,
-            PositionY = dto.PositionY,
-            Columns = dto.Columns,
-            Rows = dto.Rows
-        };
+            var widget = dto.ToEntity();
+            
+            _db.Widgets.Add(widget);
+            await _db.SaveChangesAsync();
 
-        switch (dto.Type.ToLower())
-        {
-            case "text":
-                widget.TextWidget = new TextWidget
-                {
-                    WidgetId = widget.Id,
-                    Data = JsonSerializer.Serialize(dto.Data)
-                };
-                break;
-
-            case "image":
-                widget.ImageWidget = new ImageWidget
-                {
-                    WidgetId = widget.Id,
-                    Data = JsonSerializer.Serialize(dto.Data)
-                };
-                break;
+            var resultDto = widget.ToDto();
+            return Ok(resultDto);
         }
-
-        _context.Widgets.Add(widget);
-        await _context.SaveChangesAsync();
-
-        return Ok(widget);
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<WidgetBaseDto>>> GetAll()
+    public async Task<ActionResult<IEnumerable<WidgetGetDto>>> GetAll()
     {
-        var items = await _context.Widgets
+        var widgets = await _db.Widgets
             .AsNoTracking()
             .Include(w => w.ImageWidget)
             .Include(w => w.TextWidget)
-            .Select(w => w.ToDto())
+            .Include(w => w.ChartWidget)
+            .Include(w => w.TableWidget)
             .ToListAsync();
-        return Ok(items);
+
+
+        var dtos = widgets.Select(w => w.ToDto()).ToList();
+        return Ok(dtos);
     }
 
     [HttpPut("{id:guid}")]
     public async Task<IActionResult> UpdateWidget(Guid id, [FromBody] WidgetUpdateDto dto)
     {
-        var widget = await _context.Widgets
+        var widget = await _db.Widgets
             .Include(w => w.ImageWidget)
             .Include(w => w.TextWidget)
+            .Include(w => w.ChartWidget)
+            .Include(w => w.TableWidget)
             .FirstOrDefaultAsync(w => w.Id == id);
 
         if (widget == null)
             return NotFound();
+            
+        var existingType = widget.Type.ToLower();
 
-        if (dto.PositionX.HasValue)
-            widget.PositionX = dto.PositionX.Value;
-        if (dto.PositionY.HasValue)
-            widget.PositionY = dto.PositionY.Value;
-        if (dto.Columns.HasValue)
-            widget.Columns = dto.Columns.Value;
-        if (dto.Rows.HasValue)
-            widget.Rows = dto.Rows.Value;
+        widget.PositionX = dto.PositionX;
+        widget.PositionY = dto.PositionY;
+        widget.Columns = dto.Columns;
+        widget.Rows = dto.Rows;
 
-        
+        var typeOk = Enum.TryParse<WidgetType>(existingType, true, out var type);
+        if (!typeOk) return BadRequest($"Unsupported type '{existingType}'.");
 
-        await _context.SaveChangesAsync();
-        return Ok(widget);
+        widget.Type = type.ToString();
+
+        switch (existingType.ToLower())
+        {
+            case "text":
+                if (widget.TextWidget == null)
+                    widget.TextWidget = new TextWidget { Id = widget.Id };
+
+                widget.TextWidget.HtmlContent = dto.HtmlContent;
+                break;
+
+            case "image":
+                if (widget.ImageWidget == null)
+                    widget.ImageWidget = new ImageWidget { Id = widget.Id };
+
+                widget.ImageWidget.PreviewUrl = dto.PreviewUrl;
+                break;
+
+            case "chart":
+                if (widget.ChartWidget == null)
+                    widget.ChartWidget = new ChartWidget { Id = widget.Id };
+
+                widget.ChartWidget.ChartType = dto.ChartType ?? "";
+                widget.ChartWidget.ChartData = dto.ChartData;
+                widget.ChartWidget.ChartOptions = dto.ChartOptions;
+                widget.ChartWidget.BackgroundColor = dto.BackgroundColor ?? "";
+                widget.ChartWidget.BorderWidth = dto.BorderWidth ?? 0;
+                widget.ChartWidget.CategoryPercentage = dto.CategoryPercentage ?? 0;
+                widget.ChartWidget.ShowLegend = dto.ShowLegend ?? false;
+                widget.ChartWidget.ShowGrid = dto.ShowGrid ?? false;
+                widget.ChartWidget.CsvRawData = dto.CsvRawData ?? "";
+                widget.ChartWidget.CsvHeaders = dto.CsvHeaders ?? new List<string>();
+                break;
+
+            case "table":
+                if (widget.TableWidget == null)
+                    widget.TableWidget = new TableWidget { Id = widget.Id };
+
+                widget.TableWidget.ColumnsTable = dto.ColumnsTable;
+                widget.TableWidget.RowsTable = dto.RowsTable;
+                widget.TableWidget.GridApi = dto.GridApi;
+                break;
+
+            default:
+                return BadRequest($"Unknown widget type: {existingType}");
+        }
+
+        await _db.SaveChangesAsync();
+        return Ok(widget.ToDto());
     }
 
     [HttpDelete("{id:guid}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var widget = await _context.Widgets.FirstOrDefaultAsync(w => w.Id == id);
+        var widget = await _db.Widgets.FirstOrDefaultAsync(w => w.Id == id);
         if (widget == null) return NotFound();
 
-        _context.Widgets.Remove(widget);
-        await _context.SaveChangesAsync();
+        _db.Widgets.Remove(widget);
+        await _db.SaveChangesAsync();
 
         return NoContent();
     }
 
-    private static bool IsValidType(string? t)
-        => string.Equals(t, "text", StringComparison.OrdinalIgnoreCase)
-        || string.Equals(t, "image", StringComparison.OrdinalIgnoreCase);
 }

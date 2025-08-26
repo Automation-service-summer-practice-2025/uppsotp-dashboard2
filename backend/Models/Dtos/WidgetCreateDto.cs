@@ -1,26 +1,12 @@
 using System.ComponentModel.DataAnnotations;
-using Interfaces;
+using System.Text.Json;
 
 namespace Models.Dtos;
 
-public class WidgetCreateDto
+public class WidgetCreateDto : WidgetBaseDto
 {
-    public string Type { get; set; } = "";
-    public int PositionX { get; set; }
-    public int PositionY { get; set; }
-    public int Columns { get; set; }
-    public int Rows { get; set; }
-
-    [Required]
-    public Dictionary<string, object?> Data { get; set; } = new();
+    public string Type { get; set; } = string.Empty;
+    public JsonDocument? ChartData { get; set; }
+    public JsonDocument? ChartOptions { get; set; }
 }
 
-public class TextWidgetCreateDto : IWidgetCreateData
-{
-    public string Data { get; set; } = string.Empty;
-}
-
-public class ImageWidgetCreateDto : IWidgetCreateData
-{
-    public string Data { get; set; } = string.Empty;
-}

@@ -11,6 +11,8 @@ public class AppDbContext : DbContext
     public DbSet<Widget> Widgets { get; set; }
     public DbSet<TextWidget> TextWidgets { get; set; }
     public DbSet<ImageWidget> ImageWidgets { get; set; }
+    public DbSet<ChartWidget> ChartWidgets { get; set; }
+    public DbSet<TableWidget> TableWidgets { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -18,5 +20,7 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new WidgetConf());
         modelBuilder.ApplyConfiguration(new TextWidgetConf());
         modelBuilder.ApplyConfiguration(new ImageWidgetConf());
+        modelBuilder.ApplyConfiguration(new ChartWidgetConf());
+        modelBuilder.ApplyConfiguration(new TableWidgetConf());
     }
 }
