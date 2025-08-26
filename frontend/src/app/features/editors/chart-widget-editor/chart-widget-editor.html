@@ -2,8 +2,8 @@
   <div class="chart-type">
     <label>Тип графика:</label>
     <select [value]="widget.chartType" (change)="setChartType($event)">
-      <option value="bar">Гистограмма (Bar Chart)</option>
-      <option value="scatter">Точечный график (Scatter Chart)</option>
+      <option value="bar">Гистограмма</option>
+      <option value="scatter">Точечный график</option>
     </select>
   </div>
 
@@ -64,38 +64,34 @@
   </div>
 
   <div class="chart-display-legend">
-    <label>
-      <input
-        type="checkbox"
-        [checked]="widget.showLegend ?? true"
-        (change)="onParamChange('showLegend', $event)"
-      />
-      Показать легенду
-    </label>
+    <input
+      type="checkbox"
+      id="showLegend"
+      [checked]="widget.showLegend ?? true"
+      (change)="onParamChange('showLegend', $event)"
+    />
+    <label for="showLegend">Показать легенду</label>
   </div>
 
   <div class="chart-display-grid">
-    <label>
-      <input
-        type="checkbox"
-        [checked]="widget.showGrid ?? true"
-        (change)="onParamChange('showGrid', $event)"
-      />
-      Показать сетку
-    </label>
+    <input
+      type="checkbox"
+      id="showGrid"
+      [checked]="widget.showGrid ?? true"
+      (change)="onParamChange('showGrid', $event)"
+    />
+    <label for="showGrid">Показать сетку</label>
   </div>
 
   <div class="chart-bar-width">
-    <label>
-      Толщина столбца (0-1)
-      <input
-        type="number"
-        min="0.1"
-        max="1.0"
-        step="0.1"
-        [value]="widget.categoryPercentage || 0.8"
-        (change)="onParamChange('categoryPercentage', $event)"
-      />
-    </label>
+    <label>Толщина столбца (0-1)</label>
+    <input
+      type="number"
+      min="0.1"
+      max="1.0"
+      step="0.1"
+      [value]="widget.categoryPercentage || 0.8"
+      (change)="onParamChange('categoryPercentage', $event)"
+    />
   </div>
 </div>
