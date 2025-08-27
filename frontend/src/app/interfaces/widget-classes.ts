@@ -2,8 +2,15 @@ import { Widget } from './widget.interface';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 import { Editor } from 'ngx-editor';
 import {
+  colorSchemeDarkBlue,
+  themeQuartz,
+  ColDef,
+  GridApi,
+} from 'ag-grid-community';
+import {
   ChartWidgetDTO,
   ImageWidgetDTO,
+  TableWidgetDTO,
   TextWidgetDTO,
 } from './widget-dto.interface';
 
@@ -91,6 +98,11 @@ export class ChartWidget extends Widget {
 
   csvRawData?: string;
   csvHeaders?: string[];
+  selectedFeature: Record<string, string> = {
+    single: '',
+    x: '',
+    y: '',
+  };
 
   [key: string]: any;
 
@@ -112,6 +124,38 @@ export class ChartWidget extends Widget {
       showGrid: this.showGrid,
       csvRawData: this.csvRawData,
       csvHeaders: this.csvHeaders,
+    };
+  }
+}
+
+export class TableWidget extends Widget {
+  override type: string = 'table';
+  columnsTable: ColDef[] = [
+    {
+      headerName: 'ID',
+      field: 'id',
+      minWidth: 50,
+      maxWidth: 100,
+      suppressMovable: true,
+      lockPosition: true,
+      sortable: true,
+    },
+  ];
+  rowsTable: any[] = [];
+  gridApi: GridApi = {} as GridApi;
+  currentTheme = themeQuartz.withPart(colorSchemeDarkBlue);
+
+  toDTO(): TableWidgetDTO {
+    return {
+      id: this.id,
+      type: this.type,
+      x: this.x,
+      y: this.y,
+      cols: this.cols,
+      rows: this.rows,
+      columnsTable: this.columnsTable,
+      rowsTable: this.rowsTable,
+      gridApi: this.gridApi,
     };
   }
 }

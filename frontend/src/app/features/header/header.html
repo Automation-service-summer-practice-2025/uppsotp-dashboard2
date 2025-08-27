@@ -1,7 +1,7 @@
 <div class="header">
-  @if (isOnPage('/')) {
-  <button class="login-button" (click)="redirectToPage('/login')">Войти</button>
-  } @else if (isOnPage('/admin')) {
+  @if (isAdminMode) {
   <button class="logout-button" (click)="redirectToPage('')">Выйти</button>
+  } @else {
+  <button class="login-button" (click)="redirectToPage('/login')">Войти</button>
   }
 </div>
