@@ -43,17 +43,43 @@ public class WidgetsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<WidgetGetDto>>> GetAll()
     {
-        var widgets = await _db.Widgets
-            .AsNoTracking()
-            .Include(w => w.ImageWidget)
-            .Include(w => w.TextWidget)
-            .Include(w => w.ChartWidget)
-            .Include(w => w.TableWidget)
-            .ToListAsync();
+        try
+        {
+            var widgets = await _db.Widgets
+                .AsNoTracking()
+                .Include(w => w.ImageWidget)
+                .Include(w => w.TextWidget)
+                .Include(w => w.ChartWidget)
+                .Include(w => w.TableWidget)
+                .ToListAsync();
 
+            Console.WriteLine($"Loaded {widgets.Count} widgets from database");
 
-        var dtos = widgets.Select(w => w.ToDto()).ToList();
-        return Ok(dtos);
+            foreach (var widget in widgets)
+            {
+                Console.WriteLine($"Widget ID: {widget.Id}, Type: {widget.Type}");
+                if (widget.Type.ToLower() == "image" && widget.ImageWidget != null)
+                {
+                    Console.WriteLine($"Image PreviewUrl: {widget.ImageWidget.PreviewUrl}");
+                }
+            }
+
+            var dtos = widgets.Select(w => w.ToDto()).ToList();
+
+            foreach (var dto in dtos)
+            {
+                if (dto.Type.ToLower() == "image")
+                {
+                    Console.WriteLine($"DTO Image Url: {((dynamic)dto).PreviewUrl}");
+                }
+            }
+            return Ok(dtos);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in GetAll: {ex.Message}");
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
 
     [HttpPut("{id:guid}")]
