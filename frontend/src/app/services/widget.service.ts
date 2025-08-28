@@ -22,7 +22,9 @@ export class WidgetService {
   }
 
   readWidgets(): void {
-    this.backendApiService.getWidgets().subscribe();
+    this.backendApiService.getWidgets().subscribe((widgets) => {
+      this.widgetsSubject.next([...widgets]);
+    });
   }
 
   updateWidget(widget: Widget): void {

@@ -22,4 +22,6 @@ export abstract class Widget implements GridsterItem {
   }
 
   abstract toDTO(): WidgetDTO;
+
+  abstract copyDataFromDTO(dto: WidgetDTO): void;
 }

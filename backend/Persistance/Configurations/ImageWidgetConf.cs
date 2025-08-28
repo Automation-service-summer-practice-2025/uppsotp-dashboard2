@@ -8,6 +8,6 @@ public class ImageWidgetConf : IEntityTypeConfiguration<ImageWidget>
 {
     public void Configure(EntityTypeBuilder<ImageWidget> builder)
     {
-        builder.HasKey(i => i.WidgetId);
+        builder.HasKey(i => i.Id);
     }
 }
