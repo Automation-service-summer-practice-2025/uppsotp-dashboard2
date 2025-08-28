@@ -3,22 +3,22 @@ import { WidgetSideBarBtn } from '../interfaces/widget-sb-btn.interface';
 
 export const widgetSbBtnsConfig: WidgetSideBarBtn[] = [
   {
-    name: 'text',
+    name: 'Text',
     label: 'Текст',
     icon: Type,
   },
   {
-    name: 'image',
+    name: 'Image',
     label: 'Изображение',
     icon: Image,
   },
   {
-    name: 'chart',
+    name: 'Chart',
     label: 'График',
     icon: ChartLine,
   },
   {
-    name: 'table',
+    name: 'Table',
     label: 'Таблица',
     icon: Table,
   },

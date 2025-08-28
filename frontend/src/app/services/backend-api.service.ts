@@ -57,8 +57,9 @@ export class BackendApiService {
   }
 
   private dtoToWidget(dto: WidgetDTO): Widget {
-    const widget = new widgetConfigs[dto.type].Widget();
-    Object.assign(widget, dto);
+    const widget = new widgetConfigs[dto.Type].Widget();
+
+    widget.copyDataFromDTO(dto);
 
     return widget;
   }

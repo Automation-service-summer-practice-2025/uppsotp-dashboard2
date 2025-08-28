@@ -17,22 +17,22 @@ import { TableWidgetComponent } from '../features/widgets/table-widget/table-wid
 import { TableWidgetEditor } from '../features/editors/table-widget-editor/table-widget-editor';
 
 export const widgetConfigs: Record<string, WidgetConfig> = {
-  text: {
+  Text: {
     Component: TextWidgetComponent,
     Editor: TextWidgetEditor,
     Widget: TextWidget,
   },
-  image: {
+  Image: {
     Component: ImageWidgetComponent,
     Editor: ImageWidgetEditor,
     Widget: ImageWidget,
   },
-  chart: {
+  Chart: {
     Component: ChartWidgetComponent,
     Editor: ChartWidgetEditor,
     Widget: ChartWidget,
   },
-  table: {
+  Table: {
     Component: TableWidgetComponent,
     Editor: TableWidgetEditor,
     Widget: TableWidget,

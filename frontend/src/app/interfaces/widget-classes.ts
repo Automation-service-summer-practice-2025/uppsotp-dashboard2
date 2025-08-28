@@ -12,47 +12,66 @@ import {
   ImageWidgetDTO,
   TableWidgetDTO,
   TextWidgetDTO,
+  WidgetDTO,
 } from './widget-dto.interface';
 
 export class TextWidget extends Widget {
-  override type: string = 'text';
+  override type: string = 'Text';
   htmlContent: string = '';
   editor: Editor = new Editor();
 
   override toDTO(): TextWidgetDTO {
     return {
-      id: this.id,
-      type: this.type,
-      x: this.x,
-      y: this.y,
-      cols: this.cols,
-      rows: this.rows,
-      htmlContent: this.htmlContent,
+      Id: this.id,
+      Type: this.type,
+      PositionX: this.x,
+      PositionY: this.y,
+      Columns: this.cols,
+      Rows: this.rows,
+      HtmlContent: this.htmlContent,
     };
+  }
+
+  override copyDataFromDTO(dto: TextWidgetDTO): void {
+    this.id = dto.Id;
+    this.x = dto.PositionX;
+    this.y = dto.PositionY;
+    this.cols = dto.Columns;
+    this.rows = dto.Rows;
+    this.htmlContent = dto.HtmlContent;
   }
 }
 
 export class ImageWidget extends Widget {
-  override type: string = 'image';
+  override type: string = 'Image';
 
   file?: File | null = null;
   previewUrl?: string | null = null;
 
   toDTO(): ImageWidgetDTO {
     return {
-      id: this.id,
-      type: this.type,
-      x: this.x,
-      y: this.y,
-      cols: this.cols,
-      rows: this.rows,
-      previewUrl: this.previewUrl,
+      Id: this.id,
+      Type: this.type,
+      PositionX: this.x,
+      PositionY: this.y,
+      Columns: this.cols,
+      Rows: this.rows,
+      PreviewUrl: this.previewUrl,
     };
+  }
+
+  override copyDataFromDTO(dto: ImageWidgetDTO): void {
+    this.id = dto.Id;
+    this.x = dto.PositionX;
+    this.y = dto.PositionY;
+    this.cols = dto.Columns;
+    this.rows = dto.Rows;
+    this.previewUrl = dto.PreviewUrl;
   }
 }
 
 export class ChartWidget extends Widget {
-  override type: string = 'chart';
+  override type: string = 'Chart';
 
   chartType: ChartType = 'bar';
 
@@ -108,28 +127,46 @@ export class ChartWidget extends Widget {
 
   toDTO(): ChartWidgetDTO {
     return {
-      id: this.id,
-      type: this.type,
-      x: this.x,
-      y: this.y,
-      cols: this.cols,
-      rows: this.rows,
-      chartType: this.chartType,
-      chartData: this.chartData,
-      chartOptions: this.chartOptions,
-      backgroundColor: this.backgroundColor,
-      borderWidth: this.borderWidth,
-      categoryPercentage: this.categoryPercentage,
-      showLegend: this.showLegend,
-      showGrid: this.showGrid,
-      csvRawData: this.csvRawData,
-      csvHeaders: this.csvHeaders,
+      Id: this.id,
+      Type: this.type,
+      PositionX: this.x,
+      PositionY: this.y,
+      Columns: this.cols,
+      Rows: this.rows,
+      ChartType: this.chartType,
+      ChartData: this.chartData,
+      ChartOptions: this.chartOptions,
+      BackgroundColor: this.backgroundColor,
+      BorderWidth: this.borderWidth,
+      CategoryPercentage: this.categoryPercentage,
+      ShowLegend: this.showLegend,
+      ShowGrid: this.showGrid,
+      CsvRawData: this.csvRawData,
+      CsvHeaders: this.csvHeaders,
     };
+  }
+
+  override copyDataFromDTO(dto: ChartWidgetDTO): void {
+    this.id = dto.Id;
+    this.x = dto.PositionX;
+    this.y = dto.PositionY;
+    this.cols = dto.Columns;
+    this.rows = dto.Rows;
+    this.chartType = dto.ChartType;
+    this.chartData = dto.ChartData;
+    this.chartOptions = dto.ChartOptions;
+    this.backgroundColor = dto.BackgroundColor;
+    this.borderWidth = dto.BorderWidth;
+    this.categoryPercentage = dto.CategoryPercentage;
+    this.showLegend = dto.ShowLegend;
+    this.showGrid = dto.ShowGrid;
+    this.csvRawData = dto.CsvRawData;
+    this.csvHeaders = dto.CsvHeaders;
   }
 }
 
 export class TableWidget extends Widget {
-  override type: string = 'table';
+  override type: string = 'Table';
   columnsTable: ColDef[] = [
     {
       headerName: 'ID',
@@ -147,15 +184,26 @@ export class TableWidget extends Widget {
 
   toDTO(): TableWidgetDTO {
     return {
-      id: this.id,
-      type: this.type,
-      x: this.x,
-      y: this.y,
-      cols: this.cols,
-      rows: this.rows,
-      columnsTable: this.columnsTable,
-      rowsTable: this.rowsTable,
-      gridApi: this.gridApi,
+      Id: this.id,
+      Type: this.type,
+      PositionX: this.x,
+      PositionY: this.y,
+      Columns: this.cols,
+      Rows: this.rows,
+      ColumnsTable: this.columnsTable,
+      RowsTable: this.rowsTable,
+      GridApi: this.gridApi,
     };
+  }
+
+  override copyDataFromDTO(dto: TableWidgetDTO): void {
+    this.id = dto.Id;
+    this.x = dto.PositionX;
+    this.y = dto.PositionY;
+    this.cols = dto.Columns;
+    this.rows = dto.Rows;
+    this.columnsTable = dto.ColumnsTable;
+    this.rowsTable = dto.RowsTable;
+    this.gridApi = dto.GridApi;
   }
 }

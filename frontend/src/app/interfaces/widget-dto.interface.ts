@@ -2,37 +2,37 @@ import { ColDef, GridApi } from 'ag-grid-community';
 import { ChartData, ChartOptions, ChartType } from 'chart.js';
 
 export interface WidgetDTO {
-  id: string;
-  type: string;
-  x: number;
-  y: number;
-  cols: number;
-  rows: number;
+  Id: string;
+  Type: string;
+  PositionX: number;
+  PositionY: number;
+  Columns: number;
+  Rows: number;
 }
 
 export interface TextWidgetDTO extends WidgetDTO {
-  htmlContent: string;
+  HtmlContent: string;
 }
 
 export interface ImageWidgetDTO extends WidgetDTO {
-  previewUrl?: string | null;
+  PreviewUrl?: string | null;
 }
 
 export interface ChartWidgetDTO extends WidgetDTO {
-  chartType: ChartType;
-  chartData: ChartData;
-  chartOptions: ChartOptions;
-  backgroundColor?: string;
-  borderWidth?: number;
-  categoryPercentage?: number;
-  showLegend?: boolean;
-  showGrid?: boolean;
-  csvRawData?: string;
-  csvHeaders?: string[];
+  ChartType: ChartType;
+  ChartData: ChartData;
+  ChartOptions: ChartOptions;
+  BackgroundColor?: string;
+  BorderWidth?: number;
+  CategoryPercentage?: number;
+  ShowLegend?: boolean;
+  ShowGrid?: boolean;
+  CsvRawData?: string;
+  CsvHeaders?: string[];
 }
 
 export interface TableWidgetDTO extends WidgetDTO {
-  columnsTable: ColDef[];
-  rowsTable: any[];
-  gridApi: GridApi;
+  ColumnsTable: ColDef[];
+  RowsTable: any[];
+  GridApi: GridApi;
 }
